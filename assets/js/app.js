@@ -324,7 +324,7 @@
 
     content.innerHTML = [
       '<div class="panel-header">',
-        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="76" height="76" loading="lazy" decoding="async" style="width:76px;height:76px;max-width:76px;max-height:76px;min-width:76px;min-height:76px;object-fit:cover;object-position:center;" />',
+        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="76" height="76" loading="lazy" decoding="async" style="width:76px;height:76px;max-width:76px;max-height:76px;min-width:76px;min-height:76px;object-fit:cover;object-position:center;display:block;" />',
         '<div class="panel-title-block">',
           '<p class="eyebrow">', escapeHTML(album.type), ' · ', escapeHTML(album.statusLabel), '</p>',
           '<h2 id="panel-title">', escapeHTML(album.title), '</h2>',
@@ -623,7 +623,7 @@
 
   function setupCanvas() {
     var canvas = $("#visualizer");
-    if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!canvas) return;
 
     var ctx = canvas.getContext("2d");
     var width = 0;
