@@ -113,7 +113,7 @@ code {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  opacity: .48;
+  opacity: .22;
 }
 
 .noise-layer {
@@ -135,10 +135,10 @@ code {
   height: min(48vw, 600px);
   border-radius: 999px;
   filter: blur(90px);
-  opacity: .28;
+  opacity: .22;
   z-index: 0;
   pointer-events: none;
-  animation: floatBlob 10s var(--ease-out) infinite alternate;
+  animation: floatBlob  10s var(--ease-out) infinite alternate;
 }
 
 .ambient-one {
@@ -1605,13 +1605,6 @@ code {
   }
 }
 
-/* v7 hotfix: keep the canvas background visible on desktop browsers
-   even when the OS/browser reduced-motion flag is unexpectedly enabled. */
-#visualizer {
-  display: block;
-}
-
-
 .service-icon-text[hidden] {
   display: none !important;
 }
@@ -2219,67 +2212,89 @@ dt {
   }
 }
 
-/* =========================================================
-   v6 desktop modal cover hard fix
-   - Prevents 3000x3000 album art from expanding inside link panel.
-   - Applies to PC and mobile, with mobile-specific size below.
-   ========================================================= */
-#link-panel .panel-header {
+/* v6 hotfix: hard-lock album cover size inside the music-service link panel on every viewport.
+   This prevents 3000x3000 source images from expanding the desktop modal layout. */
+.link-panel {
+  --panel-cover-size: clamp(52px, 6vw, 76px);
   box-sizing: border-box;
-  display: grid !important;
-  grid-template-columns: clamp(56px, 6vw, 76px) minmax(0, 1fr) !important;
-  align-items: center !important;
-  gap: clamp(.65rem, 1.2vw, .95rem) !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
+  overflow-x: hidden;
 }
 
-#link-panel .panel-cover,
-#link-panel .panel-header > img.panel-cover {
+.link-panel .panel-header {
+  grid-template-columns: var(--panel-cover-size) minmax(0, 1fr) !important;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.link-panel img.panel-cover,
+.link-panel .panel-cover {
   display: block !important;
   box-sizing: border-box !important;
-  width: clamp(56px, 6vw, 76px) !important;
-  height: clamp(56px, 6vw, 76px) !important;
-  min-width: clamp(56px, 6vw, 76px) !important;
-  max-width: clamp(56px, 6vw, 76px) !important;
-  min-height: clamp(56px, 6vw, 76px) !important;
-  max-height: clamp(56px, 6vw, 76px) !important;
+  inline-size: var(--panel-cover-size) !important;
+  block-size: var(--panel-cover-size) !important;
+  width: var(--panel-cover-size) !important;
+  height: var(--panel-cover-size) !important;
+  min-inline-size: var(--panel-cover-size) !important;
+  max-inline-size: var(--panel-cover-size) !important;
+  min-block-size: var(--panel-cover-size) !important;
+  max-block-size: var(--panel-cover-size) !important;
+  min-width: var(--panel-cover-size) !important;
+  max-width: var(--panel-cover-size) !important;
+  min-height: var(--panel-cover-size) !important;
+  max-height: var(--panel-cover-size) !important;
   aspect-ratio: 1 / 1 !important;
   object-fit: cover !important;
   object-position: center !important;
   overflow: hidden !important;
-  flex: 0 0 clamp(56px, 6vw, 76px) !important;
-  border-radius: 14px;
+  flex: 0 0 var(--panel-cover-size) !important;
 }
 
-#link-panel .panel-title-block {
-  min-width: 0 !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
+.link-panel .panel-title-block,
+.link-panel .track-link-info,
+.link-panel .link-row > div,
+.link-panel .service-tabs,
+.link-panel .link-stack {
+  min-width: 0;
+  max-width: 100%;
 }
 
-#link-panel .panel-title-block h2,
-#link-panel .panel-title-block p {
-  max-width: 100% !important;
-  overflow-wrap: anywhere !important;
+@media (min-width: 701px) {
+  .link-panel {
+    width: min(920px, calc(100vw - 40px)) !important;
+    max-width: calc(100vw - 40px) !important;
+  }
 }
 
-@media (max-width: 620px) {
-  #link-panel .panel-header {
-    grid-template-columns: 52px minmax(0, 1fr) !important;
+@media (max-width: 700px) {
+  .link-panel {
+    --panel-cover-size: 52px;
+  }
+}
+
+/* Combined hotfix: PC visualizer + keyword marquee + softer/larger droplets */
+#visualizer {
+  opacity: .22 !important;
+}
+
+.marquee-track {
+  animation-name: marquee !important;
+  animation-duration: 28s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #visualizer {
+    display: block !important;
   }
 
-  #link-panel .panel-cover,
-  #link-panel .panel-header > img.panel-cover {
-    width: 52px !important;
-    height: 52px !important;
-    min-width: 52px !important;
-    max-width: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
-    flex-basis: 52px !important;
-    border-radius: 12px;
+  .marquee-track {
+    animation-name: marquee !important;
+    animation-duration: 28s !important;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+    animation-play-state: running !important;
   }
 }

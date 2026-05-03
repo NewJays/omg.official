@@ -324,7 +324,7 @@
 
     content.innerHTML = [
       '<div class="panel-header">',
-        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="76" height="76" loading="lazy" decoding="async" style="width:76px;height:76px;max-width:76px;max-height:76px;min-width:76px;min-height:76px;object-fit:cover;object-position:center;display:block;" />',
+        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="76" height="76" loading="lazy" decoding="async" style="width:76px;height:76px;max-width:76px;max-height:76px;min-width:76px;min-height:76px;object-fit:cover;object-position:center;" />',
         '<div class="panel-title-block">',
           '<p class="eyebrow">', escapeHTML(album.type), ' · ', escapeHTML(album.statusLabel), '</p>',
           '<h2 id="panel-title">', escapeHTML(album.title), '</h2>',
@@ -646,7 +646,7 @@
         return {
           x: Math.random() * width,
           y: Math.random() * height,
-          r: Math.random() * 2.6 + .8,
+          r: Math.random() * 3.8 + 1.6,
           speed: Math.random() * .35 + .08,
           phase: Math.random() * Math.PI * 2,
           hue: index % 3
@@ -664,20 +664,20 @@
           p.x = Math.random() * width;
         }
 
-        var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 7);
+        var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 9);
         if (p.hue === 0) {
-          gradient.addColorStop(0, "rgba(255,79,216,.48)");
+          gradient.addColorStop(0, "rgba(255,79,216,.24)");
           gradient.addColorStop(1, "rgba(255,79,216,0)");
         } else if (p.hue === 1) {
-          gradient.addColorStop(0, "rgba(53,242,255,.44)");
+          gradient.addColorStop(0, "rgba(53,242,255,.22)");
           gradient.addColorStop(1, "rgba(53,242,255,0)");
         } else {
-          gradient.addColorStop(0, "rgba(255,181,69,.34)");
+          gradient.addColorStop(0, "rgba(255,181,69,.18)");
           gradient.addColorStop(1, "rgba(255,181,69,0)");
         }
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 7, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.r * 9, 0, Math.PI * 2);
         ctx.fill();
       });
       rafId = window.requestAnimationFrame(draw);
