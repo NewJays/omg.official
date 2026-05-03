@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Genie Music">
-  <defs><linearGradient id="g" x1="18" y1="12" x2="80" y2="86" gradientUnits="userSpaceOnUse"><stop stop-color="#36b8ff"/><stop offset="1" stop-color="#0067ff"/></linearGradient></defs>
-  <circle cx="48" cy="48" r="47" fill="url(#g)"/>
-  <path d="M63 29c-4-6-12-10-21-8-13 3-22 16-19 30 3 15 17 25 32 22 9-2 16-8 20-16H50v-13h39c.3 4-.2 9-1.6 13C82.5 74 67 86 48 86 27 86 10 69 10 48S27 10 48 10c14 0 26 7 33 18L63 29Z" fill="#fff" opacity=".97" transform="scale(.72) translate(18 18)"/>
-  <text x="48" y="59" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="19" font-weight="900" fill="#fff">genie</text>
-</svg>

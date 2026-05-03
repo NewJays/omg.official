@@ -1,6 +1,10 @@
-# 링크 입력 체크리스트
+# 링크·가사 입력 체크리스트 v4
 
-`assets/js/albums.js`에서 아래 서비스 id에 맞춰 URL을 넣으면 됩니다.
+`assets/js/albums.js`는 JSON 호환 형식입니다. 직접 편집해도 되고, 더 안전하게는 `tools/album_manager.py`를 실행해 GUI에서 수정할 수 있습니다.
+
+```bash
+python tools/album_manager.py
+```
 
 ## 서비스 id
 
@@ -19,73 +23,89 @@
 
 ## 앨범 전체 링크 입력 예시
 
-```js
-albumLinks: blankLinks({
-  youtubeTopic: "https://www.youtube.com/playlist?list=...",
-  youtubeMusic: "https://music.youtube.com/playlist?list=...",
-  apple: "https://music.apple.com/kr/album/...",
-  spotify: "https://open.spotify.com/album/...",
-  melon: "https://www.melon.com/album/detail.htm?albumId=...",
-  genie: "https://www.genie.co.kr/detail/albumInfo?axnm=...",
-  bugs: "https://music.bugs.co.kr/album/...",
-  flo: "https://www.music-flo.com/detail/album/...",
-  vibe: "https://vibe.naver.com/album/...",
-  kakao: "https://music.kakao.com/..."
-}),
+```json
+"albumLinks": {
+  "youtubeTopic": "https://www.youtube.com/playlist?list=...",
+  "youtubeMusic": "https://music.youtube.com/playlist?list=...",
+  "apple": "https://music.apple.com/kr/album/...",
+  "spotify": "https://open.spotify.com/album/...",
+  "melon": "https://www.melon.com/album/detail.htm?albumId=...",
+  "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=...",
+  "bugs": "https://music.bugs.co.kr/album/...",
+  "flo": "https://www.music-flo.com/detail/album/...",
+  "vibe": "https://vibe.naver.com/album/...",
+  "kakao": "https://music.kakao.com/..."
+}
 ```
 
-## 곡별 링크 입력 예시
+## 곡별 링크와 가사 입력 예시
 
-```js
-track("밥먹었송", {
-  youtubeTopic: "https://www.youtube.com/watch?v=...",
-  youtubeMusic: "https://music.youtube.com/watch?v=...",
-  apple: "https://music.apple.com/kr/song/...",
-  spotify: "https://open.spotify.com/track/...",
-  melon: "https://www.melon.com/song/detail.htm?songId=...",
-  genie: "https://www.genie.co.kr/detail/songInfo?xgnm=...",
-  bugs: "https://music.bugs.co.kr/track/...",
-  flo: "https://www.music-flo.com/detail/track/...",
-  vibe: "https://vibe.naver.com/track/...",
-  kakao: "https://music.kakao.com/..."
-})
+각 음악서비스의 곡 바로가기 링크는 서비스마다 별도 URL입니다. 앨범 링크와 곡 링크도 서로 다릅니다.
+
+```json
+{
+  "title": "밥먹었송",
+  "lyrics": "가사 1행\n가사 2행\n\n두 번째 문단 1행",
+  "links": {
+    "youtubeTopic": "https://www.youtube.com/watch?v=...",
+    "youtubeMusic": "https://music.youtube.com/watch?v=...",
+    "apple": "https://music.apple.com/kr/song/...",
+    "spotify": "https://open.spotify.com/track/...",
+    "melon": "https://www.melon.com/song/detail.htm?songId=...",
+    "genie": "https://www.genie.co.kr/detail/songInfo?xgnm=...",
+    "bugs": "https://music.bugs.co.kr/track/...",
+    "flo": "https://www.music-flo.com/detail/track/...",
+    "vibe": "https://vibe.naver.com/track/...",
+    "kakao": "https://music.kakao.com/..."
+  }
+}
 ```
 
-## 잔소리 트랙 링크 입력칸
+## 아이콘 교체
 
-```js
-tracks: [
-  track("밥먹었송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("방정리송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("눈높이송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("치카송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("키즈카페송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("물놀이송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("수고했송", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("자러갔숑", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" })
-]
+현재 아이콘은 PNG 경로를 사용합니다.
+
+```txt
+assets/images/services/spotify.png
 ```
 
-## 오마이메리크리스마스 트랙 링크 입력칸
+PNG, JPG, JPEG, SVG, WebP 모두 가능합니다. 같은 파일명으로 덮어쓰거나, `services[].icon` 경로를 바꾸면 됩니다.
 
-```js
-tracks: [
-  track("Oh! my 메리크리스마스", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("눈누난나 신나는 크리스마스", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("Oh! my 메리크리스마스 (Jazz Mix Ver.)", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" }),
-  track("눈누난나 신나는 크리스마스 (Jazz Mix Ver.)", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" })
-]
+```json
+{
+  "id": "spotify",
+  "label": "Spotify",
+  "short": "SP",
+  "icon": "assets/images/services/spotify.png"
+}
 ```
 
+## 잔소리 트랙 체크리스트
 
-## 협업문의 이메일
+- 밥먹었송
+- 방정리송
+- 눈높이송
+- 치카송
+- 키즈카페송
+- 물놀이송
+- 수고했송
+- 자러갔숑
 
-현재 설정값:
+각 곡마다 아래 10개 링크 칸을 채우면 됩니다.
 
-```js
-contactEmail: "omg.official@byul.me"
+```txt
+youtubeTopic / youtubeMusic / apple / spotify / melon / genie / bugs / flo / vibe / kakao
 ```
 
-## 음악서비스 아이콘 파일
+## 오마이메리크리스마스 트랙 체크리스트
 
-아이콘은 `assets/images/services/` 폴더에 있습니다. 같은 파일명으로 SVG, PNG, WebP 파일을 교체할 수 있습니다. 파일 확장자를 바꾸면 `assets/js/albums.js`의 `services[].icon` 경로도 함께 바꾸세요.
+- Oh! my 메리크리스마스
+- 눈누난나 신나는 크리스마스
+- Oh! my 메리크리스마스 (Jazz Mix Ver.)
+- 눈누난나 신나는 크리스마스 (Jazz Mix Ver.)
+
+각 곡마다 아래 10개 링크 칸을 채우면 됩니다.
+
+```txt
+youtubeTopic / youtubeMusic / apple / spotify / melon / genie / bugs / flo / vibe / kakao
+```

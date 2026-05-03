@@ -4,6 +4,35 @@
   var config = window.OHMYGASRANGE_SITE;
   if (!config) return;
 
+  function normalizeLinks(links, serviceIds) {
+    var normalized = {};
+    serviceIds.forEach(function (id) {
+      normalized[id] = links && typeof links[id] === "string" ? links[id] : "";
+    });
+    return normalized;
+  }
+
+  function normalizeConfig() {
+    config.services = Array.isArray(config.services) ? config.services : [];
+    config.albums = Array.isArray(config.albums) ? config.albums : [];
+
+    var serviceIds = config.services.map(function (service) {
+      return service.id;
+    });
+
+    config.albums.forEach(function (album) {
+      album.albumLinks = normalizeLinks(album.albumLinks, serviceIds);
+      album.tracks = Array.isArray(album.tracks) ? album.tracks : [];
+      album.tracks.forEach(function (track) {
+        track.title = track.title || "Untitled Track";
+        track.lyrics = typeof track.lyrics === "string" ? track.lyrics : "";
+        track.links = normalizeLinks(track.links, serviceIds);
+      });
+    });
+  }
+
+  normalizeConfig();
+
   var servicesById = config.services.reduce(function (acc, service) {
     acc[service.id] = service;
     return acc;
@@ -40,6 +69,10 @@
     return typeof url === "string" && url.trim() !== "" && url.trim() !== "#";
   }
 
+  function pad2(value) {
+    return value < 10 ? "0" + value : String(value);
+  }
+
   function getAlbum(albumId) {
     return config.albums.find(function (album) {
       return album.id === albumId;
@@ -57,29 +90,38 @@
   function getFirstLinkedService(album) {
     return config.services.find(function (service) {
       return serviceHasAnyLink(album, service.id);
-    }) || config.services[0];
+    }) || config.services[0] || { id: "", label: "Music Service" };
   }
 
   function getServiceLabel(serviceId) {
     return servicesById[serviceId] ? servicesById[serviceId].label : serviceId;
   }
 
-  function renderServiceIcon(service) {
-    var icon = service.icon || "";
-    var short = service.short || service.label || service.id;
-    if (!icon) {
-      return '<span class="service-icon service-icon-fallback" aria-hidden="true">' + escapeHTML(short) + '</span>';
-    }
-
-    return [
-      '<span class="service-icon" aria-hidden="true">',
-        '<img src="', escapeHTML(icon), '" alt="" loading="lazy" width="64" height="64" />',
-      '</span>'
-    ].join("");
-  }
-
   function getStatusClass(album) {
     return album.status === "upcoming" ? "upcoming" : "released";
+  }
+
+  function updateModalState() {
+    var panel = $("#link-panel");
+    var lightbox = $("#lightbox");
+    var lyrics = $("#lyrics-modal");
+    var isOpen = (panel && !panel.hidden) || (lightbox && !lightbox.hidden) || (lyrics && !lyrics.hidden);
+    document.body.classList.toggle("modal-open", !!isOpen);
+  }
+
+  function renderServiceIcon(service) {
+    var shortLabel = escapeHTML(service && service.short ? service.short : "♪");
+
+    if (service && service.icon) {
+      return [
+        '<span class="service-icon" aria-hidden="true">',
+          '<img src="', escapeHTML(service.icon), '" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false;" />',
+          '<span class="service-icon-text" hidden>', shortLabel, '</span>',
+        '</span>'
+      ].join("");
+    }
+
+    return '<span class="service-icon service-icon-fallback" aria-hidden="true"><span class="service-icon-text">' + shortLabel + '</span></span>';
   }
 
   function renderServiceStrip(album) {
@@ -96,7 +138,7 @@
         isActive ? '' : ' aria-disabled="true"',
         '>',
         renderServiceIcon(service),
-        '<span class="service-name">', escapeHTML(service.label), '</span>',
+        '<span class="service-label">', escapeHTML(service.label), '</span>',
         '</button>'
       ].join("");
     }).join("");
@@ -108,8 +150,46 @@
     }).join("");
   }
 
+  function renderTrackPreview(album) {
+    var tracks = album.tracks || [];
+
+    if (!tracks.length) {
+      return [
+        '<div class="track-preview is-empty">',
+          '<div class="track-preview-heading">',
+            '<span>Track List</span>',
+            '<small>수록곡 준비 중</small>',
+          '</div>',
+          '<p>곡명이 확정되면 GUI 편집기에서 트랙을 추가해 주세요.</p>',
+        '</div>'
+      ].join("");
+    }
+
+    return [
+      '<div class="track-preview">',
+        '<div class="track-preview-heading">',
+          '<span>Track List</span>',
+          '<small>곡 제목 · 가사보기</small>',
+        '</div>',
+        '<div class="track-preview-list">',
+          tracks.map(function (track, index) {
+            return [
+              '<div class="track-preview-row">',
+                '<span class="track-index">', pad2(index + 1), '</span>',
+                '<strong>', escapeHTML(track.title), '</strong>',
+                '<button type="button" class="lyrics-button" data-action="open-lyrics" data-album-id="', escapeHTML(album.id), '" data-track-index="', index, '">가사보기</button>',
+              '</div>'
+            ].join("");
+          }).join(""),
+        '</div>',
+      '</div>'
+    ].join("");
+  }
+
   function renderAlbumCard(album) {
     var statusClass = getStatusClass(album);
+    var firstService = getFirstLinkedService(album);
+
     return [
       '<article class="album-card reveal" data-album-card data-status="', escapeHTML(album.status), '" id="album-', escapeHTML(album.id), '">',
         '<div class="cover-zone">',
@@ -132,12 +212,13 @@
           '</div>',
           '<div>',
             '<div class="album-actions">',
-              '<button type="button" class="action-button primary" data-action="open-links" data-album-id="', escapeHTML(album.id), '" data-service-id="', escapeHTML(getFirstLinkedService(album).id), '">음악서비스 선택</button>',
-              '<button type="button" class="action-button" data-action="open-lightbox" data-img-src="', escapeHTML(album.booklet), '" data-img-title="', escapeHTML(album.title + ' 앨범 소개 부클렛'), '">부클렛 보기</button>',
+              '<button type="button" class="action-button primary" data-action="open-links" data-album-id="', escapeHTML(album.id), '" data-service-id="', escapeHTML(firstService.id), '"><span class="button-icon">♫</span><span>음악서비스 선택</span></button>',
+              '<button type="button" class="action-button" data-action="open-lightbox" data-img-src="', escapeHTML(album.booklet), '" data-img-title="', escapeHTML(album.title + ' 앨범 소개 부클렛'), '"><span class="button-icon">▣</span><span>부클렛 보기</span></button>',
             '</div>',
             '<div class="service-strip" aria-label="', escapeHTML(album.title + ' 음악서비스'), '">',
               renderServiceStrip(album),
             '</div>',
+            renderTrackPreview(album),
           '</div>',
         '</div>',
       '</article>'
@@ -175,11 +256,11 @@
       var isActive = service.id === selectedServiceId;
 
       return [
-        '<button type="button" class="service-tab service-', escapeHTML(service.id), isActive ? ' is-active' : '', hasAnyLink ? '' : ' is-empty', '"',
+        '<button type="button" class="service-tab', isActive ? ' is-active' : '', hasAnyLink ? '' : ' is-empty', '"',
         ' data-action="select-service" data-service-id="', escapeHTML(service.id), '"',
         ' aria-label="', escapeHTML(service.label + (hasAnyLink ? ' 선택' : ' 링크 준비 중')), '">',
         renderServiceIcon(service),
-        '<span class="service-tab-name">', escapeHTML(service.label), '</span>',
+        '<span>', escapeHTML(service.label), '</span>',
         '</button>'
       ].join("");
     }).join("");
@@ -191,7 +272,7 @@
 
     if (isRealUrl(albumUrl)) {
       return [
-        '<div class="link-row">',
+        '<div class="link-row album-link-row">',
           '<div>',
             '<strong>앨범 전체 듣기</strong><br />',
             '<span>', escapeHTML(serviceLabel), '에서 ', escapeHTML(album.title), ' 열기</span>',
@@ -213,24 +294,28 @@
     var tracks = album.tracks || [];
 
     if (!tracks.length) {
-      return '<div class="empty-state">곡별 링크 목록이 아직 없습니다. <strong>tracks</strong> 배열에 곡명과 서비스별 URL을 추가하면 이곳에 자동으로 표시됩니다.</div>';
+      return '<div class="empty-state">곡별 링크 목록이 아직 없습니다. <strong>tracks</strong> 배열에 곡명, 서비스별 URL, 가사를 추가하면 이곳에 자동으로 표시됩니다.</div>';
     }
 
-    var rows = tracks.map(function (track) {
+    return tracks.map(function (track, index) {
       var url = track.links && track.links[serviceId];
-      if (!isRealUrl(url)) return "";
+      var hasLink = isRealUrl(url);
+
       return [
-        '<div class="link-row">',
-          '<div>',
-            '<strong>', escapeHTML(track.title), '</strong><br />',
-            '<span>', escapeHTML(serviceLabel), ' 곡 링크</span>',
+        '<div class="link-row track-link-row">',
+          '<div class="track-link-info">',
+            '<strong>', pad2(index + 1), '. ', escapeHTML(track.title), '</strong><br />',
+            '<span>', hasLink ? escapeHTML(serviceLabel + ' 곡 바로가기') : escapeHTML(serviceLabel + ' 곡 링크 준비 중'), '</span>',
           '</div>',
-          '<a class="open-link" href="', escapeHTML(url), '" target="_blank" rel="noopener noreferrer">열기</a>',
+          '<div class="link-actions">',
+            '<button type="button" class="lyrics-link" data-action="open-lyrics" data-album-id="', escapeHTML(album.id), '" data-track-index="', index, '">가사보기</button>',
+            hasLink
+              ? '<a class="open-link" href="' + escapeHTML(url) + '" target="_blank" rel="noopener noreferrer">열기</a>'
+              : '<span class="disabled-link" aria-disabled="true">준비 중</span>',
+          '</div>',
         '</div>'
       ].join("");
-    }).filter(Boolean).join("");
-
-    return rows || '<div class="empty-state">' + escapeHTML(serviceLabel) + ' 곡별 링크가 아직 입력되지 않았습니다.</div>';
+    }).join("");
   }
 
   function renderPanel(album, selectedServiceId) {
@@ -239,8 +324,8 @@
 
     content.innerHTML = [
       '<div class="panel-header">',
-        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="120" height="120" />',
-        '<div class="panel-meta">',
+        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="3000" height="3000" />',
+        '<div class="panel-title-block">',
           '<p class="eyebrow">', escapeHTML(album.type), ' · ', escapeHTML(album.statusLabel), '</p>',
           '<h2 id="panel-title">', escapeHTML(album.title), '</h2>',
           '<p>', escapeHTML(album.titleEn), ' · ', escapeHTML(album.releaseDate), '</p>',
@@ -249,9 +334,9 @@
       '<div class="service-tabs" role="tablist" aria-label="음악서비스 선택">',
         renderServiceTabs(album, selectedServiceId),
       '</div>',
-      '<p class="panel-section-title">앨범 링크</p>',
+      '<p class="panel-section-title">Album Link</p>',
       '<div class="link-stack">', renderAlbumLink(album, selectedServiceId), '</div>',
-      '<p class="panel-section-title">곡별 링크</p>',
+      '<p class="panel-section-title">Track Links & Lyrics</p>',
       '<div class="link-stack">', renderTrackLinks(album, selectedServiceId), '</div>'
     ].join("");
   }
@@ -272,7 +357,7 @@
     renderPanel(album, selectedService.id);
     backdrop.hidden = false;
     panel.hidden = false;
-    document.body.classList.add("modal-open");
+    updateModalState();
 
     var closeButton = $("[data-close-panel]", panel);
     if (closeButton) closeButton.focus({ preventScroll: true });
@@ -281,13 +366,13 @@
   function closePanel() {
     var panel = $("#link-panel");
     var backdrop = $("#panel-backdrop");
-    if (!panel || !backdrop) return;
+    if (!panel || !backdrop || panel.hidden) return;
 
     panel.hidden = true;
     backdrop.hidden = true;
-    document.body.classList.remove("modal-open");
     state.currentPanelAlbumId = null;
     state.currentPanelServiceId = null;
+    updateModalState();
 
     if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === "function") {
       state.lastFocusedElement.focus({ preventScroll: true });
@@ -313,7 +398,7 @@
     image.alt = title;
     caption.textContent = title;
     lightbox.hidden = false;
-    document.body.classList.add("modal-open");
+    updateModalState();
 
     var closeButton = $("[data-close-lightbox]", lightbox);
     if (closeButton) closeButton.focus({ preventScroll: true });
@@ -322,11 +407,65 @@
   function closeLightbox() {
     var lightbox = $("#lightbox");
     var image = $("#lightbox-image");
-    if (!lightbox || !image) return;
+    if (!lightbox || !image || lightbox.hidden) return;
 
     lightbox.hidden = true;
     image.src = "";
-    document.body.classList.remove("modal-open");
+    updateModalState();
+
+    if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === "function") {
+      state.lastFocusedElement.focus({ preventScroll: true });
+    }
+  }
+
+  function renderLyricsText(text) {
+    var lyrics = typeof text === "string" ? text.trim() : "";
+
+    if (!lyrics) {
+      return [
+        '<div class="empty-state">',
+          '가사가 아직 입력되지 않았습니다. ',
+          '<strong>tools/album_manager.py</strong> 또는 <strong>assets/js/albums.js</strong>의 ',
+          '<strong>tracks[].lyrics</strong>에 가사를 입력하면 이 창에 표시됩니다.',
+        '</div>'
+      ].join("");
+    }
+
+    return lyrics.split(/\n{2,}/).map(function (paragraph) {
+      return '<p>' + escapeHTML(paragraph).replace(/\n/g, '<br />') + '</p>';
+    }).join("");
+  }
+
+  function openLyrics(albumId, trackIndexValue) {
+    var album = getAlbum(albumId);
+    var trackIndex = parseInt(trackIndexValue, 10);
+    var track = album && album.tracks ? album.tracks[trackIndex] : null;
+    var modal = $("#lyrics-modal");
+    var content = $("#lyrics-content");
+    if (!album || !track || !modal || !content) return;
+
+    state.lastFocusedElement = document.activeElement;
+    content.innerHTML = [
+      '<div class="lyrics-header">',
+        '<p class="eyebrow">Lyrics</p>',
+        '<h2 id="lyrics-title">', escapeHTML(track.title), '</h2>',
+        '<p>', escapeHTML(album.title), ' · ', escapeHTML(album.titleEn), '</p>',
+      '</div>',
+      '<div class="lyrics-body">', renderLyricsText(track.lyrics), '</div>'
+    ].join("");
+    modal.hidden = false;
+    updateModalState();
+
+    var closeButton = $("[data-close-lyrics]", modal);
+    if (closeButton) closeButton.focus({ preventScroll: true });
+  }
+
+  function closeLyrics() {
+    var modal = $("#lyrics-modal");
+    if (!modal || modal.hidden) return;
+
+    modal.hidden = true;
+    updateModalState();
 
     if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === "function") {
       state.lastFocusedElement.focus({ preventScroll: true });
@@ -335,6 +474,12 @@
 
   function setupEvents() {
     document.addEventListener("click", function (event) {
+      var lyricsButton = event.target.closest('[data-action="open-lyrics"]');
+      if (lyricsButton) {
+        openLyrics(lyricsButton.getAttribute("data-album-id"), lyricsButton.getAttribute("data-track-index"));
+        return;
+      }
+
       var openLinksButton = event.target.closest('[data-action="open-links"]');
       if (openLinksButton) {
         openPanel(openLinksButton.getAttribute("data-album-id"), openLinksButton.getAttribute("data-service-id"));
@@ -350,6 +495,11 @@
       var serviceTab = event.target.closest('[data-action="select-service"]');
       if (serviceTab) {
         selectService(serviceTab.getAttribute("data-service-id"));
+        return;
+      }
+
+      if (event.target.closest("[data-close-lyrics]") || event.target.id === "lyrics-modal") {
+        closeLyrics();
         return;
       }
 
@@ -370,9 +520,18 @@
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") {
-        closePanel();
+      if (event.key !== "Escape") return;
+
+      var lyrics = $("#lyrics-modal");
+      var lightbox = $("#lightbox");
+      var panel = $("#link-panel");
+
+      if (lyrics && !lyrics.hidden) {
+        closeLyrics();
+      } else if (lightbox && !lightbox.hidden) {
         closeLightbox();
+      } else if (panel && !panel.hidden) {
+        closePanel();
       }
     });
 
@@ -383,8 +542,22 @@
     }, { passive: true });
   }
 
+  function setupProject() {
+    var project = config.project || {};
+    var heroImage = $(".artist-card img");
+    var figcaption = $(".artist-card figcaption strong");
+
+    if (heroImage && project.image) {
+      heroImage.src = project.image;
+    }
+
+    if (figcaption && project.nameKo) {
+      figcaption.textContent = project.nameKo;
+    }
+  }
+
   function setupContact() {
-    var email = config.contactEmail || "omg.official@byul.me";
+    var email = config.contactEmail || "your-email@example.com";
     var mailLink = $("#contact-email");
     var year = $("#current-year");
 
@@ -520,6 +693,7 @@
   }
 
   function init() {
+    setupProject();
     renderAlbums();
     setupContact();
     setupEvents();
