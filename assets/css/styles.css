@@ -1,3 +1,18 @@
+/*
+  커스텀 한글 폰트 적용 방법:
+  1) assets/fonts/omg-round.woff2 파일을 넣습니다.
+  2) 아래 @font-face 블록의 주석을 해제합니다.
+  3) --font 맨 앞의 "OMG Round"가 해당 폰트를 사용합니다.
+
+@font-face {
+  font-family: "OMG Round";
+  src: url("../fonts/omg-round.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
 :root {
   color-scheme: dark;
   --bg: #050505;
@@ -21,7 +36,7 @@
   --max-width: 1180px;
   --header-height: 76px;
   --ease-out: cubic-bezier(.16, 1, .3, 1);
-  --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --font: "OMG Round", "NanumSquareRound", "Pretendard", "SUIT", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
 }
 
 * {
@@ -244,12 +259,18 @@ code {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .82fr);
+  grid-template-columns: minmax(0, .98fr) minmax(280px, .72fr);
   align-items: center;
-  gap: clamp(2rem, 6vw, 5rem);
+  gap: clamp(2rem, 5vw, 4rem);
   min-height: calc(100vh - var(--header-height) - 24px);
   min-height: calc(100svh - var(--header-height) - 24px);
   padding: clamp(3rem, 8vw, 6.6rem) 0 clamp(3rem, 7vw, 5rem);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
 }
 
 .eyebrow {
@@ -264,14 +285,15 @@ code {
 .hero h1 {
   margin: 0;
   max-width: 780px;
-  font-size: clamp(4.4rem, 12vw, 10.5rem);
-  line-height: .78;
-  letter-spacing: -.09em;
+  inline-size: min(100%, 760px);
+  font-size: clamp(3.7rem, 7.6vw, 8.25rem);
+  line-height: .82;
+  letter-spacing: -.075em;
   text-transform: uppercase;
 }
 
 .hero h1 span {
-  display: inline-block;
+  display: block;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,.72);
   text-shadow: 0 0 40px rgba(255,79,216,.24);
@@ -362,12 +384,13 @@ code {
 
 .hero-visual {
   position: relative;
+  z-index: 1;
   min-height: 420px;
   display: grid;
   place-items: center;
 }
 
-.artist-orbit {
+.project-orbit {
   position: absolute;
   width: min(82vw, 470px);
   aspect-ratio: 1;
@@ -376,8 +399,8 @@ code {
   animation: spin 16s linear infinite;
 }
 
-.artist-orbit::before,
-.artist-orbit::after {
+.project-orbit::before,
+.project-orbit::after {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -385,14 +408,14 @@ code {
   box-shadow: 0 0 30px currentColor;
 }
 
-.artist-orbit::before {
+.project-orbit::before {
   width: 14px;
   height: 14px;
   left: 12%;
   top: 14%;
 }
 
-.artist-orbit::after {
+.project-orbit::after {
   width: 10px;
   height: 10px;
   right: 6%;
@@ -400,7 +423,7 @@ code {
   background: var(--accent);
 }
 
-.artist-card {
+.project-card {
   position: relative;
   width: min(82vw, 410px);
   aspect-ratio: 1;
@@ -414,21 +437,21 @@ code {
   transition: transform .2s ease;
 }
 
-.artist-card img {
+.project-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: scale(1.02);
 }
 
-.artist-card::after {
+.project-card::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 46%, rgba(0,0,0,.7));
 }
 
-.artist-card figcaption {
+.project-card figcaption {
   position: absolute;
   left: 20px;
   right: 20px;
@@ -440,7 +463,7 @@ code {
   gap: 1rem;
 }
 
-.artist-card figcaption span {
+.project-card figcaption span {
   color: var(--muted-2);
   font-size: .78rem;
   font-weight: 900;
@@ -448,7 +471,7 @@ code {
   text-transform: uppercase;
 }
 
-.artist-card figcaption strong {
+.project-card figcaption strong {
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   letter-spacing: -.04em;
 }
@@ -802,15 +825,31 @@ code {
 }
 
 .service-icon {
+  position: relative;
   display: grid;
+  flex: 0 0 auto;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
   border-radius: 50%;
   color: #050505;
   background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 8px 18px rgba(0,0,0,.22);
   font-size: .72rem;
   font-weight: 950;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.service-name,
+.service-tab-name {
+  min-width: 0;
 }
 
 .service-youtubeTopic .service-icon,
@@ -946,48 +985,71 @@ code {
 
 .panel-header {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 1rem;
+  grid-template-columns: clamp(58px, 10vw, 76px) minmax(0, 1fr);
+  gap: .85rem;
   align-items: center;
   padding-right: 3rem;
 }
 
 .panel-cover {
-  width: 90px;
+  width: clamp(58px, 10vw, 76px);
+  height: clamp(58px, 10vw, 76px);
+  max-width: 76px;
+  max-height: 76px;
   aspect-ratio: 1;
-  border-radius: 18px;
+  border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 12px 32px rgba(0,0,0,.34);
 }
 
+.panel-meta {
+  min-width: 0;
+}
+
 .panel-header h2 {
   margin: 0;
-  font-size: clamp(1.55rem, 3vw, 2.45rem);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
   letter-spacing: -.05em;
+  overflow-wrap: anywhere;
 }
 
 .panel-header p {
   margin: .35rem 0 0;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .service-tabs {
-  display: flex;
-  gap: .45rem;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+  gap: .5rem;
   padding: 1.1rem 0 .7rem;
-  scrollbar-width: thin;
 }
 
 .service-tab {
-  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .55rem;
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: .58rem .78rem;
+  padding: .42rem .7rem .42rem .46rem;
   color: var(--muted);
   background: rgba(255,255,255,.05);
   cursor: pointer;
   font-weight: 900;
+}
+
+.service-tab .service-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.service-tab-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .service-tab.is-active {
@@ -1129,7 +1191,7 @@ code {
   to { transform: translateX(-50%); }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   :root {
     --header-height: 68px;
   }
@@ -1203,7 +1265,8 @@ code {
   }
 
   .hero h1 {
-    font-size: clamp(4rem, 18vw, 6.6rem);
+    font-size: clamp(3.2rem, 16.8vw, 5.8rem);
+    letter-spacing: -.065em;
   }
 
   .hero-stats {
@@ -1214,7 +1277,7 @@ code {
     min-height: 320px;
   }
 
-  .artist-card {
+  .project-card {
     border-radius: 28px;
   }
 
@@ -1247,13 +1310,28 @@ code {
   }
 
   .panel-header {
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: .72rem;
     padding-right: 2.3rem;
   }
 
   .panel-cover {
-    width: 72px;
-    border-radius: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .service-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-tab {
+    padding-right: .55rem;
+  }
+
+  .service-tab .service-icon {
+    width: 30px;
+    height: 30px;
   }
 
   .link-row {

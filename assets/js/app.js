@@ -64,6 +64,20 @@
     return servicesById[serviceId] ? servicesById[serviceId].label : serviceId;
   }
 
+  function renderServiceIcon(service) {
+    var icon = service.icon || "";
+    var short = service.short || service.label || service.id;
+    if (!icon) {
+      return '<span class="service-icon service-icon-fallback" aria-hidden="true">' + escapeHTML(short) + '</span>';
+    }
+
+    return [
+      '<span class="service-icon" aria-hidden="true">',
+        '<img src="', escapeHTML(icon), '" alt="" loading="lazy" width="64" height="64" />',
+      '</span>'
+    ].join("");
+  }
+
   function getStatusClass(album) {
     return album.status === "upcoming" ? "upcoming" : "released";
   }
@@ -81,8 +95,8 @@
         ' aria-label="', escapeHTML(album.title + ' ' + title), '"',
         isActive ? '' : ' aria-disabled="true"',
         '>',
-        '<span class="service-icon" aria-hidden="true">', escapeHTML(service.short), '</span>',
-        '<span>', escapeHTML(service.label), '</span>',
+        renderServiceIcon(service),
+        '<span class="service-name">', escapeHTML(service.label), '</span>',
         '</button>'
       ].join("");
     }).join("");
@@ -161,10 +175,11 @@
       var isActive = service.id === selectedServiceId;
 
       return [
-        '<button type="button" class="service-tab', isActive ? ' is-active' : '', hasAnyLink ? '' : ' is-empty', '"',
+        '<button type="button" class="service-tab service-', escapeHTML(service.id), isActive ? ' is-active' : '', hasAnyLink ? '' : ' is-empty', '"',
         ' data-action="select-service" data-service-id="', escapeHTML(service.id), '"',
         ' aria-label="', escapeHTML(service.label + (hasAnyLink ? ' 선택' : ' 링크 준비 중')), '">',
-        escapeHTML(service.label),
+        renderServiceIcon(service),
+        '<span class="service-tab-name">', escapeHTML(service.label), '</span>',
         '</button>'
       ].join("");
     }).join("");
@@ -224,8 +239,8 @@
 
     content.innerHTML = [
       '<div class="panel-header">',
-        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="3000" height="3000" />',
-        '<div>',
+        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="120" height="120" />',
+        '<div class="panel-meta">',
           '<p class="eyebrow">', escapeHTML(album.type), ' · ', escapeHTML(album.statusLabel), '</p>',
           '<h2 id="panel-title">', escapeHTML(album.title), '</h2>',
           '<p>', escapeHTML(album.titleEn), ' · ', escapeHTML(album.releaseDate), '</p>',
@@ -234,9 +249,9 @@
       '<div class="service-tabs" role="tablist" aria-label="음악서비스 선택">',
         renderServiceTabs(album, selectedServiceId),
       '</div>',
-      '<p class="panel-section-title">Album Link</p>',
+      '<p class="panel-section-title">앨범 링크</p>',
       '<div class="link-stack">', renderAlbumLink(album, selectedServiceId), '</div>',
-      '<p class="panel-section-title">Track Links</p>',
+      '<p class="panel-section-title">곡별 링크</p>',
       '<div class="link-stack">', renderTrackLinks(album, selectedServiceId), '</div>'
     ].join("");
   }
@@ -369,7 +384,7 @@
   }
 
   function setupContact() {
-    var email = config.contactEmail || "your-email@example.com";
+    var email = config.contactEmail || "omg.official@byul.me";
     var mailLink = $("#contact-email");
     var year = $("#current-year");
 

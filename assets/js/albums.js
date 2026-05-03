@@ -1,5 +1,5 @@
 /*
-  오마이가스레인지 앨범 데이터 파일 v2
+  오마이가스레인지 앨범 데이터 파일 v3
 
   이 파일만 수정해도 사이트의 앨범 카드, 음악서비스 버튼, 앨범 링크, 곡별 링크가 자동 갱신됩니다.
 
@@ -57,23 +57,23 @@
   }
 
   window.OHMYGASRANGE_SITE = {
-    contactEmail: "your-email@example.com",
-    artist: {
+    contactEmail: "omg.official@byul.me",
+    project: {
       nameKo: "오마이가스레인지",
       nameEn: "Oh! My Gasrange",
-      image: "assets/images/artist.jpg"
+      image: "assets/images/project.jpg"
     },
     services: [
-      { id: "youtubeTopic", label: "YouTube Topic", short: "YT" },
-      { id: "youtubeMusic", label: "YouTube Music", short: "YM" },
-      { id: "apple", label: "Apple Music", short: "AM" },
-      { id: "spotify", label: "Spotify", short: "SP" },
-      { id: "melon", label: "Melon", short: "ML" },
-      { id: "genie", label: "Genie Music", short: "GN" },
-      { id: "bugs", label: "Bugs", short: "BG" },
-      { id: "flo", label: "FLO", short: "FL" },
-      { id: "vibe", label: "Naver VIBE", short: "VB" },
-      { id: "kakao", label: "KakaoMusic", short: "KK" }
+      { id: "youtubeTopic", label: "YouTube Topic", short: "YT", icon: "assets/images/services/youtube-topic.svg" },
+      { id: "youtubeMusic", label: "YouTube Music", short: "YM", icon: "assets/images/services/youtube-music.svg" },
+      { id: "apple", label: "Apple Music", short: "AM", icon: "assets/images/services/apple-music.svg" },
+      { id: "spotify", label: "Spotify", short: "SP", icon: "assets/images/services/spotify.svg" },
+      { id: "melon", label: "Melon", short: "ML", icon: "assets/images/services/melon.svg" },
+      { id: "genie", label: "Genie Music", short: "GN", icon: "assets/images/services/genie.svg" },
+      { id: "bugs", label: "Bugs", short: "BG", icon: "assets/images/services/bugs.svg" },
+      { id: "flo", label: "FLO", short: "FL", icon: "assets/images/services/flo.svg" },
+      { id: "vibe", label: "Naver VIBE", short: "VB", icon: "assets/images/services/vibe.svg" },
+      { id: "kakao", label: "KakaoMusic", short: "KK", icon: "assets/images/services/kakao-music.svg" }
     ],
     albums: [
       {

@@ -76,3 +76,16 @@ tracks: [
   track("눈누난나 신나는 크리스마스 (Jazz Mix Ver.)", { apple: "", spotify: "", youtubeMusic: "", youtubeTopic: "", melon: "", genie: "", bugs: "", flo: "", vibe: "", kakao: "" })
 ]
 ```
+
+
+## 협업문의 이메일
+
+현재 설정값:
+
+```js
+contactEmail: "omg.official@byul.me"
+```
+
+## 음악서비스 아이콘 파일
+
+아이콘은 `assets/images/services/` 폴더에 있습니다. 같은 파일명으로 SVG, PNG, WebP 파일을 교체할 수 있습니다. 파일 확장자를 바꾸면 `assets/js/albums.js`의 `services[].icon` 경로도 함께 바꾸세요.

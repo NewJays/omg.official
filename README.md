@@ -1,6 +1,6 @@
 # Oh! My Gasrange album promo site
 
-오마이가스레인지(Oh! My Gasrange) 앨범 홍보용 반응형 정적 웹사이트입니다. 프레임워크 없이 HTML, CSS, JavaScript만 사용하므로 GitHub Pages, Netlify, Vercel, Cafe24, 일반 웹호스팅 어디에나 그대로 올릴 수 있습니다.
+오마이가스레인지(Oh! My Gasrange) 프로젝트 앨범 홍보용 반응형 정적 웹사이트입니다. 프레임워크 없이 HTML, CSS, JavaScript만 사용하므로 GitHub Pages, Netlify, Vercel, Cafe24, 일반 웹호스팅 어디에나 그대로 올릴 수 있습니다.
 
 ## 파일 구조
 
@@ -8,10 +8,21 @@
 index.html
 assets/
   css/styles.css
-  js/albums.js      ← 앨범, 곡, 음악서비스 링크, 이메일 수정은 주로 여기에서 합니다.
+  js/albums.js      ← 앨범, 곡, 음악서비스 링크, 이메일, 서비스 아이콘 경로 수정은 주로 여기에서 합니다.
   js/app.js         ← 화면 렌더링/모달/애니메이션 로직
   images/
-    artist.jpg
+    project.jpg
+    services/       ← 음악서비스 SVG 아이콘. 같은 파일명으로 교체 가능
+      youtube-topic.svg
+      youtube-music.svg
+      apple-music.svg
+      spotify.svg
+      melon.svg
+      genie.svg
+      bugs.svg
+      flo.svg
+      vibe.svg
+      kakao-music.svg
     albums/
       jansori-cover.jpg
       jansori-booklet.jpg
@@ -44,7 +55,7 @@ LINKS_TEMPLATE.md   ← 링크 입력용 체크리스트
 
 현재 이미지는 자리표시자입니다. 아래 파일명을 그대로 유지해서 교체하면 코드 수정 없이 바로 반영됩니다.
 
-- 아티스트 이미지: `assets/images/artist.jpg`
+- 프로젝트 이미지: `assets/images/project.jpg`
 - 잔소리 커버: `assets/images/albums/jansori-cover.jpg`
 - 잔소리 부클렛: `assets/images/albums/jansori-booklet.jpg`
 - 오마이메리크리스마스 커버: `assets/images/albums/merry-cover.jpg`
@@ -56,7 +67,7 @@ LINKS_TEMPLATE.md   ← 링크 입력용 체크리스트
 
 - 앨범 커버: 3000×3000
 - 앨범 소개 부클렛: 2000×2000
-- 아티스트 이미지: 정사각형
+- 프로젝트 이미지: 정사각형
 
 웹 로딩을 빠르게 하려면 실제 배포 전 JPG/WebP로 압축하는 것을 권장합니다. 원본 3000px 이미지를 그대로 써도 되지만 모바일 초기 로딩이 느려질 수 있습니다.
 
@@ -65,7 +76,7 @@ LINKS_TEMPLATE.md   ← 링크 입력용 체크리스트
 `assets/js/albums.js` 상단에서 아래 값을 실제 이메일로 바꾸세요.
 
 ```js
-contactEmail: "your-email@example.com",
+contactEmail: "omg.official@byul.me",
 ```
 
 ## 4. 앨범 전체 링크 추가
@@ -151,7 +162,42 @@ tracks: [
 
 발매 후에는 `status`를 `released`로 바꾸고 `albumLinks`, `tracks`에 링크를 채우면 됩니다.
 
-## 8. 로컬에서 확인
+## 8. 음악서비스 아이콘 교체
+
+현재 `assets/images/services/`에 서비스별 SVG 아이콘을 넣어 두었습니다. 필요하면 공식 로고 파일이나 직접 만든 아이콘으로 같은 파일명을 덮어쓰면 됩니다.
+
+```txt
+assets/images/services/youtube-topic.svg
+assets/images/services/youtube-music.svg
+assets/images/services/apple-music.svg
+assets/images/services/spotify.svg
+assets/images/services/melon.svg
+assets/images/services/genie.svg
+assets/images/services/bugs.svg
+assets/images/services/flo.svg
+assets/images/services/vibe.svg
+assets/images/services/kakao-music.svg
+```
+
+파일명을 바꾸고 싶다면 `assets/js/albums.js`의 `services` 배열에서 `icon` 값을 수정하세요.
+
+## 9. 커스텀 한글 폰트 적용
+
+가능합니다. 웹폰트는 보통 WOFF2 포맷을 권장합니다. 둥근 한글 폰트 파일을 아래 경로에 넣고 파일명을 맞춘 뒤, `assets/css/styles.css` 맨 위의 `@font-face` 주석을 해제하면 적용됩니다.
+
+```txt
+assets/fonts/omg-round.woff2
+```
+
+현재 폰트 우선순위는 다음과 같습니다.
+
+```css
+"OMG Round", "NanumSquareRound", "Pretendard", "SUIT", 시스템 한글 폰트
+```
+
+폰트 파일을 넣지 않아도 사이트는 정상 작동하며, 설치된 둥근 계열 폰트가 있으면 우선 사용합니다.
+
+## 10. 로컬에서 확인
 
 폴더에서 바로 `index.html`을 열어도 됩니다. 더 안정적으로 보려면 아래처럼 로컬 서버를 실행하세요.
 
@@ -161,7 +207,7 @@ python3 -m http.server 8000
 
 브라우저에서 `http://localhost:8000`으로 접속하면 됩니다.
 
-## 9. GitHub Pages 배포
+## 11. GitHub Pages 배포
 
 1. GitHub에서 새 공개 저장소를 만듭니다.
 2. 이 폴더의 모든 파일과 폴더를 저장소 루트에 업로드합니다.
