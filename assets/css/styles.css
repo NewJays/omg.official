@@ -1612,3 +1612,606 @@ code {
 .service-icon-text[hidden] {
   display: none !important;
 }
+
+/* === Mobile portrait overflow hotfix ===
+   Prevents horizontal overflow from header/nav, large title text,
+   service buttons, link panels, and large album images on narrow screens. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+#visualizer,
+.site-shell,
+main,
+section,
+.site-header,
+.section-wrap,
+.site-footer,
+.hero,
+.album-grid,
+.album-card,
+.album-body,
+.cover-zone,
+.track-preview,
+.service-strip,
+.link-panel,
+.lyrics-card,
+.lightbox,
+.lightbox figure {
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    width: calc(100% - 16px);
+    max-width: calc(100vw - 16px);
+    gap: .35rem;
+    overflow: hidden;
+  }
+
+  .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: .45rem;
+  }
+
+  .brand-mark,
+  .service-icon,
+  .button-icon,
+  .track-index {
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    min-width: 0;
+  }
+
+  .brand-text strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    flex: 0 0 auto;
+    min-width: 0;
+    gap: .02rem;
+  }
+
+  .site-nav a {
+    padding: .52rem .38rem;
+    font-size: .74rem;
+    white-space: nowrap;
+  }
+
+  .section-wrap,
+  .site-footer,
+  .hero {
+    width: calc(100% - 22px);
+    max-width: calc(100vw - 22px);
+  }
+
+  .hero {
+    overflow: hidden;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.65rem, 14.5vw, 4.8rem);
+    line-height: .9;
+    letter-spacing: -.055em;
+  }
+
+  .hero h1 span {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .hero-visual {
+    min-height: auto;
+    overflow: hidden;
+    padding-block: 1rem;
+  }
+
+  .artist-card,
+  .artist-orbit {
+    width: min(82vw, 320px);
+    max-width: 100%;
+  }
+
+  .section-heading,
+  .album-card,
+  .about-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .cover-zone {
+    width: 100%;
+    max-width: min(100%, 420px);
+    margin-inline: auto;
+  }
+
+  .album-title,
+  .section-heading h2,
+  .about-card h2,
+  .site-footer h2,
+  .album-description,
+  .section-heading p,
+  .about-card p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .album-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .action-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .service-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .service-pill {
+    width: 100%;
+    min-width: 0;
+    flex: initial;
+    justify-content: flex-start;
+    padding-right: .52rem;
+  }
+
+  .service-label,
+  .service-tab > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link-panel,
+  .lyrics-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .panel-header {
+    grid-template-columns: 52px minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .panel-cover {
+    display: block;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px;
+    max-width: 52px;
+    min-height: 52px;
+    max-height: 52px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .service-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .45rem;
+    overflow-x: hidden;
+    padding-right: 0;
+  }
+
+  .service-tab {
+    width: 100%;
+    min-width: 0;
+    flex: initial;
+    justify-content: flex-start;
+    white-space: nowrap;
+    padding-right: .48rem;
+  }
+
+  .link-row,
+  .track-link-row {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .track-link-info,
+  .track-link-info strong,
+  .track-link-info span {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .link-actions .lyrics-link,
+  .link-actions .open-link,
+  .link-actions .disabled-link {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .lightbox {
+    overflow-x: hidden;
+  }
+
+  .lightbox figure {
+    width: calc(100vw - 24px);
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-text {
+    display: none;
+  }
+
+  .site-nav a {
+    padding-inline: .32rem;
+    font-size: .7rem;
+  }
+
+  .service-strip,
+  .service-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* =========================================================
+   Mobile portrait overflow patch
+   - Prevents horizontal page scroll on narrow screens
+   - Converts mobile service buttons/tabs to wrapping grids
+   - Forces modal/card contents to shrink inside viewport
+   ========================================================= */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.site-shell,
+main,
+section,
+header,
+footer,
+.section-wrap,
+.site-header,
+.hero,
+.hero-copy,
+.hero-visual,
+.album-grid,
+.album-card,
+.album-body,
+.cover-zone,
+.track-preview,
+.about-card,
+.site-footer,
+.link-panel,
+.lyrics-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+span,
+strong,
+small,
+a,
+button,
+dd,
+dt {
+  min-width: 0;
+}
+
+.album-title,
+.album-title small,
+.album-description,
+.section-heading h2,
+.about-card h2,
+.site-footer h2,
+.link-row strong,
+.link-row span,
+.lyrics-body,
+.empty-state {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  .section-wrap {
+    width: min(calc(100% - 20px), var(--max-width));
+    max-width: calc(100vw - 20px);
+  }
+
+  .site-header {
+    width: calc(100% - 16px);
+    max-width: calc(100vw - 16px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .35rem;
+    overflow: hidden;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: .5rem;
+  }
+
+  .brand-text {
+    min-width: 0;
+  }
+
+  .brand-text strong {
+    display: block;
+    max-width: 34vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    min-width: 0;
+    justify-content: flex-end;
+    gap: 0;
+  }
+
+  .site-nav a {
+    padding: .52rem .36rem;
+    font-size: .72rem;
+    white-space: nowrap;
+  }
+
+  .hero {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.55rem, 13.2vw, 4.3rem);
+    letter-spacing: -.055em;
+  }
+
+  .hero h1 span {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-actions,
+  .album-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .button,
+  .action-button {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero-stats,
+  .hero-stats div {
+    min-width: 0;
+  }
+
+  .artist-orbit {
+    width: min(72vw, 300px);
+  }
+
+  .artist-card {
+    width: min(72vw, 300px);
+    max-width: 100%;
+  }
+
+  .artist-card figcaption {
+    min-width: 0;
+    gap: .55rem;
+  }
+
+  .artist-card figcaption strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .album-card {
+    width: 100%;
+    max-width: 100%;
+    transform: none !important;
+  }
+
+  .cover-zone {
+    max-width: min(100%, 360px);
+  }
+
+  .album-kicker,
+  .tag-row {
+    min-width: 0;
+  }
+
+  .pill,
+  .tag {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .album-title {
+    font-size: clamp(1.85rem, 11.5vw, 3.25rem);
+  }
+
+  .service-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .5rem;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .service-pill {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: initial;
+    justify-content: flex-start;
+    white-space: normal;
+    padding: .36rem .52rem .36rem .38rem;
+  }
+
+  .service-label,
+  .service-tab > span:not(.service-icon) {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .track-preview {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .track-preview-row {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .track-preview-row .lyrics-button {
+    grid-column: 2;
+    justify-self: stretch;
+    width: 100%;
+    max-width: 180px;
+    text-align: center;
+  }
+
+  .link-panel,
+  .lyrics-card {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding-left: clamp(.85rem, 4vw, 1.1rem);
+    padding-right: clamp(.85rem, 4vw, 1.1rem);
+  }
+
+  .panel-header {
+    grid-template-columns: 52px minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .panel-cover {
+    display: block;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px;
+    max-width: 52px;
+    min-height: 52px;
+    max-height: 52px;
+    object-fit: cover;
+  }
+
+  .panel-title-block,
+  .track-link-info,
+  .link-row > div {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .service-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .45rem;
+    overflow-x: hidden;
+    padding: .95rem 0 .7rem;
+  }
+
+  .service-tab {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
+    white-space: normal;
+    padding: .38rem .5rem .38rem .38rem;
+  }
+
+  .link-row {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .link-actions {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .link-actions .lyrics-link,
+  .link-actions .open-link,
+  .link-actions .disabled-link,
+  .open-link,
+  .disabled-link {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-text {
+    display: none;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    font-size: .82rem;
+  }
+
+  .site-nav a {
+    padding: .48rem .32rem;
+    font-size: .7rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.35rem, 12.6vw, 3.7rem);
+  }
+
+  .service-strip,
+  .service-tabs {
+    grid-template-columns: 1fr;
+  }
+}

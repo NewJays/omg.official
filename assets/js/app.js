@@ -324,7 +324,7 @@
 
     content.innerHTML = [
       '<div class="panel-header">',
-        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="3000" height="3000" />',
+        '<img class="panel-cover" src="', escapeHTML(album.cover), '" alt="', escapeHTML(album.title + ' 커버'), '" width="76" height="76" loading="lazy" decoding="async" />',
         '<div class="panel-title-block">',
           '<p class="eyebrow">', escapeHTML(album.type), ' · ', escapeHTML(album.statusLabel), '</p>',
           '<h2 id="panel-title">', escapeHTML(album.title), '</h2>',
