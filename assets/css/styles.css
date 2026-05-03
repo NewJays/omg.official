@@ -2215,3 +2215,63 @@ dt {
     grid-template-columns: 1fr;
   }
 }
+
+/* v6 hotfix: hard-lock album cover size inside the music-service link panel on every viewport.
+   This prevents 3000x3000 source images from expanding the desktop modal layout. */
+.link-panel {
+  --panel-cover-size: clamp(52px, 6vw, 76px);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.link-panel .panel-header {
+  grid-template-columns: var(--panel-cover-size) minmax(0, 1fr) !important;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.link-panel img.panel-cover,
+.link-panel .panel-cover {
+  display: block !important;
+  box-sizing: border-box !important;
+  inline-size: var(--panel-cover-size) !important;
+  block-size: var(--panel-cover-size) !important;
+  width: var(--panel-cover-size) !important;
+  height: var(--panel-cover-size) !important;
+  min-inline-size: var(--panel-cover-size) !important;
+  max-inline-size: var(--panel-cover-size) !important;
+  min-block-size: var(--panel-cover-size) !important;
+  max-block-size: var(--panel-cover-size) !important;
+  min-width: var(--panel-cover-size) !important;
+  max-width: var(--panel-cover-size) !important;
+  min-height: var(--panel-cover-size) !important;
+  max-height: var(--panel-cover-size) !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  flex: 0 0 var(--panel-cover-size) !important;
+}
+
+.link-panel .panel-title-block,
+.link-panel .track-link-info,
+.link-panel .link-row > div,
+.link-panel .service-tabs,
+.link-panel .link-stack {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 701px) {
+  .link-panel {
+    width: min(920px, calc(100vw - 40px)) !important;
+    max-width: calc(100vw - 40px) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .link-panel {
+    --panel-cover-size: 52px;
+  }
+}
