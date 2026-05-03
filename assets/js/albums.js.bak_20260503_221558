@@ -75,6 +75,12 @@ window.OHMYGASRANGE_SITE = {
       "label": "Naver VIBE",
       "short": "VB",
       "icon": "assets/images/services/vibe.png"
+    },
+    {
+      "id": "kakao",
+      "label": "KakaoMusic",
+      "short": "KK",
+      "icon": "assets/images/services/kakao-music.png"
     }
   ],
   "albums": [
@@ -106,7 +112,8 @@ window.OHMYGASRANGE_SITE = {
         "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=86546494",
         "bugs": "https://music.bugs.co.kr/album/4123966",
         "flo": "https://www.music-flo.com/detail/album/441033224/albumtrack",
-        "vibe": "https://vibe.naver.com/album/34665576"
+        "vibe": "https://vibe.naver.com/album/34665576",
+        "kakao": ""
       },
       "tracks": [
         {
@@ -121,7 +128,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328302",
             "flo": "https://www.music-flo.com/detail/track/548977834/details",
-            "vibe": "https://vibe.naver.com/track/95339451"
+            "vibe": "https://vibe.naver.com/track/95339451",
+            "kakao": ""
           }
         },
         {
@@ -136,7 +144,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328303",
             "flo": "https://www.music-flo.com/detail/track/548977835/details",
-            "vibe": "https://vibe.naver.com/track/95339452"
+            "vibe": "https://vibe.naver.com/track/95339452",
+            "kakao": ""
           }
         },
         {
@@ -151,7 +160,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328304",
             "flo": "https://www.music-flo.com/detail/track/548977836/details",
-            "vibe": "https://vibe.naver.com/track/95339453"
+            "vibe": "https://vibe.naver.com/track/95339453",
+            "kakao": ""
           }
         },
         {
@@ -166,7 +176,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328305",
             "flo": "https://www.music-flo.com/detail/track/548977837/details",
-            "vibe": "https://vibe.naver.com/track/95339454"
+            "vibe": "https://vibe.naver.com/track/95339454",
+            "kakao": ""
           }
         },
         {
@@ -181,7 +192,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328306",
             "flo": "https://www.music-flo.com/detail/track/548977838/details",
-            "vibe": "https://vibe.naver.com/track/95339455"
+            "vibe": "https://vibe.naver.com/track/95339455",
+            "kakao": ""
           }
         },
         {
@@ -196,7 +208,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328307",
             "flo": "https://www.music-flo.com/detail/track/548977839/details",
-            "vibe": "https://vibe.naver.com/track/95339456"
+            "vibe": "https://vibe.naver.com/track/95339456",
+            "kakao": ""
           }
         },
         {
@@ -211,7 +224,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328308",
             "flo": "https://www.music-flo.com/detail/track/548977840/details",
-            "vibe": "https://vibe.naver.com/track/95339457"
+            "vibe": "https://vibe.naver.com/track/95339457",
+            "kakao": ""
           }
         },
         {
@@ -226,7 +240,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6328309",
             "flo": "https://www.music-flo.com/detail/track/548977841/details",
-            "vibe": "https://vibe.naver.com/track/95339458"
+            "vibe": "https://vibe.naver.com/track/95339458",
+            "kakao": ""
           }
         }
       ]
@@ -259,7 +274,8 @@ window.OHMYGASRANGE_SITE = {
         "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=87118485",
         "bugs": "https://music.bugs.co.kr/album/4138246",
         "flo": "https://www.music-flo.com/detail/album/448483353/albumtrack",
-        "vibe": "https://vibe.naver.com/album/36245246"
+        "vibe": "https://vibe.naver.com/album/36245246",
+        "kakao": ""
       },
       "tracks": [
         {
@@ -274,7 +290,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6405763",
             "flo": "https://www.music-flo.com/detail/track/569692878/details",
-            "vibe": "https://vibe.naver.com/track/100168144"
+            "vibe": "https://vibe.naver.com/track/100168144",
+            "kakao": ""
           }
         },
         {
@@ -289,7 +306,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6405764",
             "flo": "https://www.music-flo.com/detail/track/569692879/details",
-            "vibe": "https://vibe.naver.com/track/100168145"
+            "vibe": "https://vibe.naver.com/track/100168145",
+            "kakao": ""
           }
         },
         {
@@ -304,7 +322,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6405765",
             "flo": "https://www.music-flo.com/detail/track/569692880/details",
-            "vibe": "https://vibe.naver.com/track/100168146"
+            "vibe": "https://vibe.naver.com/track/100168146",
+            "kakao": ""
           }
         },
         {
@@ -319,7 +338,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "https://music.bugs.co.kr/track/6405766",
             "flo": "https://www.music-flo.com/detail/track/569692881/details",
-            "vibe": "https://vibe.naver.com/track/100168147"
+            "vibe": "https://vibe.naver.com/track/100168147",
+            "kakao": ""
           }
         }
       ]
@@ -352,7 +372,8 @@ window.OHMYGASRANGE_SITE = {
         "genie": "",
         "bugs": "",
         "flo": "",
-        "vibe": ""
+        "vibe": "",
+        "kakao": ""
       },
       "tracks": [
         {
@@ -367,7 +388,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "",
             "flo": "",
-            "vibe": ""
+            "vibe": "",
+            "kakao": ""
           }
         },
         {
@@ -382,7 +404,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "",
             "flo": "",
-            "vibe": ""
+            "vibe": "",
+            "kakao": ""
           }
         },
         {
@@ -397,7 +420,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "",
             "flo": "",
-            "vibe": ""
+            "vibe": "",
+            "kakao": ""
           }
         },
         {
@@ -412,7 +436,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "",
             "flo": "",
-            "vibe": ""
+            "vibe": "",
+            "kakao": ""
           }
         },
         {
@@ -427,7 +452,8 @@ window.OHMYGASRANGE_SITE = {
             "genie": "",
             "bugs": "",
             "flo": "",
-            "vibe": ""
+            "vibe": "",
+            "kakao": ""
           }
         }
       ]
