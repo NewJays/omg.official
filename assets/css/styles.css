@@ -2272,7 +2272,7 @@ dt {
   }
 }
 
-/* Combined hotfix: PC visualizer + keyword marquee + softer/larger droplets */
+/* Current combined hotfix: visualizer, marquee, and lyrics modal layering */
 #visualizer {
   opacity: .22 !important;
 }
@@ -2283,6 +2283,27 @@ dt {
   animation-timing-function: linear !important;
   animation-iteration-count: infinite !important;
   animation-play-state: running !important;
+}
+
+.lyrics-modal {
+  z-index: 120 !important;
+}
+
+.lyrics-modal .lyrics-card,
+.lyrics-card {
+  z-index: 130 !important;
+}
+
+.lyrics-modal[hidden] {
+  display: none !important;
+}
+
+.link-panel {
+  z-index: 60;
+}
+
+.panel-backdrop {
+  z-index: 50;
 }
 
 @media (prefers-reduced-motion: reduce) {

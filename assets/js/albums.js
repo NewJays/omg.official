@@ -47,24 +47,6 @@ window.OHMYGASRANGE_SITE = {
       "icon": "assets/images/services/spotify.png"
     },
     {
-      "id": "melon",
-      "label": "Melon",
-      "short": "ML",
-      "icon": "assets/images/services/melon.png"
-    },
-    {
-      "id": "genie",
-      "label": "Genie Music",
-      "short": "GN",
-      "icon": "assets/images/services/genie.png"
-    },
-    {
-      "id": "bugs",
-      "label": "Bugs",
-      "short": "BG",
-      "icon": "assets/images/services/bugs.png"
-    },
-    {
       "id": "flo",
       "label": "FLO",
       "short": "FL",
@@ -75,6 +57,24 @@ window.OHMYGASRANGE_SITE = {
       "label": "Naver VIBE",
       "short": "VB",
       "icon": "assets/images/services/vibe.png"
+    },
+    {
+      "id": "bugs",
+      "label": "Bugs",
+      "short": "BG",
+      "icon": "assets/images/services/bugs.png"
+    },
+    {
+      "id": "melon",
+      "label": "Melon",
+      "short": "ML",
+      "icon": "assets/images/services/melon.png"
+    },
+    {
+      "id": "genie",
+      "label": "Genie Music",
+      "short": "GN",
+      "icon": "assets/images/services/genie.png"
     }
   ],
   "albums": [

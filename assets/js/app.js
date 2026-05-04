@@ -225,35 +225,34 @@
     ].join("");
   }
 
-function getAlbumSortTime(album) {
-  var raw = album.sortDate || album.releaseDate || "";
-  var value = String(raw).trim();
 
-  // 2026.01.15, 2026-01-15, 2026/01/15 모두 처리
-  var match = value.match(/(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
+  function getAlbumSortTime(album) {
+    var raw = album.sortDate || album.releaseDate || "";
+    var value = String(raw).trim();
+    var match = value.match(/(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
 
-  if (!match) {
-    return 0;
+    if (!match) {
+      return 0;
+    }
+
+    var year = Number(match[1]);
+    var month = Number(match[2]) - 1;
+    var day = Number(match[3]);
+
+    return new Date(year, month, day).getTime();
   }
 
-  var year = Number(match[1]);
-  var month = Number(match[2]) - 1;
-  var day = Number(match[3]);
+  function renderAlbums() {
+    var grid = $("#album-grid");
+    if (!grid) return;
 
-  return new Date(year, month, day).getTime();
-}
+    var sortedAlbums = config.albums.slice().sort(function (a, b) {
+      return getAlbumSortTime(b) - getAlbumSortTime(a);
+    });
 
-function renderAlbums() {
-  var grid = $("#album-grid");
-  if (!grid) return;
-
-  var sortedAlbums = config.albums.slice().sort(function (a, b) {
-    return getAlbumSortTime(b) - getAlbumSortTime(a);
-  });
-
-  grid.innerHTML = sortedAlbums.map(renderAlbumCard).join("");
-  applyFilter(state.activeFilter);
-}
+    grid.innerHTML = sortedAlbums.map(renderAlbumCard).join("");
+    applyFilter(state.activeFilter);
+  }
 
   function applyFilter(filter) {
     state.activeFilter = filter;
