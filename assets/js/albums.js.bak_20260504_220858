@@ -328,10 +328,10 @@ window.OHMYGASRANGE_SITE = {
       "id": "gil",
       "type": "EP 2집",
       "title": "길",
-      "titleEn": "Road",
+      "titleEn": "Gil",
       "status": "upcoming",
       "statusLabel": "발매 예정",
-      "releaseDate": "2026.05.21",
+      "releaseDate": "TBA",
       "genre": "발라드",
       "trackCount": "5곡",
       "cover": "assets/images/albums/gil-cover.jpg",
@@ -341,7 +341,7 @@ window.OHMYGASRANGE_SITE = {
         "EP",
         "Coming Soon",
         "길",
-        "20260521"
+        "To Be Announced"
       ],
       "albumLinks": {
         "youtubeTopic": "",
