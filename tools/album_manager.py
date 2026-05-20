@@ -31,13 +31,13 @@ except Exception as exc:  # pragma: no cover
     print("tkinter를 불러올 수 없습니다. Python 설치 옵션에서 Tk/Tcl을 포함해 주세요.")
     raise exc
 
-APP_TITLE = "Oh! My Gasrange 앨범/링크/가사 편집기"
+APP_TITLE = "Oh! My Gasrange 앨범/링크/가사/MV 편집기"
 ALBUMS_JS_REL = Path("assets/js/albums.js")
 SERVICE_ICON_DIR_REL = Path("assets/images/services")
 ALBUM_IMAGE_DIR_REL = Path("assets/images/albums")
 
 JS_HEADER = """/*
-  오마이가스레인지 앨범 데이터 파일 v4
+  오마이가스레인지 앨범 데이터 파일 v4.1
 
   이 파일은 JSON 형태의 JavaScript 데이터입니다.
   - 웹사이트는 이 파일을 그대로 읽습니다.
@@ -49,6 +49,7 @@ JS_HEADER = """/*
   링크 입력 위치
   - 앨범 전체 링크: albums[].albumLinks.{serviceId}
   - 곡 바로가기 링크: albums[].tracks[].links.{serviceId}
+  - 곡별 뮤직비디오 링크: albums[].tracks[].videoLinks.{serviceId}
   - 가사: albums[].tracks[].lyrics
 */
 """
@@ -149,7 +150,7 @@ def normalize_links(links: Any, ids: List[str]) -> Dict[str, str]:
 
 
 def normalize_data(data: Dict[str, Any]) -> None:
-    data.setdefault("version", "4.0.0")
+    data.setdefault("version", "4.1.0")
     data.setdefault("contactEmail", "omg.official@byul.me")
     data.setdefault("project", {})
     data["project"].setdefault("nameKo", "오마이가스레인지")
@@ -188,6 +189,7 @@ def normalize_data(data: Dict[str, Any]) -> None:
             track.setdefault("title", "새 곡")
             track.setdefault("lyrics", "")
             track["links"] = normalize_links(track.get("links"), ids)
+            track["videoLinks"] = normalize_links(track.get("videoLinks"), ids)
 
 
 def new_album(data: Dict[str, Any]) -> Dict[str, Any]:
@@ -212,7 +214,8 @@ def new_album(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def new_track(data: Dict[str, Any]) -> Dict[str, Any]:
-    return {"title": "새 곡", "lyrics": "", "links": blank_links(service_ids(data))}
+    ids = service_ids(data)
+    return {"title": "새 곡", "lyrics": "", "links": blank_links(ids), "videoLinks": blank_links(ids)}
 
 
 class ScrollFrame(ttk.Frame):
@@ -273,6 +276,7 @@ class AlbumManager(tk.Tk):
         self.album_link_vars: Dict[str, tk.StringVar] = {}
         self.track_title_var = tk.StringVar()
         self.track_link_vars: Dict[str, tk.StringVar] = {}
+        self.track_video_link_vars: Dict[str, tk.StringVar] = {}
         self.service_vars = {key: tk.StringVar() for key in ["id", "label", "short", "icon"]}
 
     def _build_ui(self) -> None:
@@ -417,7 +421,7 @@ class AlbumManager(tk.Tk):
 
     def _build_tracks_tab(self) -> None:
         tab = ttk.Frame(self.tabs, padding=8)
-        self.tabs.add(tab, text="곡 링크/가사")
+        self.tabs.add(tab, text="곡 링크/가사/MV")
         tab.columnconfigure(1, weight=1)
         tab.rowconfigure(0, weight=1)
 
@@ -449,6 +453,10 @@ class AlbumManager(tk.Tk):
         self.track_links_frame = ttk.Frame(frame)
         self.track_links_frame.grid(row=3, column=0, columnspan=2, sticky="ew")
         self.track_links_frame.columnconfigure(1, weight=1)
+        ttk.Label(frame, text="곡별 뮤직비디오 URL", font=("TkDefaultFont", 10, "bold")).grid(row=4, column=0, columnspan=2, sticky="w", pady=(18, 6))
+        self.track_video_links_frame = ttk.Frame(frame)
+        self.track_video_links_frame.grid(row=5, column=0, columnspan=2, sticky="ew")
+        self.track_video_links_frame.columnconfigure(1, weight=1)
 
     def refresh_all(self) -> None:
         self._loading = True
@@ -477,17 +485,23 @@ class AlbumManager(tk.Tk):
             child.destroy()
         for child in self.track_links_frame.winfo_children():
             child.destroy()
+        for child in self.track_video_links_frame.winfo_children():
+            child.destroy()
         self.album_link_vars.clear()
         self.track_link_vars.clear()
+        self.track_video_link_vars.clear()
         for row, service in enumerate(self.data.get("services", [])):
             sid = service.get("id", "")
             label = service.get("label", sid)
             self.album_link_vars[sid] = tk.StringVar()
             self.track_link_vars[sid] = tk.StringVar()
+            self.track_video_link_vars[sid] = tk.StringVar()
             ttk.Label(self.album_links_frame, text=label).grid(row=row, column=0, sticky="w", padx=(0, 8), pady=3)
             ttk.Entry(self.album_links_frame, textvariable=self.album_link_vars[sid]).grid(row=row, column=1, sticky="ew", pady=3)
             ttk.Label(self.track_links_frame, text=label).grid(row=row, column=0, sticky="w", padx=(0, 8), pady=3)
             ttk.Entry(self.track_links_frame, textvariable=self.track_link_vars[sid]).grid(row=row, column=1, sticky="ew", pady=3)
+            ttk.Label(self.track_video_links_frame, text=label).grid(row=row, column=0, sticky="w", padx=(0, 8), pady=3)
+            ttk.Entry(self.track_video_links_frame, textvariable=self.track_video_link_vars[sid]).grid(row=row, column=1, sticky="ew", pady=3)
 
     def refresh_album_list(self) -> None:
         self.album_list.delete(0, "end")
@@ -627,6 +641,8 @@ class AlbumManager(tk.Tk):
         self.lyrics_text.delete("1.0", "end")
         for var in self.track_link_vars.values():
             var.set("")
+        for var in self.track_video_link_vars.values():
+            var.set("")
 
     def load_track_fields(self) -> None:
         track = self.current_track()
@@ -638,6 +654,8 @@ class AlbumManager(tk.Tk):
         self.lyrics_text.insert("1.0", track.get("lyrics", ""))
         for sid, var in self.track_link_vars.items():
             var.set(track.get("links", {}).get(sid, ""))
+        for sid, var in self.track_video_link_vars.items():
+            var.set(track.get("videoLinks", {}).get(sid, ""))
 
     def store_current_track(self) -> None:
         if self._loading:
@@ -648,8 +666,11 @@ class AlbumManager(tk.Tk):
         track["title"] = self.track_title_var.get().strip() or "Untitled Track"
         track["lyrics"] = self.lyrics_text.get("1.0", "end").rstrip("\n")
         track.setdefault("links", {})
+        track.setdefault("videoLinks", {})
         for sid, var in self.track_link_vars.items():
             track["links"][sid] = var.get().strip()
+        for sid, var in self.track_video_link_vars.items():
+            track["videoLinks"][sid] = var.get().strip()
 
     def store_current_service(self) -> None:
         if self._loading:
@@ -675,6 +696,9 @@ class AlbumManager(tk.Tk):
                 tlinks = track.setdefault("links", {})
                 if old_id in tlinks and new_id not in tlinks:
                     tlinks[new_id] = tlinks.pop(old_id)
+                vlinks = track.setdefault("videoLinks", {})
+                if old_id in vlinks and new_id not in vlinks:
+                    vlinks[new_id] = vlinks.pop(old_id)
 
     def add_album(self) -> None:
         self.store_all_fields()
@@ -815,6 +839,7 @@ class AlbumManager(tk.Tk):
             album.get("albumLinks", {}).pop(sid, None)
             for track in album.get("tracks", []):
                 track.get("links", {}).pop(sid, None)
+                track.get("videoLinks", {}).pop(sid, None)
         self.current_service_index = None
         self._build_dynamic_link_fields()
         self.refresh_service_list()

@@ -1,5 +1,5 @@
 /*
-  오마이가스레인지 앨범 데이터 파일 v4
+  오마이가스레인지 앨범 데이터 파일 v4.1
 
   이 파일은 JSON 형태의 JavaScript 데이터입니다.
   - 웹사이트는 이 파일을 그대로 읽습니다.
@@ -11,10 +11,11 @@
   링크 입력 위치
   - 앨범 전체 링크: albums[].albumLinks.{serviceId}
   - 곡 바로가기 링크: albums[].tracks[].links.{serviceId}
+  - 곡별 뮤직비디오 링크: albums[].tracks[].videoLinks.{serviceId}
   - 가사: albums[].tracks[].lyrics
 */
 window.OHMYGASRANGE_SITE = {
-  "version": "4.0.0",
+  "version": "4.1.0",
   "contactEmail": "omg.official@byul.me",
   "project": {
     "nameKo": "오! 마이 가스레인지",
@@ -122,6 +123,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328302",
             "flo": "https://www.music-flo.com/detail/track/548977834/details",
             "vibe": "https://vibe.naver.com/track/95339451"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -137,6 +149,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328303",
             "flo": "https://www.music-flo.com/detail/track/548977835/details",
             "vibe": "https://vibe.naver.com/track/95339452"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -152,6 +175,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328304",
             "flo": "https://www.music-flo.com/detail/track/548977836/details",
             "vibe": "https://vibe.naver.com/track/95339453"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -167,6 +201,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328305",
             "flo": "https://www.music-flo.com/detail/track/548977837/details",
             "vibe": "https://vibe.naver.com/track/95339454"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -182,6 +227,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328306",
             "flo": "https://www.music-flo.com/detail/track/548977838/details",
             "vibe": "https://vibe.naver.com/track/95339455"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -197,6 +253,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328307",
             "flo": "https://www.music-flo.com/detail/track/548977839/details",
             "vibe": "https://vibe.naver.com/track/95339456"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -212,6 +279,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328308",
             "flo": "https://www.music-flo.com/detail/track/548977840/details",
             "vibe": "https://vibe.naver.com/track/95339457"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -227,6 +305,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6328309",
             "flo": "https://www.music-flo.com/detail/track/548977841/details",
             "vibe": "https://vibe.naver.com/track/95339458"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         }
       ]
@@ -275,6 +364,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6405763",
             "flo": "https://www.music-flo.com/detail/track/569692878/details",
             "vibe": "https://vibe.naver.com/track/100168144"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -290,6 +390,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6405764",
             "flo": "https://www.music-flo.com/detail/track/569692879/details",
             "vibe": "https://vibe.naver.com/track/100168145"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -305,6 +416,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6405765",
             "flo": "https://www.music-flo.com/detail/track/569692880/details",
             "vibe": "https://vibe.naver.com/track/100168146"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -320,6 +442,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "https://music.bugs.co.kr/track/6405766",
             "flo": "https://www.music-flo.com/detail/track/569692881/details",
             "vibe": "https://vibe.naver.com/track/100168147"
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         }
       ]
@@ -368,6 +501,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "",
             "flo": "",
             "vibe": ""
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -383,6 +527,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "",
             "flo": "",
             "vibe": ""
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -398,6 +553,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "",
             "flo": "",
             "vibe": ""
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -413,6 +579,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "",
             "flo": "",
             "vibe": ""
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
@@ -428,6 +605,17 @@ window.OHMYGASRANGE_SITE = {
             "bugs": "",
             "flo": "",
             "vibe": ""
+          },
+          "videoLinks": {
+            "youtubeTopic": "",
+            "youtubeMusic": "",
+            "apple": "",
+            "spotify": "",
+            "flo": "",
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         }
       ]

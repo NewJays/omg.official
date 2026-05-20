@@ -27,6 +27,7 @@
         track.title = track.title || "Untitled Track";
         track.lyrics = typeof track.lyrics === "string" ? track.lyrics : "";
         track.links = normalizeLinks(track.links, serviceIds);
+        track.videoLinks = normalizeLinks(track.videoLinks, serviceIds);
       });
     });
   }
@@ -84,7 +85,27 @@
     var hasTrackLink = (album.tracks || []).some(function (track) {
       return isRealUrl(track.links && track.links[serviceId]);
     });
-    return hasAlbumLink || hasTrackLink;
+    var hasVideoLink = (album.tracks || []).some(function (track) {
+      return isRealUrl(track.videoLinks && track.videoLinks[serviceId]);
+    });
+    return hasAlbumLink || hasTrackLink || hasVideoLink;
+  }
+
+  function getTrackVideoUrl(track, preferredServiceId) {
+    if (!track) return "";
+
+    if (preferredServiceId && isRealUrl(track.videoLinks && track.videoLinks[preferredServiceId])) {
+      return track.videoLinks[preferredServiceId];
+    }
+
+    for (var i = 0; i < config.services.length; i += 1) {
+      var sid = config.services[i].id;
+      if (isRealUrl(track.videoLinks && track.videoLinks[sid])) {
+        return track.videoLinks[sid];
+      }
+    }
+
+    return "";
   }
 
   function getFirstLinkedService(album) {
@@ -169,15 +190,23 @@
       '<div class="track-preview">',
         '<div class="track-preview-heading">',
           '<span>Track List</span>',
-          '<small>곡 제목 · 가사보기</small>',
+          '<small>곡 제목 · 가사 · MV</small>',
         '</div>',
         '<div class="track-preview-list">',
           tracks.map(function (track, index) {
+            var videoUrl = getTrackVideoUrl(track);
+            var videoButton = isRealUrl(videoUrl)
+              ? '<a class="video-button" href="' + escapeHTML(videoUrl) + '" target="_blank" rel="noopener noreferrer">뮤직비디오 보기</a>'
+              : '';
+
             return [
               '<div class="track-preview-row">',
                 '<span class="track-index">', pad2(index + 1), '</span>',
                 '<strong>', escapeHTML(track.title), '</strong>',
-                '<button type="button" class="lyrics-button" data-action="open-lyrics" data-album-id="', escapeHTML(album.id), '" data-track-index="', index, '">가사보기</button>',
+                '<div class="track-preview-actions">',
+                  '<button type="button" class="lyrics-button" data-action="open-lyrics" data-album-id="', escapeHTML(album.id), '" data-track-index="', index, '">가사보기</button>',
+                  videoButton,
+                '</div>',
               '</div>'
             ].join("");
           }).join(""),
@@ -224,7 +253,6 @@
       '</article>'
     ].join("");
   }
-
 
   function getAlbumSortTime(album) {
     var raw = album.sortDate || album.releaseDate || "";
@@ -274,7 +302,10 @@
       var hasTrackLink = (album.tracks || []).some(function (track) {
         return isRealUrl(track.links && track.links[service.id]);
       });
-      var hasAnyLink = hasAlbumLink || hasTrackLink;
+      var hasVideoLink = (album.tracks || []).some(function (track) {
+        return isRealUrl(track.videoLinks && track.videoLinks[service.id]);
+      });
+      var hasAnyLink = hasAlbumLink || hasTrackLink || hasVideoLink;
       var isActive = service.id === selectedServiceId;
 
       return [
@@ -316,21 +347,32 @@
     var tracks = album.tracks || [];
 
     if (!tracks.length) {
-      return '<div class="empty-state">곡별 링크 목록이 아직 없습니다. <strong>tracks</strong> 배열에 곡명, 서비스별 URL, 가사를 추가하면 이곳에 자동으로 표시됩니다.</div>';
+      return '<div class="empty-state">곡별 링크 목록이 아직 없습니다. <strong>tracks</strong> 배열에 곡명, 서비스별 URL, 가사, 뮤직비디오 URL을 추가하면 이곳에 자동으로 표시됩니다.</div>';
     }
 
     return tracks.map(function (track, index) {
       var url = track.links && track.links[serviceId];
+      var videoUrl = track.videoLinks && track.videoLinks[serviceId];
       var hasLink = isRealUrl(url);
+      var hasVideo = isRealUrl(videoUrl);
+      var stateText = [];
+
+      stateText.push(hasLink ? serviceLabel + ' 곡 바로가기' : serviceLabel + ' 곡 링크 준비 중');
+      if (hasVideo) {
+        stateText.push('뮤직비디오 있음');
+      }
 
       return [
         '<div class="link-row track-link-row">',
           '<div class="track-link-info">',
             '<strong>', pad2(index + 1), '. ', escapeHTML(track.title), '</strong><br />',
-            '<span>', hasLink ? escapeHTML(serviceLabel + ' 곡 바로가기') : escapeHTML(serviceLabel + ' 곡 링크 준비 중'), '</span>',
+            '<span>', escapeHTML(stateText.join(' · ')), '</span>',
           '</div>',
           '<div class="link-actions">',
             '<button type="button" class="lyrics-link" data-action="open-lyrics" data-album-id="', escapeHTML(album.id), '" data-track-index="', index, '">가사보기</button>',
+            hasVideo
+              ? '<a class="video-link" href="' + escapeHTML(videoUrl) + '" target="_blank" rel="noopener noreferrer">뮤직비디오 보기</a>'
+              : '',
             hasLink
               ? '<a class="open-link" href="' + escapeHTML(url) + '" target="_blank" rel="noopener noreferrer">열기</a>'
               : '<span class="disabled-link" aria-disabled="true">준비 중</span>',
@@ -358,7 +400,7 @@
       '</div>',
       '<p class="panel-section-title">Album Link</p>',
       '<div class="link-stack">', renderAlbumLink(album, selectedServiceId), '</div>',
-      '<p class="panel-section-title">Track Links & Lyrics</p>',
+      '<p class="panel-section-title">Track Links · Music Videos · Lyrics</p>',
       '<div class="link-stack">', renderTrackLinks(album, selectedServiceId), '</div>'
     ].join("");
   }

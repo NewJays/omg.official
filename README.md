@@ -1,4 +1,4 @@
-# Oh! My Gasrange album promo site v4
+# Oh! My Gasrange album promo site v7
 
 오마이가스레인지(Oh! My Gasrange) 앨범 홍보용 반응형 정적 웹사이트입니다. 프레임워크 없이 HTML, CSS, JavaScript만 사용하므로 GitHub Pages, Netlify, Vercel, Cafe24, 일반 웹호스팅 어디에나 그대로 올릴 수 있습니다.
 
@@ -8,7 +8,7 @@
 index.html
 assets/
   css/styles.css
-  js/albums.js          ← 프로젝트 정보, 앨범, 곡, 가사, 음악서비스 링크, 아이콘 경로
+  js/albums.js          ← 프로젝트 정보, 앨범, 곡, 가사, 음악서비스 링크, 뮤직비디오 링크, 아이콘 경로
   js/app.js             ← 화면 렌더링/링크 패널/가사 모달/애니메이션 로직
   fonts/                ← 업로드 폰트용 폴더. OMG-Round.woff2 파일을 넣으면 자동 적용
   images/
@@ -229,3 +229,38 @@ python3 -m http.server 8000
 6. 저장하면 `https://계정명.github.io/저장소명/` 주소로 공개됩니다.
 
 사용자 사이트 형태로 쓰려면 저장소 이름을 `계정명.github.io`로 만들면 `https://계정명.github.io/` 주소를 사용할 수 있습니다.
+
+
+## v7 추가 기능
+
+- `tracks[].videoLinks.{serviceId}`에 곡별·플랫폼별 뮤직비디오 URL을 입력할 수 있습니다.
+- 앨범 카드의 곡 목록에서는 해당 곡에 입력된 첫 번째 뮤직비디오 URL이 있으면 `뮤직비디오 보기` 버튼이 표시됩니다.
+- 음악서비스 선택 패널에서는 현재 선택한 서비스의 곡별 뮤직비디오 URL이 있을 때만 `뮤직비디오 보기` 버튼이 표시됩니다.
+- 최신 누적 핫픽스가 포함되어 있습니다: 최신 앨범 우선 정렬, PC 키워드 marquee, 부드럽고 큰 물방울 배경, 가사창 최상위 표시, 링크 패널 커버 크기 고정.
+
+### 데이터 위치
+
+```js
+tracks: [
+  {
+    title: "곡 제목",
+    lyrics: "가사",
+    links: {
+      youtubeMusic: "곡 듣기 URL"
+    },
+    videoLinks: {
+      youtubeMusic: "해당 플랫폼의 뮤직비디오 URL"
+    }
+  }
+]
+```
+
+
+## v7 preserve-content build
+
+이 빌드는 사용자가 제공한 `index.html`과 `albums.js`의 기존 문구, 앨범, 곡, 가사, 링크 데이터를 기준으로 만들었습니다.  
+`albums.js`에는 기존 데이터는 유지하고 각 곡에 `videoLinks` 필드만 추가했습니다.
+
+- 기존 곡 듣기 링크: `tracks[].links.{serviceId}`
+- 곡별 뮤직비디오 링크: `tracks[].videoLinks.{serviceId}`
+- 가사: `tracks[].lyrics`

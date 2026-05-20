@@ -1,4 +1,4 @@
-# 링크·가사 입력 체크리스트 v4
+# 링크·가사·뮤직비디오 입력 체크리스트 v7
 
 `assets/js/albums.js`는 JSON 호환 형식입니다. 직접 편집해도 되고, 더 안전하게는 `tools/album_manager.py`를 실행해 GUI에서 수정할 수 있습니다.
 
@@ -108,4 +108,55 @@ youtubeTopic / youtubeMusic / apple / spotify / melon / genie / bugs / flo / vib
 
 ```txt
 youtubeTopic / youtubeMusic / apple / spotify / melon / genie / bugs / flo / vibe / kakao
+```
+
+
+## 곡별 뮤직비디오 URL 입력 예시
+
+`links`는 곡 듣기 URL이고, `videoLinks`는 뮤직비디오 URL입니다.  
+플랫폼마다 뮤직비디오 주소가 다르면 아래처럼 서비스 id별로 각각 입력합니다.
+
+```json
+{
+  "title": "곡 제목",
+  "lyrics": "가사 입력",
+  "links": {
+    "youtubeMusic": "https://music.youtube.com/watch?v=...",
+    "apple": "https://music.apple.com/kr/song/...",
+    "spotify": "https://open.spotify.com/track/..."
+  },
+  "videoLinks": {
+    "youtubeMusic": "https://music.youtube.com/watch?v=MV_ID",
+    "youtubeTopic": "https://www.youtube.com/watch?v=MV_ID",
+    "apple": "",
+    "spotify": "",
+    "melon": "",
+    "genie": "",
+    "bugs": "",
+    "flo": "",
+    "vibe": "",
+    "kakao": ""
+  }
+}
+```
+
+GUI에서는 `곡 링크/가사/MV` 탭의 `곡별 뮤직비디오 URL` 영역에 입력하면 됩니다.
+
+
+## 곡별 뮤직비디오 URL
+
+`links`는 곡 듣기 URL이고, `videoLinks`는 뮤직비디오 URL입니다.
+
+```json
+"videoLinks": {
+  "youtubeTopic": "",
+  "youtubeMusic": "",
+  "apple": "",
+  "spotify": "",
+  "melon": "",
+  "genie": "",
+  "bugs": "",
+  "flo": "",
+  "vibe": ""
+}
 ```
