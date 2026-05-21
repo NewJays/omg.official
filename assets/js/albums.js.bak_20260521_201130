@@ -103,11 +103,11 @@ window.OHMYGASRANGE_SITE = {
         "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_lngUzl4PI5jb3_OAWYmPawlpkq9c5N4G8",
         "apple": "https://music.apple.com/kr/album/jansori/1828367407",
         "spotify": "https://open.spotify.com/album/5iYmNwdTyH6mQShXQotzBJ",
-        "flo": "https://www.music-flo.com/detail/album/441033224/albumtrack",
-        "vibe": "https://vibe.naver.com/album/34665576",
-        "bugs": "https://music.bugs.co.kr/album/4123966",
         "melon": "https://www.melon.com/album/detail.htm?albumId=11941081",
-        "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=86546494"
+        "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=86546494",
+        "bugs": "https://music.bugs.co.kr/album/4123966",
+        "flo": "https://www.music-flo.com/detail/album/441033224/albumtrack",
+        "vibe": "https://vibe.naver.com/album/34665576"
       },
       "tracks": [
         {
@@ -118,11 +118,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=O4UAuG4pmQc&si=iarS-qlYtp94jgwx",
             "apple": "https://music.apple.com/kr/song/%EB%B0%A5%EB%A8%B9%EC%97%88%EC%86%A1/1828367408",
             "spotify": "https://open.spotify.com/track/4MVKmSCcDsTEqSglQWCY9J?si=3fe25899183e4044",
-            "flo": "https://www.music-flo.com/detail/track/548977834/details",
-            "vibe": "https://vibe.naver.com/track/95339451",
-            "bugs": "https://music.bugs.co.kr/track/6328302",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328302",
+            "flo": "https://www.music-flo.com/detail/track/548977834/details",
+            "vibe": "https://vibe.naver.com/track/95339451"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -144,11 +144,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=Vlq4sPaSy1s&si=gAJC2lj1kmYZ6uZY",
             "apple": "https://music.apple.com/kr/song/%EB%B0%A9%EC%A0%95%EB%A6%AC%EC%86%A1/1828367409",
             "spotify": "https://open.spotify.com/track/62O1bnKHKnESmNsxUbYJal?si=960626314ff54228",
-            "flo": "https://www.music-flo.com/detail/track/548977835/details",
-            "vibe": "https://vibe.naver.com/track/95339452",
-            "bugs": "https://music.bugs.co.kr/track/6328303",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328303",
+            "flo": "https://www.music-flo.com/detail/track/548977835/details",
+            "vibe": "https://vibe.naver.com/track/95339452"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -170,11 +170,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=W4soAdj5ZTQ&si=oM0MJIGO-fiQDKAe",
             "apple": "https://music.apple.com/kr/song/%EB%88%88%EB%86%92%EC%9D%B4%EC%86%A1/1828367412",
             "spotify": "https://open.spotify.com/track/192ddGO93kampQULUhmIMM?si=99219c9d12b2462b",
-            "flo": "https://www.music-flo.com/detail/track/548977836/details",
-            "vibe": "https://vibe.naver.com/track/95339453",
-            "bugs": "https://music.bugs.co.kr/track/6328304",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328304",
+            "flo": "https://www.music-flo.com/detail/track/548977836/details",
+            "vibe": "https://vibe.naver.com/track/95339453"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -196,11 +196,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=yTz_d3_dQp4&si=ke0MDCaqj74hOA2O",
             "apple": "https://music.apple.com/kr/song/%EC%B9%98%EC%B9%B4%EC%86%A1/1828367414",
             "spotify": "https://open.spotify.com/track/2ryHweGiSSgSuoZdYihcJ9?si=0b32bb7d44964b0d",
-            "flo": "https://www.music-flo.com/detail/track/548977837/details",
-            "vibe": "https://vibe.naver.com/track/95339454",
-            "bugs": "https://music.bugs.co.kr/track/6328305",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328305",
+            "flo": "https://www.music-flo.com/detail/track/548977837/details",
+            "vibe": "https://vibe.naver.com/track/95339454"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -222,11 +222,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=c0mF3gyKFcg&si=oNuGpruZPzXz6FjD",
             "apple": "https://music.apple.com/kr/song/%ED%82%A4%EC%A6%88%EC%B9%B4%ED%8E%98%EC%86%A1/1828367415",
             "spotify": "https://open.spotify.com/track/4PVkkDL2kujKjiaxPFuDaD?si=7458d11b0e0b42c6",
-            "flo": "https://www.music-flo.com/detail/track/548977838/details",
-            "vibe": "https://vibe.naver.com/track/95339455",
-            "bugs": "https://music.bugs.co.kr/track/6328306",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328306",
+            "flo": "https://www.music-flo.com/detail/track/548977838/details",
+            "vibe": "https://vibe.naver.com/track/95339455"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -248,11 +248,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=Zu6xo7dgJr4&si=8CoNjX7FDGpf_ZW8",
             "apple": "https://music.apple.com/kr/song/%EB%AC%BC%EB%86%80%EC%9D%B4%EC%86%A1/1828367416",
             "spotify": "https://open.spotify.com/track/1LADTlRRV4wFl8UmiQ0hf0?si=712b25fbbb27448d",
-            "flo": "https://www.music-flo.com/detail/track/548977839/details",
-            "vibe": "https://vibe.naver.com/track/95339456",
-            "bugs": "https://music.bugs.co.kr/track/6328307",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328307",
+            "flo": "https://www.music-flo.com/detail/track/548977839/details",
+            "vibe": "https://vibe.naver.com/track/95339456"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -274,11 +274,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=Zu6xo7dgJr4&si=rc5Cq94NMzU15ta8",
             "apple": "https://music.apple.com/kr/song/%EC%88%98%EA%B3%A0%ED%96%88%EC%86%A1/1828367417",
             "spotify": "https://open.spotify.com/track/2F75STYv82O3kVD4Z4IxG0?si=e947931f274b48d0",
-            "flo": "https://www.music-flo.com/detail/track/548977840/details",
-            "vibe": "https://vibe.naver.com/track/95339457",
-            "bugs": "https://music.bugs.co.kr/track/6328308",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328308",
+            "flo": "https://www.music-flo.com/detail/track/548977840/details",
+            "vibe": "https://vibe.naver.com/track/95339457"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -300,11 +300,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=iJkYajQDrFU&si=sJJ4rwJHt2bWI9aq",
             "apple": "https://music.apple.com/kr/song/%EC%9E%90%EB%9F%AC%EA%B0%94%EC%88%91/1828367418",
             "spotify": "https://open.spotify.com/track/6cF8WxPniylzuj2n3FEYWP?si=37e80977e0f041ba",
-            "flo": "https://www.music-flo.com/detail/track/548977841/details",
-            "vibe": "https://vibe.naver.com/track/95339458",
-            "bugs": "https://music.bugs.co.kr/track/6328309",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6328309",
+            "flo": "https://www.music-flo.com/detail/track/548977841/details",
+            "vibe": "https://vibe.naver.com/track/95339458"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -344,11 +344,11 @@ window.OHMYGASRANGE_SITE = {
         "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_kJYYqCIEEz3CnMRdmYBjLuuOvyd8cDz58",
         "apple": "https://music.apple.com/kr/album/oh-my-merry-christmas-ep/1867121511",
         "spotify": "https://open.spotify.com/album/37a9CzUkmDp7gnbqq5a47c",
-        "flo": "https://www.music-flo.com/detail/album/448483353/albumtrack",
-        "vibe": "https://vibe.naver.com/album/36245246",
-        "bugs": "https://music.bugs.co.kr/album/4138246",
         "melon": "https://www.melon.com/album/detail.htm?albumId=12592723",
-        "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=87118485"
+        "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=87118485",
+        "bugs": "https://music.bugs.co.kr/album/4138246",
+        "flo": "https://www.music-flo.com/detail/album/448483353/albumtrack",
+        "vibe": "https://vibe.naver.com/album/36245246"
       },
       "tracks": [
         {
@@ -359,11 +359,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=T1Glqd_rKQQ&si=nY3MGfgwzg7GHfZU",
             "apple": "https://music.apple.com/kr/song/oh-my-merry-christmas/1867121512",
             "spotify": "https://open.spotify.com/track/6ZhiIYASapmkZmGVfrIsq4?si=5fd391b1e7a642d4",
-            "flo": "https://www.music-flo.com/detail/track/569692878/details",
-            "vibe": "https://vibe.naver.com/track/100168144",
-            "bugs": "https://music.bugs.co.kr/track/6405763",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6405763",
+            "flo": "https://www.music-flo.com/detail/track/569692878/details",
+            "vibe": "https://vibe.naver.com/track/100168144"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -385,11 +385,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=WYIyzeQzex0&si=LMVT5iY8Hpm1f4Hc",
             "apple": "https://music.apple.com/kr/song/oh-my-merry-christmas-jazz-mix-version/1867121514",
             "spotify": "https://open.spotify.com/track/0RK3BAqCbU4ogeECEvflVU?si=c56a76e6e4c74926",
-            "flo": "https://www.music-flo.com/detail/track/569692879/details",
-            "vibe": "https://vibe.naver.com/track/100168145",
-            "bugs": "https://music.bugs.co.kr/track/6405764",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6405764",
+            "flo": "https://www.music-flo.com/detail/track/569692879/details",
+            "vibe": "https://vibe.naver.com/track/100168145"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -411,11 +411,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=IbvxnckOPiA&si=nuhkPFv2u8-0WUvZ",
             "apple": "https://music.apple.com/kr/song/%EB%88%88%EB%88%84%EB%82%9C%EB%82%98-%EC%8B%A0%EB%82%98%EB%8A%94-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4/1867121515",
             "spotify": "https://open.spotify.com/track/7puiR8VdStpvAZc3Ezp1cM?si=18e4937cb07c4eca",
-            "flo": "https://www.music-flo.com/detail/track/569692880/details",
-            "vibe": "https://vibe.naver.com/track/100168146",
-            "bugs": "https://music.bugs.co.kr/track/6405765",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6405765",
+            "flo": "https://www.music-flo.com/detail/track/569692880/details",
+            "vibe": "https://vibe.naver.com/track/100168146"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -437,11 +437,11 @@ window.OHMYGASRANGE_SITE = {
             "youtubeMusic": "https://music.youtube.com/watch?v=UExwBsRhRvk&si=vTjaca2uDZ5p3H6V",
             "apple": "https://music.apple.com/kr/song/%EB%88%88%EB%88%84%EB%82%9C%EB%82%98-%EC%8B%A0%EB%82%98%EB%8A%94-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-jazz-mix-version/1867121516",
             "spotify": "https://open.spotify.com/track/27ImXp7tjbV8C9Ojq5Kd7i?si=739ef9b159134c92",
-            "flo": "https://www.music-flo.com/detail/track/569692881/details",
-            "vibe": "https://vibe.naver.com/track/100168147",
-            "bugs": "https://music.bugs.co.kr/track/6405766",
             "melon": "",
-            "genie": ""
+            "genie": "",
+            "bugs": "https://music.bugs.co.kr/track/6405766",
+            "flo": "https://www.music-flo.com/detail/track/569692881/details",
+            "vibe": "https://vibe.naver.com/track/100168147"
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -462,45 +462,45 @@ window.OHMYGASRANGE_SITE = {
       "type": "EP 2집",
       "title": "길",
       "titleEn": "Road",
-      "status": "released",
-      "statusLabel": "발매 완료",
+      "status": "upcoming",
+      "statusLabel": "발매 예정",
       "releaseDate": "2026.05.21",
       "genre": "발라드",
       "trackCount": "5곡",
       "cover": "assets/images/albums/gil-cover.jpg",
       "booklet": "assets/images/albums/gil-booklet.jpg",
-      "description": "오마이가스레인지는 초등학생 아이와 친구들이 오마이갓을 재미있게 부르는 표현입니다.\n가족들의 이야기를 담아내는 프로젝트 앨범으로 세번째 앨범이 된 이번 앨범은,\n새로운 도전을 이어나가는 아빠와, 길을 걸어가는 모든 이에 대한 응원과 위로를 담은 앨범입니다.",
+      "description": "발매 예정 EP 2집. 발매일, 플랫폼 링크, 곡별 링크, 가사가 확정되면 공지예정",
       "tags": [
         "EP",
-        "Released",
+        "Coming Soon",
         "길",
         "20260521"
       ],
       "albumLinks": {
-        "youtubeTopic": "https://www.youtube.com/playlist?list=OLAK5uy_ny1E_1du2s0Lw6XoPPGJ0LHmKI4XHlkbE",
-        "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_m0nENCeI6dDS9Ik8JCQ0HE03g95WM-WdY",
+        "youtubeTopic": "",
+        "youtubeMusic": "",
         "apple": "",
-        "spotify": "https://open.spotify.com/album/0RsWwnf2HvGtpkaurnBz6u?si=hpsXEdQAShSKYLYNdknuHQ",
-        "flo": "https://www.music-flo.com/detail/album/455515220/albumtrack",
-        "vibe": "https://vibe.naver.com/album/37369863",
-        "bugs": "https://music.bugs.co.kr/album/4148129",
-        "melon": "https://www.melon.com/album/detail.htm?albumId=13464266",
-        "genie": "https://www.genie.co.kr/detail/albumInfo?axnm=87646587"
+        "spotify": "",
+        "melon": "",
+        "genie": "",
+        "bugs": "",
+        "flo": "",
+        "vibe": ""
       },
       "tracks": [
         {
           "title": "새로운 길을 떠나는 너에게",
-          "lyrics": "낯선 바람 네 어깨를 스쳐도,\n처음 걷는 길 앞에 발끝이 떨려도,\n한 걸음 내딛는 그 순간부터\n그 길은 너의 길이 될거야\n\n괜찮아, 천천히 가도 돼\n한 걸음, 또 한 걸음, 그거면 돼\n돌아가도 괜찮아, 느려도 괜찮아\n네 속도로, 네 숨결로\n\n걸어가, 멈추지 말고, 한 걸음씩\n언젠가 길 끝에서 웃을수 있게\n수고했어, 수고했어요\n스스로를 안아줄 수 있는 그날까지\n\n조금 돌아가도, 지름길이 험해도\n나아가는 너를 응원해\n어떤 길을 걸어도 멈추진 말아\n멈추지만 않으면, 도착할 수 있으니까\n\n지나온 길 위에서 만난 인연들,\n문득 그리워지는 날이면,\n눈을 감고 지나온 시간들 떠올려봐\n그 이름들 너의 하루 어딘가에 함께 있어\n\n언젠가 삶을 돌아보는 그날\n\"참 잘 걸어왔다\" 말할 수 있도록,\n나를 믿자, 나를 믿고 가자\n세상도, 가족도, 이 노래도 널 응원하니까\n\n걸어가, 걸어가, 두려워 말고\n강물이 흐르는 쪽으로 걸어가,\n새로운 길을 떠나는 너,\n오래 오래, 빛나기를",
+          "lyrics": "Coming soon",
           "links": {
-            "youtubeTopic": "https://youtu.be/SIhk1oZ04uM?si=n1I5VwOxuHX4BpDE",
-            "youtubeMusic": "https://music.youtube.com/watch?v=SIhk1oZ04uM&si=QdLP8Y0pou61osqz",
+            "youtubeTopic": "",
+            "youtubeMusic": "",
             "apple": "",
-            "spotify": "https://open.spotify.com/track/5S3ScCE3cHFO0GTCbVkpNX?si=b77947b8578249a5",
-            "flo": "https://www.music-flo.com/detail/track/588354449/details",
-            "vibe": "https://vibe.naver.com/track/103768954",
-            "bugs": "https://music.bugs.co.kr/track/6468018",
-            "melon": "https://www.melon.com/song/detail.htm?songId=602047265",
-            "genie": ""
+            "spotify": "",
+            "melon": "",
+            "genie": "",
+            "bugs": "",
+            "flo": "",
+            "vibe": ""
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -516,43 +516,43 @@ window.OHMYGASRANGE_SITE = {
         },
         {
           "title": "길을 걸어가는 모든 이에게",
-          "lyrics": "길을 걸어가,\n걷는 이유를 다 알진 못해도,\n오늘도 하루만큼 걸어가\n\n삶은 길 위에서, 강물처럼 흘러\n붙잡아도 손끝을 흐르고,\n어떤 날은 불꽃처럼 환히 타오르죠\n\n가끔 지쳐서 주저앉고 싶어도,\n다시 일어서 길을 걸어\n\n길을 걸어가는 모든 이에게,\n행복이 머물기를\n말없이 걸어온 마음에,\n따뜻한 위로가 닿기를\n\n그렇게 걷다 보면 누군가를 만나고,\n누군가는 어두운 길을 밝혀주고,\n누군가는 함께 걷고,\n누군가는 머물다 가\n\n우린 길을 걸어요\n서로의 곁을 걸어요\n느린 걸음이어도,\n마음은 맞닿아 있어\n길 위의 모든 사람들에게,\n작은 평안이 머물기를,\n지친 하루 끝에도 따뜻함이 있길\n\n우린 길을 걸어요\n삶이라는 길을 걸어요\n환하게 빛나는 시간도,\n강물처럼 흘러가는 시간도,\n걸어요\n\n그 길 위에 모든이에게,\n행복이 머물기를\n그 길의 어디쯤에,\n따뜻한 위로가 있기를",
+          "lyrics": "Coming soon",
           "links": {
-            "youtubeTopic": "https://youtu.be/ncCMX-rxRjg?si=S1t-04qGyfebRCaK",
-            "youtubeMusic": "https://music.youtube.com/watch?v=ncCMX-rxRjg&si=R1bd2tTXqLVZH5Il",
+            "youtubeTopic": "",
+            "youtubeMusic": "",
             "apple": "",
-            "spotify": "https://open.spotify.com/track/7pBiVr1twSdGiK0KAgvjHG?si=6d792f6f67cb46b0",
-            "flo": "https://www.music-flo.com/detail/track/588354453/details",
-            "vibe": "https://vibe.naver.com/track/103768956",
-            "bugs": "https://music.bugs.co.kr/track/6468019",
-            "melon": "https://www.melon.com/song/detail.htm?songId=602047266",
-            "genie": ""
+            "spotify": "",
+            "melon": "",
+            "genie": "",
+            "bugs": "",
+            "flo": "",
+            "vibe": ""
           },
           "videoLinks": {
-            "youtubeTopic": "https://www.youtube.com/watch?v=1VhShL6ra3o&list=RD1VhShL6ra3o&start_radio=1",
+            "youtubeTopic": "",
             "youtubeMusic": "",
             "apple": "",
             "spotify": "",
             "flo": "",
-            "vibe": "https://vibe.naver.com/video/418602",
-            "bugs": "https://music.bugs.co.kr/mv/639380",
-            "melon": "https://www.melon.com/video/detail2.htm?mvId=50289386&dummyText=1779361708762_lv180f&menuId=28010101",
-            "genie": "https://www.genie.co.kr/detail/mediaInfo?xvnm=261382"
+            "vibe": "",
+            "bugs": "",
+            "melon": "",
+            "genie": ""
           }
         },
         {
           "title": "수고했송 (2026)",
-          "lyrics": "오늘 하루, 학교를 마치고,\n학원을 마치고,\n혼자서 긴 하루를 헤쳐나갔을 너\n그런 너에게 해주고 싶은 말,\n오늘 하루도 수고했어\n\n아빠 몇 시에 오냐고 묻는 너에게,\n빠르면 아홉시라고 답하는 아빠\n그럼 엄마는 몇시냐고 또 묻는 네게,\n엄마도 아홉시라 답할 수 밖에 없던 엄마\n그럼에도 어제 오늘, 잘 지내준 네게,\n정말 고맙고 미안해\n\n잠자리에 들기 전,\n오늘은 무슨 꿈을 꿀 거냐고 묻는 너에게,\n우리 가족 함께 여행가는 꿈이라고 말하는 아빠\n사실 매일 같이 행복한 여행을 꿈꿔\n캠핑장으로, 바다로, 모험속으로,\n그리고 평범한 하루 속 작은 여행으로\n우리 가족 하루 하루 행복하게 걷자\n\n엄마도 아빠도, 우리 딸도, 오늘 수고했어\n더위에도 눈길에도 매일 하굣길을 지켜주는\n할머니도 오늘 하루 감사해요\n도전 같은 시간 어쩌면 지친 하루였을지도 모를 오늘,\n그 하루를 함께 살아낸 우리 가족,\n정말 수고했어\n\n내일 또 아침 해가 뜨고,\n계절이 지나가고,\n우리의 시간은 조금씩 쌓여가겠지\n\n그 시간 속에서,\n비록 매일같이 쉬운 날만은 아니겠지만,\n같이 가자, 우리 가족 행복한 내일로",
+          "lyrics": "Coming soon",
           "links": {
-            "youtubeTopic": "https://youtu.be/G5KdNQz1WV8?si=MadB9eL8-5Q7Nid1",
-            "youtubeMusic": "https://music.youtube.com/watch?v=G5KdNQz1WV8&si=-OCfDW-eNtXFuk4S",
+            "youtubeTopic": "",
+            "youtubeMusic": "",
             "apple": "",
-            "spotify": "https://open.spotify.com/track/3GsWoW9ESZ85p2rVHnAqlV?si=f2b2f7be3b0f45ec",
-            "flo": "https://www.music-flo.com/detail/track/588354455/details",
-            "vibe": "https://vibe.naver.com/track/103768958",
-            "bugs": "https://music.bugs.co.kr/track/6468020",
-            "melon": "https://www.melon.com/song/detail.htm?songId=602047267",
-            "genie": ""
+            "spotify": "",
+            "melon": "",
+            "genie": "",
+            "bugs": "",
+            "flo": "",
+            "vibe": ""
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -568,17 +568,17 @@ window.OHMYGASRANGE_SITE = {
         },
         {
           "title": "새로운 길을 떠나는 너에게 (Remix)",
-          "lyrics": "낯선 바람 네 어깨를 스쳐도,\n처음 걷는 길 앞에 발끝이 떨려도,\n한 걸음 내딛는 그 순간부터\n그 길은 너의 길이 될거야\n\n괜찮아, 천천히 가도 돼\n한 걸음, 또 한 걸음, 그거면 돼\n돌아가도 괜찮아, 느려도 괜찮아\n네 속도로, 네 숨결로\n\n걸어가, 멈추지 말고, 한 걸음씩\n언젠가 길 끝에서 웃을수 있게\n수고했어, 수고했어요\n스스로를 안아줄 수 있는 그날까지\n\n조금 돌아가도, 지름길이 험해도\n나아가는 너를 응원해\n어떤 길을 걸어도 멈추진 말아\n멈추지만 않으면, 도착할 수 있으니까\n\n지나온 길 위에서 만난 인연들,\n문득 그리워지는 날이면,\n눈을 감고 지나온 시간들 떠올려봐\n그 이름들 너의 하루 어딘가에 함께 있어\n\n언젠가 삶을 돌아보는 그날\n\"참 잘 걸어왔다\" 말할 수 있도록,\n나를 믿자, 나를 믿고 가자\n세상도, 가족도, 이 노래도 널 응원하니까\n\n걸어가, 걸어가, 두려워 말고\n강물이 흐르는 쪽으로 걸어가,\n새로운 길을 떠나는 너,\n오래 오래, 빛나기를",
+          "lyrics": "Coming soon",
           "links": {
-            "youtubeTopic": "https://youtu.be/McWz1iBE724?si=BzvOPq53IMkcRZvh",
-            "youtubeMusic": "https://music.youtube.com/watch?v=McWz1iBE724&si=w8esEPfnQURcqkcA",
+            "youtubeTopic": "",
+            "youtubeMusic": "",
             "apple": "",
-            "spotify": "https://open.spotify.com/track/4NZqd6VMuaPyCifK0LxAbP?si=82d493416a0f4667",
-            "flo": "https://www.music-flo.com/detail/track/588354457/details",
-            "vibe": "https://vibe.naver.com/track/103768960",
-            "bugs": "https://music.bugs.co.kr/track/6468021",
-            "melon": "https://www.melon.com/song/detail.htm?songId=602047268",
-            "genie": ""
+            "spotify": "",
+            "melon": "",
+            "genie": "",
+            "bugs": "",
+            "flo": "",
+            "vibe": ""
           },
           "videoLinks": {
             "youtubeTopic": "",
@@ -594,17 +594,17 @@ window.OHMYGASRANGE_SITE = {
         },
         {
           "title": "길을 걸어가는 모든 이에게 (Remix)",
-          "lyrics": "길을 걸어가,\n걷는 이유를 다 알진 못해도,\n오늘도 하루만큼 걸어가\n\n삶은 길 위에서, 강물처럼 흘러\n붙잡아도 손끝을 흐르고,\n어떤 날은 불꽃처럼 환히 타오르죠\n\n가끔 지쳐서 주저앉고 싶어도,\n다시 일어서 길을 걸어\n\n길을 걸어가는 모든 이에게,\n행복이 머물기를\n말없이 걸어온 마음에,\n따뜻한 위로가 닿기를\n\n그렇게 걷다 보면 누군가를 만나고,\n누군가는 어두운 길을 밝혀주고,\n누군가는 함께 걷고,\n누군가는 머물다 가\n\n우린 길을 걸어요\n서로의 곁을 걸어요\n느린 걸음이어도,\n마음은 맞닿아 있어\n길 위의 모든 사람들에게,\n작은 평안이 머물기를,\n지친 하루 끝에도 따뜻함이 있길\n\n우린 길을 걸어요\n삶이라는 길을 걸어요\n환하게 빛나는 시간도,\n강물처럼 흘러가는 시간도,\n걸어요\n\n그 길 위에 모든이에게,\n행복이 머물기를\n그 길의 어디쯤에,\n따뜻한 위로가 있기를",
+          "lyrics": "Coming soon",
           "links": {
-            "youtubeTopic": "https://youtu.be/J0AsYBKn6u4?si=IJ7oWS9FsbIsTb67",
-            "youtubeMusic": "https://music.youtube.com/watch?v=J0AsYBKn6u4&si=uIKWwcV2Av3N4u5b",
+            "youtubeTopic": "",
+            "youtubeMusic": "",
             "apple": "",
-            "spotify": "https://open.spotify.com/track/3CorlbYDB8BaGPjKjVmn0w?si=07588400f7c94f65",
-            "flo": "https://www.music-flo.com/detail/track/588354459/details",
-            "vibe": "https://vibe.naver.com/track/103768962",
-            "bugs": "https://music.bugs.co.kr/track/6468022",
-            "melon": "https://www.melon.com/song/detail.htm?songId=602047269",
-            "genie": ""
+            "spotify": "",
+            "melon": "",
+            "genie": "",
+            "bugs": "",
+            "flo": "",
+            "vibe": ""
           },
           "videoLinks": {
             "youtubeTopic": "",
