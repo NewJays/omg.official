@@ -479,7 +479,7 @@ window.OHMYGASRANGE_SITE = {
       "albumLinks": {
         "youtubeTopic": "https://www.youtube.com/playlist?list=OLAK5uy_ny1E_1du2s0Lw6XoPPGJ0LHmKI4XHlkbE",
         "youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_m0nENCeI6dDS9Ik8JCQ0HE03g95WM-WdY",
-        "apple": "https://music.apple.com/kr/album/road-ep/6768562835",
+        "apple": "",
         "spotify": "https://open.spotify.com/album/0RsWwnf2HvGtpkaurnBz6u?si=hpsXEdQAShSKYLYNdknuHQ",
         "flo": "https://www.music-flo.com/detail/album/455515220/albumtrack",
         "vibe": "https://vibe.naver.com/album/37369863",
@@ -494,7 +494,7 @@ window.OHMYGASRANGE_SITE = {
           "links": {
             "youtubeTopic": "https://youtu.be/SIhk1oZ04uM?si=n1I5VwOxuHX4BpDE",
             "youtubeMusic": "https://music.youtube.com/watch?v=SIhk1oZ04uM&si=QdLP8Y0pou61osqz",
-            "apple": "https://music.apple.com/kr/song/%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B8%B8%EC%9D%84-%EB%96%A0%EB%82%98%EB%8A%94-%EB%84%88%EC%97%90%EA%B2%8C/6768562837",
+            "apple": "",
             "spotify": "https://open.spotify.com/track/5S3ScCE3cHFO0GTCbVkpNX?si=b77947b8578249a5",
             "flo": "https://www.music-flo.com/detail/track/588354449/details",
             "vibe": "https://vibe.naver.com/track/103768954",
@@ -520,7 +520,7 @@ window.OHMYGASRANGE_SITE = {
           "links": {
             "youtubeTopic": "https://youtu.be/ncCMX-rxRjg?si=S1t-04qGyfebRCaK",
             "youtubeMusic": "https://music.youtube.com/watch?v=ncCMX-rxRjg&si=R1bd2tTXqLVZH5Il",
-            "apple": "https://music.apple.com/kr/song/%EA%B8%B8%EC%9D%84-%EA%B1%B8%EC%96%B4%EA%B0%80%EB%8A%94-%EB%AA%A8%EB%93%A0-%EC%9D%B4%EC%97%90%EA%B2%8C/6768562840",
+            "apple": "",
             "spotify": "https://open.spotify.com/track/7pBiVr1twSdGiK0KAgvjHG?si=6d792f6f67cb46b0",
             "flo": "https://www.music-flo.com/detail/track/588354453/details",
             "vibe": "https://vibe.naver.com/track/103768956",
@@ -546,7 +546,7 @@ window.OHMYGASRANGE_SITE = {
           "links": {
             "youtubeTopic": "https://youtu.be/G5KdNQz1WV8?si=MadB9eL8-5Q7Nid1",
             "youtubeMusic": "https://music.youtube.com/watch?v=G5KdNQz1WV8&si=-OCfDW-eNtXFuk4S",
-            "apple": "https://music.apple.com/kr/song/%EC%88%98%EA%B3%A0%ED%96%88%EC%86%A1-2026-remastered-version/6768562844",
+            "apple": "",
             "spotify": "https://open.spotify.com/track/3GsWoW9ESZ85p2rVHnAqlV?si=f2b2f7be3b0f45ec",
             "flo": "https://www.music-flo.com/detail/track/588354455/details",
             "vibe": "https://vibe.naver.com/track/103768958",
@@ -572,7 +572,7 @@ window.OHMYGASRANGE_SITE = {
           "links": {
             "youtubeTopic": "https://youtu.be/McWz1iBE724?si=BzvOPq53IMkcRZvh",
             "youtubeMusic": "https://music.youtube.com/watch?v=McWz1iBE724&si=w8esEPfnQURcqkcA",
-            "apple": "https://music.apple.com/kr/song/%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B8%B8%EC%9D%84-%EB%96%A0%EB%82%98%EB%8A%94-%EB%84%88%EC%97%90%EA%B2%8C-remix-ver/6768562847",
+            "apple": "",
             "spotify": "https://open.spotify.com/track/4NZqd6VMuaPyCifK0LxAbP?si=82d493416a0f4667",
             "flo": "https://www.music-flo.com/detail/track/588354457/details",
             "vibe": "https://vibe.naver.com/track/103768960",
@@ -598,7 +598,7 @@ window.OHMYGASRANGE_SITE = {
           "links": {
             "youtubeTopic": "https://youtu.be/J0AsYBKn6u4?si=IJ7oWS9FsbIsTb67",
             "youtubeMusic": "https://music.youtube.com/watch?v=J0AsYBKn6u4&si=uIKWwcV2Av3N4u5b",
-            "apple": "https://music.apple.com/kr/song/%EA%B8%B8%EC%9D%84-%EA%B1%B8%EC%96%B4%EA%B0%80%EB%8A%94-%EB%AA%A8%EB%93%A0-%EC%9D%B4%EC%97%90%EA%B2%8C-remix-ver/6768562848",
+            "apple": "",
             "spotify": "https://open.spotify.com/track/3CorlbYDB8BaGPjKjVmn0w?si=07588400f7c94f65",
             "flo": "https://www.music-flo.com/detail/track/588354459/details",
             "vibe": "https://vibe.naver.com/track/103768962",
