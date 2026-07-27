@@ -257,7 +257,7 @@ const CONFIG = {
   DB_URL      : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
   DEFAULT_ROOM: "1",
   DEFAULT_GOAL: 10,
-  POLL_MS     : 1500,
+  POLL_MS     : 900,
   POOL        : 60
 };
 
@@ -304,15 +304,19 @@ addEventListener("resize", detectView);
 })();
 
 /* ── 상태 ── */
-let lastKey  = null;
-let total    = 0;
-let pool     = [];
-let queue    = [];
-let cycle    = 0;
-let fails    = 0;
-let resetKey = "";           // 이 키 이하의 메시지는 화면에서 제외합니다
-let hidden   = {};           // 개별 숨김 처리된 메시지
-const lanes  = [];
+let total       = 0;
+let pool        = [];
+let queue       = [];
+let cycle       = 0;
+let fails       = 0;
+let resetKey    = "";          // 이 키 이하의 메시지는 화면에서 제외합니다
+let hidden      = {};          // 개별 숨김 처리된 메시지
+let revision    = 0;           // 관리자 변경 신호
+let initialized = false;
+let syncPromise = null;
+let visibleSig  = "";          // 현재 표시 대상 키 전체의 서명
+let knownKeys   = new Set();
+const lanes     = [];
 
 function lamp(ok, text){
   el("led").classList.toggle("off", !ok);
@@ -338,10 +342,11 @@ function setMood(pct){
 /* ── 목표 달성률 ── */
 function paintGoal(){
   const pct = total / GOAL * 100;
-  const shown = Math.min(100, pct);
-  el("fill").style.width = shown + "%";
-  el("pct").textContent  = (shown >= 100 ? 100 : shown.toFixed(shown < 10 ? 1 : 0)) + "%";
-  el("cur").textContent  = nf(total);
+  const barPct = Math.min(100, pct);
+  const pctText = pct.toFixed(pct < 10 && pct % 1 ? 1 : 0);
+  el("fill").style.width = barPct + "%";
+  el("pct").textContent  = pctText + "%";   // 목표 초과 시에도 110%, 120%처럼 실제 수치 표시
+  el("cur").textContent   = nf(total);
   el("count").textContent = nf(total);
   el("track").classList.toggle("done", pct >= 100);
   setMood(pct);
@@ -350,70 +355,91 @@ function paintGoal(){
 /* 표시 대상인지 판정 */
 const visible = k => k > resetKey && !hidden[k];
 
-/* ── 전체 개수(키만 조회) ── */
-async function loadTotal(){
-  try{
-    const res = await fetch(`${MSGS}?shallow=true`, {cache:"no-store"});
-    if (!res.ok) return;
-    const data = await res.json();
-    total = data ? Object.keys(data).filter(visible).length : 0;
-    paintGoal();
-  }catch(e){}
-}
-
-/* ── 관리 정보(리셋 지점 · 숨김 목록) ── */
-async function loadCtrl(){
-  const res = await fetch(`${CTRL}?cb=${Date.now()}`, {cache:"no-store"});
-  if (!res.ok) return false;
-  const c = await res.json() || {};
-  const nextReset = c.resetKey || "";
-  const nextHidden = c.hidden || {};
-  const resetChanged  = nextReset !== resetKey;
-  const hiddenChanged = Object.keys(nextHidden).length !== Object.keys(hidden).length;
-  resetKey = nextReset;
-  hidden   = nextHidden;
-  return resetChanged || hiddenChanged;
-}
-
-function clearScreen(){
-  pool = []; queue = []; lastKey = null; cycle = 0;
-  el("field").querySelectorAll(".msg").forEach(n => n.remove());
-  el("waiting").style.display = "flex";
-}
-
-/* ── 새 메시지 읽기 ── */
-async function pull(){
-  const url = lastKey
-    ? `${MSGS}?orderBy="$key"&startAt="${lastKey}"`
-    : `${MSGS}?orderBy="$key"&limitToLast=${CONFIG.POOL}`;
+async function fetchJSON(url){
   const res = await fetch(url, {cache:"no-store"});
   if (!res.ok) throw new Error(res.status);
-  const data = await res.json();
-  if (!data) return;
-
-  const rows = Object.entries(data)
-    .filter(([k]) => k !== lastKey)
-    .sort((a,b) => a[0] < b[0] ? -1 : 1);
-  if (!rows.length) return;
-
-  const first = lastKey === null;
-  lastKey = rows[rows.length-1][0];
-
-  const list = rows
-    .filter(([k]) => visible(k))
-    .map(([k,v]) => ({k, text:(v.text||""), name:(v.name||"")}));
-  if (!list.length) return;
-
-  pool = pool.concat(list).slice(-CONFIG.POOL);
-  if (first){
-    queue.push(...list.slice(-3));
-  }else{
-    total += list.length;
-    queue.push(...list.map(m => ({...m, fresh:true})));
-  }
-  paintGoal();
-  el("waiting").style.display = pool.length ? "none" : "flex";
+  return res.json();
 }
+
+function removeNoLongerVisible(nextKeys){
+  queue = queue.filter(m => nextKeys.has(m.k));
+  el("field").querySelectorAll(".msg[data-key]").forEach(node => {
+    if (!nextKeys.has(node.dataset.key)) node.remove();
+  });
+}
+
+/*
+   매 주기마다 ctrl + 전체 키를 다시 비교합니다.
+   따라서 POST 추가뿐 아니라 DELETE, 숨김, 복구, 전체 리셋도 같은 방식으로 감지합니다.
+   실제 메시지 본문은 키 구성이 바뀐 경우에만 다시 받아 네트워크 사용량을 줄입니다.
+*/
+async function syncState(){
+  const [ctrlData, keyData] = await Promise.all([
+    fetchJSON(CTRL),
+    fetchJSON(`${MSGS}?shallow=true`)
+  ]);
+
+  const c = ctrlData || {};
+  const nextReset    = c.resetKey || "";
+  const nextHidden   = c.hidden || {};
+  const nextRevision = Number(c.revision || 0);
+
+  resetKey = nextReset;
+  hidden   = nextHidden;
+
+  const allKeys = keyData ? Object.keys(keyData).sort() : [];
+  const visibleKeys = allKeys.filter(visible);
+  const nextSig = visibleKeys.join("|");
+  const nextKeys = new Set(visibleKeys);
+  const keysChanged = nextSig !== visibleSig;
+  const revisionChanged = nextRevision !== revision;
+
+  total = visibleKeys.length;
+  paintGoal();
+
+  if (!initialized || keysChanged || revisionChanged){
+    const latestData = await fetchJSON(`${MSGS}?orderBy="$key"&limitToLast=${CONFIG.POOL * 3}`) || {};
+    const nextPool = Object.entries(latestData)
+      .filter(([k]) => nextKeys.has(k))
+      .sort((a,b) => a[0] < b[0] ? -1 : 1)
+      .slice(-CONFIG.POOL)
+      .map(([k,v]) => ({k, text:(v && v.text) || "", name:(v && v.name) || ""}));
+
+    removeNoLongerVisible(nextKeys);
+
+    if (!initialized){
+      queue.push(...nextPool.slice(-3));
+    }else{
+      const fresh = nextPool
+        .filter(m => !knownKeys.has(m.k))
+        .map(m => ({...m, fresh:true}));
+      queue.push(...fresh);
+    }
+
+    pool = nextPool;
+    cycle = 0;
+    el("waiting").style.display = pool.length ? "none" : "flex";
+  }
+
+  visibleSig = nextSig;
+  revision   = nextRevision;
+  knownKeys  = nextKeys;
+  initialized = true;
+}
+
+function requestSync(){
+  if (!syncPromise){
+    syncPromise = syncState().finally(() => { syncPromise = null; });
+  }
+  return syncPromise;
+}
+
+/* 같은 브라우저의 관리자 탭 신호와 화면 복귀 시에는 즉시 다시 확인합니다. */
+addEventListener("storage", e => {
+  if (e.key === `blueele:room:${ROOM}`) requestSync().catch(() => {});
+});
+addEventListener("focus", () => requestSync().catch(() => {}));
+addEventListener("online", () => requestSync().catch(() => {}));
 
 /* ── 메시지를 아래에서 위로 띄우기 ── */
 function float(m){
@@ -431,6 +457,7 @@ function float(m){
 
   const node = document.createElement("article");
   node.className = "msg" + (m.fresh ? " fresh" : "");
+  node.dataset.key = m.k;
   node.style.setProperty("--x", (gutter + idx*(laneW+gutter) + jitter) + "%");
   node.style.setProperty("--w", laneW + "%");
   node.style.setProperty("--dur", ((isMobile ? 13 : 17) + Math.random()*3) + "s");
@@ -470,14 +497,9 @@ function tick(){
 }
 
 /* ── 폴링 루프 ── */
-let ctrlTurn = 0;
 async function loop(){
   try{
-    if (ctrlTurn++ % 3 === 0){
-      const changed = await loadCtrl();
-      if (changed){ clearScreen(); await loadTotal(); }
-    }
-    await pull();
+    await requestSync();
     fails = 0;
     lamp(true, "실시간");
   }catch(e){
@@ -488,7 +510,7 @@ async function loop(){
 }
 
 paintGoal();
-loadCtrl().then(loadTotal).finally(loop);
+loop();
 setTimeout(tick, 900);
 </script>
 </body>
