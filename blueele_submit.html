@@ -153,13 +153,16 @@ const CONFIG = {
   DEFAULT_ROOM: "1",
   MAX_LEN     : 300,
   BOARD_URL   : "board.html",
-  REDIRECT_MS : 2200
+  REDIRECT_MS : 2200,
+  COUNT_POLL_MS: 1500
 };
 
 const q = new URLSearchParams(location.search);
 const rawRoom = (q.get("room") || "").replace(/[^0-9]/g, "");
 const ROOM = rawRoom !== "" ? String(parseInt(rawRoom, 10)) : CONFIG.DEFAULT_ROOM;
-const MSGS = `${CONFIG.DB_URL}/rooms/${ROOM}/msgs.json`;
+const ROOT = `${CONFIG.DB_URL}/rooms/${ROOM}`;
+const MSGS = `${ROOT}/msgs.json`;
+const CTRL = `${ROOT}/ctrl.json`;
 
 const el = id => document.getElementById(id);
 el("roomNo").textContent = ROOM;
@@ -183,15 +186,30 @@ function boardUrl(){
   }
 })();
 
-/* 지금까지 모인 응원 수 */
-(async function(){
+/* 지금까지 모인 응원 수 — 삭제·숨김·복구·리셋도 주기적으로 반영 */
+async function updateLiveCount(){
   try{
-    const res = await fetch(`${MSGS}?shallow=true`, {cache:"no-store"});
-    if (!res.ok) return;
-    const data = await res.json();
-    el("cnt").textContent = (data ? Object.keys(data).length : 0).toLocaleString("ko-KR");
+    const [msgRes, ctrlRes] = await Promise.all([
+      fetch(`${MSGS}?shallow=true`, {cache:"no-store"}),
+      fetch(CTRL, {cache:"no-store"})
+    ]);
+    if (!msgRes.ok || !ctrlRes.ok) return;
+
+    const data = await msgRes.json();
+    const ctrl = await ctrlRes.json() || {};
+    const resetKey = ctrl.resetKey || "";
+    const hidden = ctrl.hidden || {};
+    const count = data
+      ? Object.keys(data).filter(k => k > resetKey && !hidden[k]).length
+      : 0;
+    el("cnt").textContent = count.toLocaleString("ko-KR");
   }catch(e){}
-})();
+}
+
+function countLoop(){
+  updateLiveCount().finally(() => setTimeout(countLoop, CONFIG.COUNT_POLL_MS));
+}
+countLoop();
 
 let sending = false;
 
