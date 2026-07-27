@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="320" height="400" role="img" aria-label="환하게 웃는 학생">
+  <defs>
+    <linearGradient id="joyTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB48F"/><stop offset="1" stop-color="#FF9166"/>
+    </linearGradient>
+    <radialGradient id="joyGlow" cx="50%" cy="42%" r="55%">
+      <stop offset="0" stop-color="#FFC24B" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#FFC24B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="160" cy="180" r="165" fill="url(#joyGlow)"/>
+
+  <!-- 반짝임 -->
+  <g stroke="#FFC24B" stroke-width="5" stroke-linecap="round">
+    <path d="M46 92l0-20"/><path d="M36 106l-16-6"/><path d="M58 112l12-12"/>
+    <path d="M274 92l0-20"/><path d="M286 106l16-6"/><path d="M262 112l-12-12"/>
+  </g>
+  <g fill="#FF9166">
+    <path d="M62 44l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
+    <path d="M258 40l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/>
+  </g>
+
+  <!-- 다리 · 신발 -->
+  <g stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <rect x="132" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <rect x="166" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <ellipse cx="140" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+    <ellipse cx="180" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+  </g>
+
+  <!-- 몸통 -->
+  <path d="M120 248c0-14 18-20 40-20s40 6 40 20l6 54c0 11-18 16-46 16s-46-5-46-16z"
+        fill="url(#joyTop)" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- 만세한 팔 -->
+  <g fill="#FFE3CC" stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <path d="M124 250c-16-10-28-30-34-52-2-9 12-13 15-4 5 18 14 33 27 41z"/>
+    <path d="M196 250c16-10 28-30 34-52 2-9-12-13-15-4-5 18-14 33-27 41z"/>
+    <circle cx="86" cy="192" r="13"/>
+    <circle cx="234" cy="192" r="13"/>
+  </g>
+
+  <!-- 목 -->
+  <rect x="148" y="208" width="24" height="26" rx="11" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+
+  <!-- 머리 -->
+  <g>
+    <ellipse cx="160" cy="168" rx="70" ry="72" fill="#5B4636"/>
+    <ellipse cx="94" cy="178" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="226" cy="178" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="160" cy="178" rx="56" ry="56" fill="#FFE3CC"/>
+    <ellipse cx="160" cy="168" rx="70" ry="72" fill="none" stroke="#3C4763" stroke-width="3"/>
+    <path d="M104 160c0-46 25-64 56-64s56 18 56 64c-9-27-30-40-56-40s-47 13-56 40z"
+          fill="#5B4636" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- 웃는 눈 -->
+    <g stroke="#3B3229" stroke-width="6" stroke-linecap="round" fill="none">
+      <path d="M124 184c6-11 20-11 26 0"/>
+      <path d="M170 184c6-11 20-11 26 0"/>
+    </g>
+    <!-- 볼 -->
+    <ellipse cx="112" cy="198" rx="13" ry="9" fill="#FF9C86" opacity=".8"/>
+    <ellipse cx="208" cy="198" rx="13" ry="9" fill="#FF9C86" opacity=".8"/>
+    <!-- 활짝 웃는 입 -->
+    <path d="M136 204c8 22 40 22 48 0z" fill="#B4574E" stroke="#3B3229" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M148 216c5 6 19 6 24 0z" fill="#FF9C86"/>
+  </g>
+</svg>

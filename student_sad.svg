@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="320" height="400" role="img" aria-label="울상인 학생">
+  <defs>
+    <linearGradient id="sadTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9FB0D8"/><stop offset="1" stop-color="#8296C4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 비구름 -->
+  <g opacity="0.95">
+    <path d="M92 62c-14 0-25 10-25 22s11 22 25 22h132c16 0 28-11 28-24s-12-24-28-24c-4-16-19-27-37-27-16 0-30 9-36 22-6-5-13-8-21-8-20 0-32 12-38 17z"
+          fill="#93A3C9" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+    <g stroke="#6E86BE" stroke-width="6" stroke-linecap="round">
+      <path d="M104 116l-7 20"/><path d="M148 120l-7 22"/>
+      <path d="M196 116l-7 20"/><path d="M232 122l-6 18"/>
+    </g>
+  </g>
+
+  <!-- 다리 · 신발 -->
+  <g stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <rect x="134" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <rect x="164" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <ellipse cx="144" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+    <ellipse cx="176" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+  </g>
+
+  <!-- 몸통 (어깨가 처진 자세) -->
+  <path d="M122 250c0-13 17-19 38-19s38 6 38 19l8 54c0 11-18 16-46 16s-46-5-46-16z"
+        fill="url(#sadTop)" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- 팔 (아래로 축 늘어짐) -->
+  <g fill="#FFE3CC" stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <path d="M124 254c-10 14-16 32-17 50 0 8 14 8 15 0 2-16 7-30 14-42z"/>
+    <path d="M196 254c10 14 16 32 17 50 0 8-14 8-15 0-2-16-7-30-14-42z"/>
+  </g>
+
+  <!-- 목 -->
+  <rect x="148" y="212" width="24" height="26" rx="11" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+
+  <!-- 머리 -->
+  <g transform="rotate(-6 160 178)">
+    <ellipse cx="160" cy="176" rx="70" ry="72" fill="#5B4636"/>
+    <ellipse cx="94" cy="186" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="226" cy="186" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="160" cy="186" rx="56" ry="56" fill="#FFE3CC"/>
+    <ellipse cx="160" cy="176" rx="70" ry="72" fill="none" stroke="#3C4763" stroke-width="3"/>
+    <!-- 앞머리 -->
+    <path d="M104 168c0-46 25-64 56-64s56 18 56 64c-9-27-30-40-56-40s-47 13-56 40z"
+          fill="#5B4636" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- 슬픈 눈 -->
+    <g stroke="#3B3229" stroke-width="6" stroke-linecap="round" fill="none">
+      <path d="M126 190c5-9 17-9 22 0"/>
+      <path d="M172 190c5-9 17-9 22 0"/>
+    </g>
+    <!-- 눈물 -->
+    <g fill="#7FB4FF" stroke="#3C4763" stroke-width="2">
+      <path d="M134 200c5 8 8 13 8 18a8 8 0 0 1-16 0c0-5 3-10 8-18z"/>
+      <path d="M186 200c5 8 8 13 8 18a8 8 0 0 1-16 0c0-5 3-10 8-18z"/>
+    </g>
+    <!-- 볼 -->
+    <ellipse cx="118" cy="206" rx="11" ry="7" fill="#FFB4A2" opacity=".55"/>
+    <ellipse cx="202" cy="206" rx="11" ry="7" fill="#FFB4A2" opacity=".55"/>
+    <!-- 내려간 입 -->
+    <path d="M146 224c6-8 22-8 28 0" stroke="#3B3229" stroke-width="5" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>푸른코끼리 | 관리자</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0B1533;
+  --navy-mid:#132251;
+  --panel:rgba(19,34,81,.55);
+  --blue:#4F7CFF;
+  --blue-soft:#8FB0FF;
+  --blue-pale:#C9D6FF;
+  --coral:#FF9166;
+  --gold:#FFC24B;
+  --red:#FF7A7A;
+  --cream:#FDF6EC;
+  --cream-dim:rgba(253,246,236,.6);
+  --edge:rgba(143,176,255,.22);
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  min-height:100dvh;background:var(--navy-deep);color:var(--cream);
+  font-family:'Noto Sans KR',sans-serif;font-size:15px;
+  background-image:
+    radial-gradient(ellipse 120% 50% at 50% 0%, rgba(79,124,255,.18), transparent 60%),
+    linear-gradient(180deg,var(--navy-deep),var(--navy-mid) 60%,var(--navy-deep));
+  background-attachment:fixed;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:26px 22px 70px}
+button{font-family:inherit;cursor:pointer;border:0}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+
+/* ── 로그인 ── */
+.gate{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--edge);border-radius:20px;padding:28px 24px;text-align:center;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.gate-card .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue-pale);opacity:.75;margin-bottom:10px}
+.gate-card h1{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:25px;margin-bottom:20px}
+.gate-card input{width:100%;background:rgba(11,21,51,.6);border:1px solid var(--edge);border-radius:12px;padding:13px 15px;color:var(--cream);font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-align:center;outline:0}
+.gate-card button{width:100%;margin-top:12px;padding:14px 0;border-radius:12px;background:linear-gradient(135deg,var(--blue),#3B5FE0);color:var(--cream);font-weight:700;font-size:15px}
+.gate-msg{margin-top:12px;font-size:12.5px;color:var(--red);min-height:18px}
+
+/* ── 헤더 ── */
+header{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+header .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue-pale);opacity:.75;margin-bottom:5px}
+header .eyebrow b{color:var(--coral);font-weight:500}
+header h1{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:30px;letter-spacing:-.01em}
+header .tools{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:12px;padding:9px 15px;border-radius:999px;
+  background:rgba(79,124,255,.14);border:1px solid var(--edge);color:var(--cream)
+}
+.btn:hover{background:rgba(79,124,255,.24)}
+.btn.warn{background:rgba(255,122,122,.12);border-color:rgba(255,122,122,.4);color:#FFC7C7}
+.btn.warn:hover{background:rgba(255,122,122,.22)}
+.btn.go{background:rgba(255,145,102,.14);border-color:rgba(255,145,102,.4);color:#FFD2BE}
+
+/* ── 룸 카드 ── */
+h2{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue-pale);opacity:.8;margin:26px 0 12px;text-transform:uppercase}
+.rooms{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.room{
+  background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:16px 18px;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:border-color .15s ease,transform .12s ease
+}
+.room:hover{border-color:rgba(143,176,255,.45)}
+.room.active{border-color:var(--coral);box-shadow:0 0 0 1px rgba(255,145,102,.35),0 10px 30px rgba(255,145,102,.12)}
+.room .no{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:26px;line-height:1}
+.room .no small{font-family:var(--mono);font-size:11px;color:var(--blue-pale);opacity:.75;margin-right:7px;letter-spacing:.14em}
+.room .figs{display:flex;gap:14px;margin:12px 0 14px;font-family:var(--mono);font-size:12px;color:var(--cream-dim)}
+.room .figs b{display:block;font-size:19px;color:var(--cream);font-weight:500;font-variant-numeric:tabular-nums;margin-top:2px}
+.room .figs .hid b{color:var(--red)}
+.room .acts{display:flex;gap:7px;flex-wrap:wrap}
+.room .acts .btn{padding:7px 12px;font-size:11px}
+
+/* ── 메시지 목록 ── */
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar .title{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:21px}
+.toolbar .right{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.list{display:flex;flex-direction:column;gap:9px}
+.item{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--blue);
+  border-radius:12px;padding:13px 15px
+}
+.item.hidden-row{opacity:.5;border-left-color:var(--red)}
+.item .body{flex:1;min-width:0}
+.item .txt{font-size:15.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.item .meta{margin-top:7px;font-family:var(--mono);font-size:11px;color:var(--cream-dim);display:flex;gap:12px;flex-wrap:wrap}
+.item .meta .nm{color:var(--coral)}
+.item .acts{display:flex;gap:6px;flex-shrink:0}
+.item .acts .btn{padding:6px 11px;font-size:11px}
+.empty{padding:34px 10px;text-align:center;color:var(--cream-dim);font-family:var(--mono);font-size:12.5px}
+
+/* ── 링크 만들기 ── */
+.linker{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:16px 18px}
+.linker .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.linker label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue-pale);opacity:.8;margin-bottom:6px}
+.linker input{background:rgba(11,21,51,.6);border:1px solid var(--edge);border-radius:10px;padding:10px 13px;color:var(--cream);font-family:var(--mono);font-size:14px;width:120px;outline:0}
+.linker .out{margin-top:13px;display:flex;flex-direction:column;gap:7px;font-family:var(--mono);font-size:12.5px;word-break:break-all}
+.linker .out a{color:var(--blue-soft)}
+
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:rgba(11,21,51,.95);border:1px solid var(--edge);border-radius:999px;
+  padding:11px 20px;font-family:var(--mono);font-size:12.5px;z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .25s ease
+}
+.toast.show{opacity:1}
+.toast.err{border-color:rgba(255,122,122,.5);color:#FFC7C7}
+</style>
+</head>
+<body>
+
+<!-- ── 비밀번호 ── -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="eyebrow">삼성 CSR · <b style="color:#FF9166">푸른코끼리</b></div>
+    <h1>관리자 콘솔</h1>
+    <input id="pw" type="password" placeholder="비밀번호" autocomplete="off" inputmode="text">
+    <button id="enter">들어가기</button>
+    <div class="gate-msg" id="gateMsg"></div>
+  </div>
+</div>
+
+<!-- ── 본문 ── -->
+<div class="wrap" id="app" hidden>
+  <header>
+    <div>
+      <div class="eyebrow">삼성 CSR · <b>푸른코끼리</b> 사이버 폭력 예방 캠페인</div>
+      <h1>응원 메시지 관리</h1>
+    </div>
+    <div class="tools">
+      <span class="btn" id="autoBtn">자동 새로고침 켬</span>
+      <button class="btn" id="refresh">새로고침</button>
+    </div>
+  </header>
+
+  <h2>전광판 현황</h2>
+  <div class="rooms" id="rooms"></div>
+
+  <h2>링크 만들기</h2>
+  <div class="linker">
+    <div class="row">
+      <div><label for="lkRoom">룸 번호</label><input id="lkRoom" type="number" min="1" step="1" value="1"></div>
+      <div><label for="lkGoal">목표 개수</label><input id="lkGoal" type="number" min="1" step="1" value="20"></div>
+      <button class="btn go" id="makeLink">주소 만들기</button>
+    </div>
+    <div class="out" id="linkOut"></div>
+  </div>
+
+  <h2 id="listHead">메시지</h2>
+  <div class="toolbar">
+    <span class="title" id="listTitle">룸을 선택하세요</span>
+    <div class="right">
+      <button class="btn warn" id="resetRoom" hidden>이 룸 전체 리셋</button>
+    </div>
+  </div>
+  <div class="list" id="list">
+    <div class="empty">위에서 룸을 선택하면 메시지가 표시됩니다</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   푸른코끼리 관리자 콘솔
+
+   삭제 방식
+     1) 우선 실제 삭제(DELETE)를 시도합니다.
+     2) 보안 규칙이 삭제를 막으면 ctrl/hidden 에 기록해
+        전광판에서 보이지 않게 처리합니다(되돌리기 가능).
+   전체 리셋도 같은 순서로 동작하며, 규칙이 막을 경우
+   ctrl/resetKey 를 갱신해 이전 메시지를 전부 가립니다.
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  DB_URL  : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  PASSWORD: "JMT202607",
+  REFRESH : 6000
+};
+
+const DB = CONFIG.DB_URL;
+const el = id => document.getElementById(id);
+const nf = n => Number(n).toLocaleString("ko-KR");
+
+let rooms = {};        // {roomNo: {total, hiddenCount, visible, resetKey, hidden}}
+let current = null;    // 선택된 룸
+let auto = true;
+let timer = null;
+
+/* ── 비밀번호 ── */
+function tryEnter(){
+  if (el("pw").value === CONFIG.PASSWORD){
+    el("gate").hidden = true;
+    el("app").hidden = false;
+    loadAll();
+    schedule();
+  }else{
+    el("gateMsg").textContent = "비밀번호가 맞지 않습니다.";
+    el("pw").value = "";
+  }
+}
+el("enter").addEventListener("click", tryEnter);
+el("pw").addEventListener("keydown", e => { if (e.key === "Enter") tryEnter(); });
+el("pw").focus();
+
+/* ── 알림 ── */
+let toastTimer = null;
+function toast(text, isErr){
+  const t = el("toast");
+  t.textContent = text;
+  t.classList.toggle("err", !!isErr);
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ── 통신 helper ── */
+async function getJSON(path){
+  const res = await fetch(`${DB}${path}`, {cache:"no-store"});
+  if (!res.ok) throw new Error(res.status);
+  return res.json();
+}
+async function putJSON(path, value){
+  const res = await fetch(`${DB}${path}`, {
+    method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify(value)
+  });
+  if (!res.ok) throw new Error(res.status);
+  return true;
+}
+async function delPath(path){
+  const res = await fetch(`${DB}${path}`, {method:"DELETE"});
+  return res.ok;
+}
+
+/* ── 전체 룸 현황 ── */
+async function loadAll(){
+  try{
+    const roomList = await getJSON(`/rooms.json?shallow=true`) || {};
+    const keys = Object.keys(roomList).sort((a,b) => (+a||0) - (+b||0));
+    const next = {};
+
+    await Promise.all(keys.map(async r => {
+      const [msgs, ctrl] = await Promise.all([
+        getJSON(`/rooms/${r}/msgs.json?shallow=true`).catch(() => null),
+        getJSON(`/rooms/${r}/ctrl.json`).catch(() => null)
+      ]);
+      const all      = msgs ? Object.keys(msgs) : [];
+      const resetKey = (ctrl && ctrl.resetKey) || "";
+      const hidden   = (ctrl && ctrl.hidden) || {};
+      const alive    = all.filter(k => k > resetKey);
+      next[r] = {
+        total  : all.length,
+        alive  : alive.length,
+        hiddenN: alive.filter(k => hidden[k]).length,
+        visible: alive.filter(k => !hidden[k]).length,
+        resetKey, hidden
+      };
+    }));
+
+    rooms = next;
+    renderRooms();
+    if (current && rooms[current]) loadMessages(current, true);
+  }catch(e){
+    toast("현황을 불러오지 못했습니다. 규칙에서 /rooms 읽기가 허용되었는지 확인하세요.", true);
+  }
+}
+
+function renderRooms(){
+  const box = el("rooms");
+  const keys = Object.keys(rooms);
+  if (!keys.length){
+    box.innerHTML = `<div class="empty">아직 생성된 전광판이 없습니다. 아래에서 링크를 만들어 첫 메시지를 남겨보세요.</div>`;
+    return;
+  }
+  box.innerHTML = "";
+  keys.forEach(r => {
+    const d = rooms[r];
+    const card = document.createElement("div");
+    card.className = "room" + (current === r ? " active" : "");
+    card.innerHTML = `
+      <div class="no"><small>ROOM</small>${r}</div>
+      <div class="figs">
+        <span>표시 중<b>${nf(d.visible)}</b></span>
+        <span class="hid">숨김<b>${nf(d.hiddenN)}</b></span>
+        <span>누적<b>${nf(d.total)}</b></span>
+      </div>
+      <div class="acts">
+        <button class="btn" data-act="open">메시지 보기</button>
+        <button class="btn go" data-act="board">전광판</button>
+        <button class="btn warn" data-act="reset">리셋</button>
+      </div>`;
+    card.querySelector('[data-act="open"]').onclick = () => loadMessages(r);
+    card.querySelector('[data-act="board"]').onclick = () => window.open(`board.html?room=${r}`, "_blank");
+    card.querySelector('[data-act="reset"]').onclick = () => resetRoom(r);
+    box.appendChild(card);
+  });
+}
+
+/* ── 메시지 목록 ── */
+async function loadMessages(room, quiet){
+  current = room;
+  el("listTitle").textContent = `ROOM ${room} 메시지`;
+  el("resetRoom").hidden = false;
+  el("resetRoom").onclick = () => resetRoom(room);
+  renderRooms();
+
+  try{
+    const data = await getJSON(`/rooms/${room}/msgs.json?orderBy="$key"&limitToLast=300`) || {};
+    const d = rooms[room] || {resetKey:"", hidden:{}};
+    const rows = Object.entries(data)
+      .filter(([k]) => k > d.resetKey)
+      .sort((a,b) => a[0] < b[0] ? 1 : -1);   // 최신이 위로
+
+    const list = el("list");
+    if (!rows.length){
+      list.innerHTML = `<div class="empty">표시할 메시지가 없습니다</div>`;
+      return;
+    }
+    list.innerHTML = "";
+    rows.forEach(([k,v]) => {
+      const isHidden = !!d.hidden[k];
+      const row = document.createElement("div");
+      row.className = "item" + (isHidden ? " hidden-row" : "");
+      const when = v.ts ? new Date(v.ts).toLocaleString("ko-KR", {month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}) : "";
+      row.innerHTML = `
+        <div class="body">
+          <div class="txt"></div>
+          <div class="meta">
+            <span class="nm"></span><span>${when}</span><span>${k}</span>
+            ${isHidden ? '<span style="color:#FF7A7A">숨김</span>' : ''}
+          </div>
+        </div>
+        <div class="acts"></div>`;
+      row.querySelector(".txt").textContent = v.text || "";
+      row.querySelector(".nm").textContent  = v.name ? v.name : "익명";
+
+      const acts = row.querySelector(".acts");
+      if (isHidden){
+        const b = document.createElement("button");
+        b.className = "btn"; b.textContent = "복구";
+        b.onclick = () => unhide(room, k);
+        acts.appendChild(b);
+      }else{
+        const b = document.createElement("button");
+        b.className = "btn warn"; b.textContent = "삭제";
+        b.onclick = () => removeOne(room, k, v.text || "");
+        acts.appendChild(b);
+      }
+      list.appendChild(row);
+    });
+  }catch(e){
+    if (!quiet) toast("메시지를 불러오지 못했습니다.", true);
+  }
+}
+
+/* ── 개별 삭제 ── */
+async function removeOne(room, key, preview){
+  const short = preview.length > 18 ? preview.slice(0,18) + "…" : preview;
+  if (!confirm(`이 메시지를 삭제할까요?\n\n"${short}"`)) return;
+
+  if (await delPath(`/rooms/${room}/msgs/${key}.json`)){
+    toast("삭제했습니다.");
+  }else{
+    try{
+      await putJSON(`/rooms/${room}/ctrl/hidden/${key}.json`, true);
+      toast("규칙이 삭제를 막아 숨김 처리했습니다.");
+    }catch(e){
+      toast("삭제하지 못했습니다. 규칙을 확인하세요.", true); return;
+    }
+  }
+  await loadAll();
+}
+
+async function unhide(room, key){
+  try{
+    await fetch(`${DB}/rooms/${room}/ctrl/hidden/${key}.json`, {method:"DELETE"});
+    toast("복구했습니다.");
+    await loadAll();
+  }catch(e){ toast("복구하지 못했습니다.", true); }
+}
+
+/* ── 룸 전체 리셋 ── */
+async function resetRoom(room){
+  if (!confirm(`ROOM ${room} 의 메시지를 전부 비웁니다.\n전광판이 처음 상태로 돌아갑니다. 진행할까요?`)) return;
+
+  if (await delPath(`/rooms/${room}/msgs.json`)){
+    try{ await fetch(`${DB}/rooms/${room}/ctrl.json`, {method:"DELETE"}); }catch(e){}
+    toast(`ROOM ${room} 를 비웠습니다.`);
+  }else{
+    try{
+      const msgs = await getJSON(`/rooms/${room}/msgs.json?shallow=true`) || {};
+      const keys = Object.keys(msgs).sort();
+      const last = keys.length ? keys[keys.length-1] : "";
+      await putJSON(`/rooms/${room}/ctrl.json`, {resetKey:last});
+      toast(`ROOM ${room} 를 리셋했습니다(기록은 보존).`);
+    }catch(e){
+      toast("리셋하지 못했습니다. 규칙을 확인하세요.", true); return;
+    }
+  }
+  await loadAll();
+  if (current === room) loadMessages(room, true);
+}
+
+/* ── 링크 만들기 ── */
+el("makeLink").addEventListener("click", () => {
+  const r = Math.max(1, parseInt(el("lkRoom").value, 10) || 1);
+  const g = Math.max(1, parseInt(el("lkGoal").value, 10) || 20);
+  const base = location.href.replace(/admin\.html.*$/, "");
+  const submit = `${base}blueele_submit.html?room=${r}&goal=${g}`;
+  const board  = `${base}board.html?room=${r}&goal=${g}`;
+  el("linkOut").innerHTML = `
+    <div>입력 폼 (QR용) · <a href="${submit}" target="_blank">${submit}</a></div>
+    <div>전광판 · <a href="${board}" target="_blank">${board}</a></div>`;
+});
+
+/* ── 새로고침 ── */
+function schedule(){
+  clearTimeout(timer);
+  if (auto) timer = setTimeout(async () => { await loadAll(); schedule(); }, CONFIG.REFRESH);
+}
+el("refresh").addEventListener("click", () => loadAll());
+el("autoBtn").addEventListener("click", () => {
+  auto = !auto;
+  el("autoBtn").textContent = auto ? "자동 새로고침 켬" : "자동 새로고침 끔";
+  schedule();
+});
+</script>
+</body>
+</html>

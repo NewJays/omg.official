@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="320" height="400" role="img" aria-label="조금씩 밝아지는 학생">
+  <defs>
+    <linearGradient id="midTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFA97F"/><stop offset="1" stop-color="#FF9166"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 걷히는 구름과 비치는 해 -->
+  <g>
+    <circle cx="226" cy="72" r="30" fill="#FFC24B" stroke="#3C4763" stroke-width="3"/>
+    <g stroke="#FFC24B" stroke-width="5" stroke-linecap="round">
+      <path d="M226 26v-12"/><path d="M262 44l9-8"/><path d="M266 96l11 5"/>
+    </g>
+    <path d="M92 66c-13 0-23 9-23 20s10 20 23 20h96c14 0 25-10 25-21s-11-21-25-21c-4-14-17-24-33-24-17 0-31 11-35 26-6-2-19 0-28 0z"
+          fill="#C9D6FF" stroke="#3C4763" stroke-width="3" stroke-linejoin="round" opacity=".92"/>
+  </g>
+
+  <!-- 다리 · 신발 -->
+  <g stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <rect x="134" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <rect x="164" y="308" width="22" height="46" rx="10" fill="#7FBF9B"/>
+    <ellipse cx="144" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+    <ellipse cx="176" cy="362" rx="19" ry="11" fill="#FDF6EC"/>
+  </g>
+
+  <!-- 몸통 (허리를 편 자세) -->
+  <path d="M120 246c0-14 18-20 40-20s40 6 40 20l6 56c0 11-18 16-46 16s-46-5-46-16z"
+        fill="url(#midTop)" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- 팔 (살짝 벌어짐) -->
+  <g fill="#FFE3CC" stroke="#3C4763" stroke-width="3" stroke-linejoin="round">
+    <path d="M122 250c-14 12-24 28-28 46-2 8 12 11 14 3 4-15 12-27 22-36z"/>
+    <path d="M198 250c14 12 24 28 28 46 2 8-12 11-14 3-4-15-12-27-22-36z"/>
+  </g>
+
+  <!-- 목 -->
+  <rect x="148" y="208" width="24" height="26" rx="11" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+
+  <!-- 머리 -->
+  <g>
+    <ellipse cx="160" cy="170" rx="70" ry="72" fill="#5B4636"/>
+    <ellipse cx="94" cy="180" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="226" cy="180" rx="10" ry="13" fill="#FFE3CC" stroke="#3C4763" stroke-width="3"/>
+    <ellipse cx="160" cy="180" rx="56" ry="56" fill="#FFE3CC"/>
+    <ellipse cx="160" cy="170" rx="70" ry="72" fill="none" stroke="#3C4763" stroke-width="3"/>
+    <path d="M104 162c0-46 25-64 56-64s56 18 56 64c-9-27-30-40-56-40s-47 13-56 40z"
+          fill="#5B4636" stroke="#3C4763" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- 동그란 눈 -->
+    <g fill="#3B3229">
+      <ellipse cx="137" cy="182" rx="8" ry="9"/>
+      <ellipse cx="183" cy="182" rx="8" ry="9"/>
+    </g>
+    <g fill="#FDF6EC">
+      <circle cx="140" cy="179" r="3"/>
+      <circle cx="186" cy="179" r="3"/>
+    </g>
+    <!-- 볼 -->
+    <ellipse cx="116" cy="200" rx="12" ry="8" fill="#FFB4A2" opacity=".7"/>
+    <ellipse cx="204" cy="200" rx="12" ry="8" fill="#FFB4A2" opacity=".7"/>
+    <!-- 옅은 미소 -->
+    <path d="M144 208c7 9 25 9 32 0" stroke="#3B3229" stroke-width="5" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
