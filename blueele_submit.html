@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>메시지 남기기</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+:root{
+  --bg:#ECEEF6;
+  --card:#FFFFFF;
+  --ink:#131A33;
+  --muted:#6E7591;
+  --line:#DCE0EC;
+  --amber:#E9963A;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+  font-size:16px;line-height:1.55;
+  display:flex;flex-direction:column;
+}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:26px 20px 40px;flex:1}
+
+/* 헤더 */
+.lamp{display:flex;align-items:center;gap:7px;margin-bottom:14px}
+.led{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(233,150,58,.5);animation:pulse 2.2s infinite}
+.led.off{background:#C3392F;animation:none}
+.lamp span{font-family:var(--mono);font-size:11px;letter-spacing:.13em;color:var(--muted)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(233,150,58,.45)}70%{box-shadow:0 0 0 9px rgba(233,150,58,0)}100%{box-shadow:0 0 0 0 rgba(233,150,58,0)}}
+h1{font-size:29px;font-weight:800;letter-spacing:-.025em;margin:0 0 6px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 24px}
+
+/* 입력 카드 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+input,textarea{
+  width:100%;border:0;outline:0;background:transparent;font:inherit;color:inherit;resize:none;padding:0
+}
+input{font-size:16px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:20px}
+textarea{font-size:17px;min-height:130px;line-height:1.5}
+input::placeholder,textarea::placeholder{color:#AEB4C6}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
+
+/* 글자수 게이지 */
+.gauge{height:3px;background:var(--line);border-radius:99px;overflow:hidden;margin:14px 0 10px}
+.gauge i{display:block;height:100%;width:0;background:var(--amber);transition:width .18s ease}
+.gauge.over i{background:#C3392F}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.count.over{color:#C3392F}
+button{
+  font:inherit;font-weight:700;font-size:16px;background:var(--ink);color:#fff;
+  border:0;border-radius:999px;padding:13px 30px;cursor:pointer;
+  transition:transform .12s ease,opacity .15s ease
+}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.3;cursor:not-allowed}
+.msg{font-size:13.5px;color:var(--muted);margin:14px 2px 0;min-height:20px}
+.msg.err{color:#C3392F}
+
+/* 보낸 목록 */
+.sent{margin-top:30px}
+.sent h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);font-weight:400;margin:0 0 10px}
+.sent ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.sent li{
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--amber);
+  border-radius:10px;padding:11px 13px;font-size:14.5px;white-space:pre-wrap;word-break:break-word;
+  animation:rise .3s ease both
+}
+.sent li time{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:5px}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sent li{animation:none}.led{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="lamp"><span class="led" id="led"></span><span id="ledText">준비됨</span></div>
+  <h1 id="title">메시지 남기기</h1>
+  <p class="sub">남긴 메시지는 전광판에 바로 올라갑니다.</p>
+
+  <div class="card">
+    <label for="name">이름 (선택)</label>
+    <input id="name" maxlength="12" placeholder="비워두면 익명으로 올라갑니다" autocomplete="off">
+
+    <label for="text">메시지</label>
+    <textarea id="text" placeholder="하고 싶은 말을 적어주세요"></textarea>
+
+    <div class="gauge" id="gauge"><i id="gaugeFill"></i></div>
+    <div class="foot">
+      <span class="count" id="count">0 / 200</span>
+      <button id="send" disabled>남기기</button>
+    </div>
+    <p class="msg" id="msg"></p>
+  </div>
+
+  <section class="sent" id="sentBox" hidden>
+    <h2>내가 남긴 메시지</h2>
+    <ul id="sentList"></ul>
+  </section>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   설정 — ROOM 값은 전광판(board.html)과 반드시 같아야 합니다.
+   ═══════════════════════════════════════════ */
+const CONFIG = {
+  DB_URL : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  ROOM   : "event-01",
+  TITLE  : "메시지 남기기",
+  MAX_LEN: 200
+};
+
+const q = new URLSearchParams(location.search);
+if (q.get("room")) CONFIG.ROOM = q.get("room");
+const ENDPOINT = `${CONFIG.DB_URL}/rooms/${CONFIG.ROOM}/msgs.json`;
+
+const el = id => document.getElementById(id);
+el("title").textContent = CONFIG.TITLE;
+document.title = CONFIG.TITLE;
+
+let sending = false;
+const mine = [];
+
+function lamp(ok, text){
+  el("led").classList.toggle("off", !ok);
+  el("ledText").textContent = text;
+}
+
+function updateCount(){
+  const n = el("text").value.length;
+  const pct = Math.min(100, n / CONFIG.MAX_LEN * 100);
+  el("gaugeFill").style.width = pct + "%";
+  el("gauge").classList.toggle("over", n > CONFIG.MAX_LEN);
+  el("count").textContent = `${n} / ${CONFIG.MAX_LEN}`;
+  el("count").classList.toggle("over", n > CONFIG.MAX_LEN);
+  el("send").disabled = sending || n === 0 || n > CONFIG.MAX_LEN;
+}
+
+function say(text, isErr){
+  const m = el("msg");
+  m.textContent = text;
+  m.classList.toggle("err", !!isErr);
+  if (!isErr && text) setTimeout(() => { if (m.textContent === text) m.textContent = ""; }, 2800);
+}
+
+function addMine(text){
+  mine.unshift({text, at:new Date()});
+  el("sentBox").hidden = false;
+  const list = el("sentList");
+  list.innerHTML = "";
+  mine.forEach(m => {
+    const li = document.createElement("li");
+    li.textContent = m.text;
+    const t = document.createElement("time");
+    const h = String(m.at.getHours()).padStart(2,"0");
+    const mm = String(m.at.getMinutes()).padStart(2,"0");
+    t.textContent = `${h}:${mm} 전송됨`;
+    li.appendChild(t);
+    list.appendChild(li);
+  });
+}
+
+async function send(){
+  const text = el("text").value.trim();
+  const name = el("name").value.trim().slice(0, 12);
+  if (!text || sending || text.length > CONFIG.MAX_LEN) return;
+
+  sending = true;
+  el("send").disabled = true;
+  lamp(true, "전송 중");
+  say("");
+
+  try{
+    const res = await fetch(ENDPOINT, {
+      method : "POST",
+      headers: {"Content-Type":"application/json"},
+      body   : JSON.stringify({ text, name, ts:{".sv":"timestamp"} })
+    });
+    if (!res.ok){
+      const detail = await res.text().catch(() => "");
+      throw new Error(res.status + " " + detail);
+    }
+    el("text").value = "";
+    addMine(text);
+    lamp(true, "준비됨");
+    say("전광판에 올렸습니다.");
+  }catch(err){
+    lamp(false, "전송 실패");
+    if (String(err).includes("401") || String(err).includes("Permission")){
+      say("데이터베이스 규칙이 쓰기를 막고 있습니다. Firebase 콘솔의 규칙 탭을 확인해주세요.", true);
+    }else{
+      say("전송하지 못했습니다. 네트워크를 확인하고 다시 눌러주세요.", true);
+    }
+  }finally{
+    sending = false;
+    updateCount();
+  }
+}
+
+el("text").addEventListener("input", updateCount);
+el("send").addEventListener("click", send);
+el("text").addEventListener("keydown", e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === "Enter") send();
+});
+updateCount();
+</script>
+</body>
+</html>
