@@ -249,6 +249,13 @@ async function delPath(path){
   return res.ok;
 }
 
+/* 같은 브라우저에서 열린 전광판에는 즉시 동기화 신호를 보냅니다. */
+function signalBoard(room){
+  try{
+    localStorage.setItem(`blueele:room:${room}`, String(Date.now()));
+  }catch(e){}
+}
+
 /* ── 전체 룸 현황 ── */
 async function loadAll(){
   try{
@@ -387,6 +394,7 @@ async function removeOne(room, key, preview){
       toast("삭제하지 못했습니다. 규칙을 확인하세요.", true); return;
     }
   }
+  signalBoard(room);
   await loadAll();
 }
 
@@ -394,6 +402,7 @@ async function unhide(room, key){
   try{
     await fetch(`${DB}/rooms/${room}/ctrl/hidden/${key}.json`, {method:"DELETE"});
     toast("복구했습니다.");
+    signalBoard(room);
     await loadAll();
   }catch(e){ toast("복구하지 못했습니다.", true); }
 }
@@ -416,6 +425,7 @@ async function resetRoom(room){
       toast("리셋하지 못했습니다. 규칙을 확인하세요.", true); return;
     }
   }
+  signalBoard(room);
   await loadAll();
   if (current === room) loadMessages(room, true);
 }
@@ -494,6 +504,8 @@ async function renameRoom(oldRoom){
   }
 
   current = newRoom;
+  signalBoard(oldRoom);
+  signalBoard(newRoom);
   await loadAll();
   loadMessages(newRoom, true);
 }
