@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>푸른코끼리 | 응원 전광판</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0B1533;
+  --navy-mid:#132251;
+  --blue:#4F7CFF;
+  --blue-soft:#8FB0FF;
+  --blue-pale:#C9D6FF;
+  --coral:#FF9166;
+  --cream:#FDF6EC;
+  --cream-dim:rgba(253,246,236,0.62);
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  background:var(--navy-deep);
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+}
+.stage{
+  position:relative;width:100%;height:100dvh;overflow:hidden;
+  background:
+    radial-gradient(ellipse 140% 60% at 50% 6%, rgba(79,124,255,.22), transparent 60%),
+    radial-gradient(ellipse 110% 55% at 50% 100%, rgba(79,124,255,.18), transparent 65%),
+    linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 55%, var(--navy-deep) 100%);
+  display:flex;flex-direction:column;
+}
+
+/* ═══ L0 별가루 ═══ */
+.dust{position:absolute;inset:0;z-index:0;pointer-events:none}
+.dust span{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:var(--blue-pale);opacity:.3;animation:twinkle 4s ease-in-out infinite
+}
+@keyframes twinkle{0%,100%{opacity:.12}50%{opacity:.55}}
+
+/* ═══ L1 코끼리 일러스트 (배경) ═══ */
+.hero{
+  position:absolute;z-index:1;left:50%;bottom:0;transform:translateX(-50%);
+  width:min(46vh,520px);pointer-events:none;
+  opacity:.30;
+  filter:drop-shadow(0 0 40px rgba(79,124,255,.55));
+  animation:float 6s ease-in-out infinite;
+}
+.hero img{display:block;width:100%;height:auto}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-12px)}}
+
+/* ═══ L2 스크림 — 일러스트를 뒤로 밀어 글자를 살립니다 ═══ */
+.scrim{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 92%, rgba(11,21,51,.55), transparent 70%),
+    linear-gradient(180deg, rgba(11,21,51,.35) 0%, rgba(11,21,51,0) 22%, rgba(11,21,51,0) 62%, rgba(11,21,51,.72) 100%);
+}
+
+/* ═══ L9 상단 바 ═══ */
+.topbar{
+  position:relative;z-index:9;flex:0 0 auto;
+  display:flex;align-items:flex-end;gap:16px;
+  padding:16px 26px 14px;
+  background:linear-gradient(180deg, rgba(11,21,51,.88), rgba(11,21,51,0));
+}
+.brand .eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  color:var(--blue-pale);opacity:.75;text-transform:uppercase;margin-bottom:5px
+}
+.brand .eyebrow b{color:var(--coral);font-weight:500}
+.brand h1{
+  font-family:'Black Han Sans',sans-serif;font-weight:400;
+  font-size:clamp(20px,2.2vw,32px);letter-spacing:-.01em;line-height:1.1;
+  text-shadow:0 0 22px rgba(79,124,255,.4)
+}
+.brand h1 em{font-style:normal;color:var(--coral)}
+.meters{margin-left:auto;display:flex;align-items:center;gap:18px;flex-shrink:0}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:12px;color:var(--blue-pale);
+  background:rgba(79,124,255,.12);border:1px solid rgba(143,176,255,.25);
+  padding:6px 14px;border-radius:999px;white-space:nowrap
+}
+.chip b{color:var(--cream);font-weight:500;font-variant-numeric:tabular-nums}
+.led{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse 1.6s ease-in-out infinite}
+.led.off{background:#E5484D;animation:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+/* ═══ L5 메시지가 떠오르는 층 ═══ */
+.field{position:relative;z-index:5;flex:1 1 auto;overflow:hidden}
+.msg{
+  position:absolute;top:100%;
+  left:var(--x);width:var(--w);
+  padding:18px 24px;border-radius:24px;
+  background:rgba(11,21,51,.58);
+  border:1px solid rgba(143,176,255,.28);
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+  box-shadow:0 12px 40px rgba(5,10,28,.5), inset 0 1px 0 rgba(201,214,255,.14);
+  will-change:transform;
+  animation:rise var(--dur) linear forwards;
+}
+.msg .t{
+  font-family:'Black Han Sans',sans-serif;font-weight:400;
+  font-size:var(--fs);line-height:1.34;letter-spacing:-.015em;
+  color:var(--cream);word-break:keep-all;overflow-wrap:anywhere;
+  text-shadow:0 0 26px rgba(79,124,255,.55), 0 3px 12px rgba(0,0,0,.7);
+}
+.msg .n{
+  margin-top:10px;font-family:var(--mono);font-size:12px;
+  color:var(--coral);opacity:.9
+}
+.msg.fresh{border-color:rgba(255,145,102,.55);box-shadow:0 12px 44px rgba(255,145,102,.22), 0 12px 40px rgba(5,10,28,.5)}
+@keyframes rise{
+  0%  {transform:translateY(0) scale(.96);opacity:0}
+  8%  {opacity:1}
+  86% {opacity:1}
+  100%{transform:translateY(calc(-100dvh - 150%)) scale(1);opacity:0}
+}
+
+.waiting{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;text-align:center;padding:0 24px
+}
+.waiting strong{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:clamp(22px,3vw,38px);text-shadow:0 0 24px rgba(79,124,255,.45)}
+.waiting span{font-family:var(--mono);font-size:12.5px;color:var(--cream-dim)}
+
+/* ═══ L9 하단 목표 달성률 ═══ */
+.goal{
+  position:relative;z-index:9;flex:0 0 auto;
+  padding:14px 26px calc(18px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg, rgba(11,21,51,.92), rgba(11,21,51,0));
+}
+.goal-head{display:flex;align-items:baseline;gap:12px;margin-bottom:9px}
+.goal-head .label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue-pale);opacity:.8;text-transform:uppercase}
+.goal-head .nums{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--cream-dim);font-variant-numeric:tabular-nums}
+.goal-head .nums b{color:var(--cream);font-weight:500}
+.goal-head .pct{
+  font-family:'Black Han Sans',sans-serif;font-weight:400;
+  font-size:clamp(22px,2.4vw,34px);color:var(--coral);
+  font-variant-numeric:tabular-nums;line-height:1;
+  text-shadow:0 0 20px rgba(255,145,102,.45)
+}
+.track{
+  position:relative;height:14px;border-radius:999px;
+  background:rgba(79,124,255,.14);border:1px solid rgba(143,176,255,.22);overflow:hidden
+}
+.fill{
+  position:relative;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg, var(--blue) 0%, var(--blue-soft) 55%, var(--coral) 100%);
+  box-shadow:0 0 20px rgba(79,124,255,.6);
+  transition:width 1.1s cubic-bezier(.25,.9,.3,1)
+}
+.fill::after{
+  content:"";position:absolute;top:0;right:0;width:70px;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(253,246,236,.28));
+}
+.track.done .fill{background:linear-gradient(90deg,var(--coral),#FFC24B)}
+
+/* ═══ 모바일 뷰 ═══ */
+body.mobile .topbar{padding:14px 18px 12px;flex-direction:column;align-items:flex-start;gap:10px}
+body.mobile .meters{margin-left:0;width:100%;gap:10px}
+body.mobile .chip{font-size:11px;padding:5px 11px}
+body.mobile .brand h1{font-size:clamp(19px,5.6vw,26px)}
+body.mobile .hero{width:min(78vw,340px);opacity:.26}
+body.mobile .msg{padding:14px 18px;border-radius:20px}
+body.mobile .msg .n{font-size:11px;margin-top:7px}
+body.mobile .goal{padding:12px 18px calc(16px + env(safe-area-inset-bottom))}
+body.mobile .goal-head .pct{font-size:26px}
+body.mobile .track{height:12px}
+
+@media (prefers-reduced-motion:reduce){
+  .hero,.led,.dust span{animation:none}
+  .msg{animation:none;top:auto;bottom:12%;left:50%!important;width:min(88%,720px)!important;transform:translateX(-50%)}
+}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="dust" id="dust"></div>
+
+  <div class="hero"><img src="1000018839.png" alt="아이를 감싸안은 푸른코끼리 가족"></div>
+  <div class="scrim"></div>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="eyebrow">삼성 그룹 CSR · <b>푸른코끼리</b> 사이버 폭력 예방 캠페인</div>
+      <h1>너는 <em>혼자</em>가 아니야</h1>
+    </div>
+    <div class="meters">
+      <span class="chip"><i class="led" id="led"></i><span id="ledText">연결 중</span></span>
+      <span class="chip">응원 메시지 <b id="count">0</b></span>
+    </div>
+  </div>
+
+  <div class="field" id="field">
+    <div class="waiting" id="waiting">
+      <strong>첫 응원을 기다리고 있어요</strong>
+      <span>QR을 찍고 메시지를 남기면 이곳에 떠오릅니다</span>
+    </div>
+  </div>
+
+  <div class="goal">
+    <div class="goal-head">
+      <span class="label">목표 달성률</span>
+      <span class="pct" id="pct">0%</span>
+      <span class="nums"><b id="cur">0</b> / <span id="goalNum">1,000</span>개</span>
+    </div>
+    <div class="track" id="track"><div class="fill" id="fill"></div></div>
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   설정
+   주소 뒤 파라미터로 조정합니다.
+     ?goal=2000   목표 메시지 수 (기본 1000)
+     ?room=day2   방 이름 (입력 폼과 반드시 동일해야 합니다)
+   예) board.html?goal=2000
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  DB_URL : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  ROOM   : "event-01",
+  GOAL   : 1000,
+  POLL_MS: 1500,
+  POOL   : 60      // 화면 순환에 쓸 최근 메시지 보관 수
+};
+
+const q = new URLSearchParams(location.search);
+if (q.get("room")) CONFIG.ROOM = q.get("room");
+if (q.get("goal") && +q.get("goal") > 0) CONFIG.GOAL = Math.floor(+q.get("goal"));
+
+const BASE = `${CONFIG.DB_URL}/rooms/${CONFIG.ROOM}/msgs.json`;
+const el = id => document.getElementById(id);
+const nf = n => n.toLocaleString("ko-KR");
+
+/* ── 모바일 / PC 뷰 판별 ── */
+let isMobile = false;
+function detectView(){
+  const narrow = window.matchMedia("(max-width:780px)").matches;
+  const touch  = window.matchMedia("(pointer:coarse)").matches;
+  isMobile = narrow || (touch && window.innerWidth < 1024);
+  document.body.classList.toggle("mobile", isMobile);
+}
+detectView();
+addEventListener("resize", detectView);
+
+/* ── 별가루 ── */
+(function(){
+  const d = el("dust");
+  for (let i = 0; i < 30; i++){
+    const s = document.createElement("span");
+    s.style.left = Math.random()*100 + "%";
+    s.style.top  = Math.random()*100 + "%";
+    s.style.animationDelay = (Math.random()*4) + "s";
+    d.appendChild(s);
+  }
+})();
+
+/* ── 상태 ── */
+let lastKey = null;      // 마지막으로 읽은 메시지 키
+let total   = 0;         // 전체 메시지 수
+let pool    = [];        // 순환 표시용 메시지 풀
+let queue   = [];        // 아직 화면에 띄우지 않은 새 메시지
+let cycle   = 0;         // 풀 순환 인덱스
+let fails   = 0;
+const lanes = [];        // 레인별 다음 사용 가능 시각
+
+function lamp(ok, text){
+  el("led").classList.toggle("off", !ok);
+  el("ledText").textContent = text;
+}
+
+/* ── 목표 달성률 ── */
+function paintGoal(){
+  const pct = Math.min(100, total / CONFIG.GOAL * 100);
+  el("fill").style.width = pct + "%";
+  el("pct").textContent  = (pct >= 100 ? 100 : pct.toFixed(pct < 10 ? 1 : 0)) + "%";
+  el("cur").textContent  = nf(total);
+  el("count").textContent = nf(total);
+  el("goalNum").textContent = nf(CONFIG.GOAL);
+  el("track").classList.toggle("done", pct >= 100);
+}
+
+/* ── 전체 개수는 키만 받아오는 shallow 조회로 확인 ── */
+async function loadTotal(){
+  try{
+    const res = await fetch(`${BASE}?shallow=true`, {cache:"no-store"});
+    if (!res.ok) return;
+    const data = await res.json();
+    total = data ? Object.keys(data).length : 0;
+    paintGoal();
+  }catch(e){ /* 실패해도 이후 폴링으로 채워집니다 */ }
+}
+
+/* ── 새 메시지 읽기 ── */
+async function pull(){
+  const url = lastKey
+    ? `${BASE}?orderBy="$key"&startAt="${lastKey}"`
+    : `${BASE}?orderBy="$key"&limitToLast=${CONFIG.POOL}`;
+  const res = await fetch(url, {cache:"no-store"});
+  if (!res.ok) throw new Error(res.status);
+  const data = await res.json();
+  if (!data) return;
+
+  const fresh = Object.entries(data)
+    .filter(([k]) => k !== lastKey)
+    .sort((a,b) => a[0] < b[0] ? -1 : 1);
+  if (!fresh.length) return;
+
+  const first = lastKey === null;
+  lastKey = fresh[fresh.length-1][0];
+
+  const list = fresh.map(([k,v]) => ({k, text:(v.text||""), name:(v.name||"")}));
+  pool = pool.concat(list).slice(-CONFIG.POOL);
+
+  if (first){
+    if (!total){ total = list.length; }
+    queue.push(...list.slice(-3));            // 처음엔 최근 3개만 바로 띄웁니다
+  }else{
+    total += list.length;
+    queue.push(...list.map(m => ({...m, fresh:true})));
+  }
+  paintGoal();
+  el("waiting").style.display = pool.length ? "none" : "flex";
+}
+
+/* ── 메시지 한 개를 아래에서 위로 띄우기 ── */
+function float(m){
+  const laneCount = isMobile ? 2 : 3;
+  while (lanes.length < laneCount) lanes.push(0);
+  lanes.length = laneCount;
+
+  // 가장 오래 비어 있던 레인을 고릅니다
+  let idx = 0;
+  for (let i = 1; i < laneCount; i++) if (lanes[i] < lanes[idx]) idx = i;
+  lanes[idx] = performance.now() + (isMobile ? 3400 : 2600);
+
+  const gutter = isMobile ? 5 : 4;
+  const laneW  = (100 - gutter*(laneCount+1)) / laneCount;
+  const jitter = (Math.random()-0.5) * (isMobile ? 2 : 3);
+
+  const node = document.createElement("article");
+  node.className = "msg" + (m.fresh ? " fresh" : "");
+  node.style.setProperty("--x", (gutter + idx*(laneW+gutter) + jitter) + "%");
+  node.style.setProperty("--w", laneW + "%");
+  node.style.setProperty("--dur", ((isMobile ? 13 : 17) + Math.random()*3) + "s");
+
+  // 글이 짧을수록 크게 — 멀리서도 읽히도록
+  const len = (m.text || "").length;
+  const fs = isMobile
+    ? (len < 16 ? "clamp(26px,7.4vw,38px)" : len < 40 ? "clamp(21px,5.8vw,30px)" : "clamp(17px,4.6vw,24px)")
+    : (len < 16 ? "clamp(38px,3.6vw,66px)" : len < 40 ? "clamp(30px,2.6vw,48px)" : "clamp(23px,1.9vw,34px)");
+  node.style.setProperty("--fs", fs);
+
+  const t = document.createElement("div");
+  t.className = "t";
+  t.textContent = m.text;
+  node.appendChild(t);
+
+  if (m.name){
+    const n = document.createElement("div");
+    n.className = "n";
+    n.textContent = "— " + m.name;
+    node.appendChild(n);
+  }
+
+  el("field").appendChild(node);
+  node.addEventListener("animationend", () => node.remove());
+  setTimeout(() => node.remove(), 25000);   // 안전장치
+}
+
+/* ── 새 메시지 우선, 없으면 기존 메시지를 순환 ── */
+function tick(){
+  if (queue.length){
+    float(queue.shift());
+  }else if (pool.length){
+    float(pool[cycle++ % pool.length]);
+  }
+  const gap = queue.length > 2 ? 900 : (isMobile ? 2600 : 2100);
+  setTimeout(tick, gap + Math.random()*600);
+}
+
+/* ── 폴링 루프 ── */
+async function loop(){
+  try{
+    await pull();
+    fails = 0;
+    lamp(true, "실시간");
+  }catch(e){
+    fails++;
+    lamp(false, fails > 2 ? "연결 끊김" : "재시도 중");
+  }
+  setTimeout(loop, CONFIG.POLL_MS);
+}
+
+paintGoal();
+loadTotal();
+loop();
+setTimeout(tick, 900);
+</script>
+</body>
+</html>
