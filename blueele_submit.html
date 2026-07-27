@@ -16,16 +16,12 @@
   --blue-pale:#C9D6FF;
   --coral:#FF9166;
   --cream:#FDF6EC;
-  --cream-dim:rgba(253,246,236,0.62);
+  --cream-dim:rgba(253,246,236,.62);
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;min-height:100%}
-body{
-  background:var(--navy-deep);
-  font-family:'Noto Sans KR',sans-serif;
-  color:var(--cream);
-}
+body{background:var(--navy-deep);font-family:'Noto Sans KR',sans-serif;color:var(--cream)}
 .stage{
   position:relative;width:100%;max-width:480px;min-height:100dvh;margin:0 auto;
   display:flex;flex-direction:column;overflow:hidden;
@@ -34,69 +30,44 @@ body{
     radial-gradient(ellipse 100% 50% at 50% 100%, rgba(79,124,255,.16), transparent 65%),
     linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 55%, var(--navy-deep) 100%);
 }
-
-/* 별가루 */
 .dust{position:absolute;inset:0;z-index:0;pointer-events:none}
 .dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--blue-pale);opacity:.32;animation:twinkle 4s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:.14}50%{opacity:.6}}
 
-/* 헤더 */
 .eyebrow{
   position:relative;z-index:5;text-align:center;padding:18px 20px 4px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
-  color:var(--blue-pale);opacity:.75;text-transform:uppercase
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue-pale);opacity:.75;text-transform:uppercase
 }
 .eyebrow b{color:var(--coral);font-weight:500}
+.roomtag{
+  position:relative;z-index:5;display:block;width:fit-content;margin:8px auto 0;
+  font-family:var(--mono);font-size:11px;color:var(--coral);
+  background:rgba(255,145,102,.14);border:1px solid rgba(255,145,102,.38);
+  padding:4px 12px;border-radius:999px
+}
 
-/* 코끼리 */
-.hero{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding:8px 24px 2px}
-.ring{position:relative;width:100%;max-width:280px;aspect-ratio:371/312}
-.glow{
-  position:absolute;inset:-12%;border-radius:50%;
-  background:radial-gradient(circle, rgba(255,145,102,.30) 0%, rgba(79,124,255,.16) 55%, transparent 75%);
-  filter:blur(6px);animation:breathe 5s ease-in-out infinite
-}
+.hero{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding:10px 24px 2px}
+.ring{position:relative;width:100%;max-width:250px;aspect-ratio:371/312}
+.glow{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(255,145,102,.3) 0%,rgba(79,124,255,.16) 55%,transparent 75%);filter:blur(6px);animation:breathe 5s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
-.hero img{
-  position:relative;z-index:4;width:100%;height:100%;object-fit:contain;display:block;
-  filter:drop-shadow(0 0 22px rgba(79,124,255,.45)) drop-shadow(0 10px 20px rgba(0,0,0,.35));
-  animation:float 4.5s ease-in-out infinite
-}
+.hero img{position:relative;z-index:4;width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 0 22px rgba(79,124,255,.45)) drop-shadow(0 10px 20px rgba(0,0,0,.35));animation:float 4.5s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* 카피 */
 .copy{position:relative;z-index:5;text-align:center;padding:6px 26px 0}
-.headline{
-  font-family:'Black Han Sans',sans-serif;font-weight:400;
-  font-size:26px;line-height:1.35;letter-spacing:-.01em;
-  text-shadow:0 0 22px rgba(79,124,255,.35)
-}
+.headline{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:26px;line-height:1.35;letter-spacing:-.01em;text-shadow:0 0 22px rgba(79,124,255,.35)}
 .headline em{font-style:normal;color:var(--coral)}
 .sub{margin-top:8px;font-size:13px;color:var(--cream-dim)}
-.counter{
-  margin-top:14px;display:inline-flex;align-items:center;gap:7px;
-  font-family:var(--mono);font-size:12px;color:var(--blue-pale);
-  background:rgba(79,124,255,.12);border:1px solid rgba(143,176,255,.25);
-  padding:6px 14px;border-radius:999px
-}
+.counter{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;color:var(--blue-pale);background:rgba(79,124,255,.12);border:1px solid rgba(143,176,255,.25);padding:6px 14px;border-radius:999px}
 .counter b{color:var(--cream);font-weight:500;font-variant-numeric:tabular-nums}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--coral);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
-/* 입력 */
 .form{position:relative;z-index:5;padding:20px 24px 0;flex:1}
-.field{
-  background:rgba(19,34,81,.55);border:1px solid rgba(143,176,255,.22);
-  border-radius:18px;padding:16px 18px;
-  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)
-}
+.field{background:rgba(19,34,81,.55);border:1px solid rgba(143,176,255,.22);border-radius:18px;padding:16px 18px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue-pale);opacity:.8;margin-bottom:7px}
-input,textarea{
-  width:100%;border:0;outline:0;background:transparent;resize:none;
-  font-family:'Noto Sans KR',sans-serif;color:var(--cream);
-}
+input,textarea{width:100%;border:0;outline:0;background:transparent;resize:none;font-family:'Noto Sans KR',sans-serif;color:var(--cream)}
 input{font-size:15px;padding-bottom:11px;border-bottom:1px solid rgba(143,176,255,.22);margin-bottom:18px}
-textarea{font-size:16.5px;line-height:1.55;min-height:118px}
+textarea{font-size:16.5px;line-height:1.55;min-height:140px}
 input::placeholder,textarea::placeholder{color:rgba(201,214,255,.4)}
 input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
 
@@ -106,48 +77,30 @@ input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px soli
 .count{display:block;text-align:right;font-family:var(--mono);font-size:11px;color:var(--cream-dim);font-variant-numeric:tabular-nums}
 .count.over{color:#FF7A7A}
 
-/* CTA */
 .cta-wrap{position:relative;z-index:5;padding:18px 24px calc(24px + env(safe-area-inset-bottom))}
-.cta{
-  display:block;width:100%;padding:16px 0;border:none;border-radius:16px;
-  background:linear-gradient(135deg, var(--blue) 0%, #3B5FE0 100%);
-  color:var(--cream);font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:16px;
-  letter-spacing:-.01em;box-shadow:0 8px 28px rgba(79,124,255,.45);cursor:pointer;
-  transition:transform .12s ease,opacity .15s ease
-}
+.cta{display:block;width:100%;padding:16px 0;border:none;border-radius:16px;background:linear-gradient(135deg,var(--blue) 0%,#3B5FE0 100%);color:var(--cream);font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;box-shadow:0 8px 28px rgba(79,124,255,.45);cursor:pointer;transition:transform .12s ease,opacity .15s ease}
 .cta:active{transform:scale(.98)}
 .cta:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
 .note{text-align:center;margin-top:10px;font-size:11px;color:var(--cream-dim);min-height:16px}
 .note.err{color:#FF9A9A}
 
-/* 전송 완료 오버레이 */
-.done{
-  position:fixed;inset:0;z-index:20;display:none;
-  align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:0 34px;
-  background:radial-gradient(ellipse 90% 60% at 50% 45%, rgba(19,34,81,.96), rgba(11,21,51,.98));
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)
-}
+.done{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:0 34px;background:radial-gradient(ellipse 90% 60% at 50% 45%,rgba(19,34,81,.96),rgba(11,21,51,.98));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .done.show{display:flex;animation:fadein .35s ease both}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
-.done img{width:170px;filter:drop-shadow(0 0 26px rgba(255,145,102,.5));animation:pop .5s cubic-bezier(.2,.9,.3,1.2) both}
+.done img{width:180px;filter:drop-shadow(0 0 26px rgba(255,145,102,.5));animation:pop .5s cubic-bezier(.2,.9,.3,1.2) both}
 @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 .done .big{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:28px;text-shadow:0 0 24px rgba(255,145,102,.4)}
 .done .small{font-size:13.5px;color:var(--cream-dim)}
-.done .go{
-  margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--blue-pale);
-  background:rgba(79,124,255,.14);border:1px solid rgba(143,176,255,.3);
-  padding:9px 18px;border-radius:999px;cursor:pointer;color:var(--cream)
-}
-@media (prefers-reduced-motion:reduce){
-  .hero img,.glow,.dot,.dust span,.done img{animation:none}
-}
+.done .go{margin-top:6px;font-family:var(--mono);font-size:12px;background:rgba(79,124,255,.14);border:1px solid rgba(143,176,255,.3);padding:9px 18px;border-radius:999px;cursor:pointer;color:var(--cream)}
+@media (prefers-reduced-motion:reduce){.hero img,.glow,.dot,.dust span,.done img{animation:none}}
 </style>
 </head>
 <body>
 <div class="stage">
   <div class="dust" id="dust"></div>
 
-  <div class="eyebrow">삼성 그룹 CSR · <b>푸른코끼리</b> 사이버 폭력 예방 캠페인</div>
+  <div class="eyebrow">삼성 CSR · <b>푸른코끼리</b> 사이버 폭력 예방 캠페인</div>
+  <span class="roomtag">ROOM <b id="roomNo">1</b></span>
 
   <div class="hero">
     <div class="ring">
@@ -171,19 +124,18 @@ input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px soli
       <textarea id="text" placeholder="지금 힘든 누군가에게 건네고 싶은 말을 적어주세요"></textarea>
 
       <div class="gauge" id="gauge"><i id="gfill"></i></div>
-      <span class="count" id="count">0 / 200</span>
+      <span class="count" id="count">0 / 300</span>
     </div>
   </div>
 
   <div class="cta-wrap">
     <button class="cta" id="send" disabled>응원 메시지 보내기</button>
-    <p class="note" id="note">보내주신 메시지는 사이버 폭력 피해 학생들에게 전달됩니다</p>
+    <p class="note" id="note">여러분의 한 문장이 아이들에게 힘이 됩니다.</p>
   </div>
 </div>
 
-<!-- 전송 완료 -->
 <div class="done" id="done">
-  <img src="1000018839.png" alt="">
+  <img src="student_happy.svg" alt="">
   <div class="big">마음이 전해졌어요</div>
   <div class="small">잠시 후 전광판으로 이동합니다</div>
   <button class="go" id="goNow">지금 전광판 보기</button>
@@ -191,35 +143,35 @@ input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px soli
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   설정
    주소 뒤 파라미터는 전광판으로 그대로 전달됩니다.
-     ?goal=2000   목표 메시지 수
-     ?room=day2   방 이름 (전광판과 반드시 동일해야 합니다)
+     ?room=2   전광판 번호(숫자, 기본 1)
+     ?goal=50  목표 메시지 수(기본 20)
+   예) blueele_submit.html?room=2&goal=50
    ═══════════════════════════════════════════════════════════ */
 const CONFIG = {
-  DB_URL     : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
-  ROOM       : "event-01",
-  MAX_LEN    : 200,
-  BOARD_URL  : "board.html",
-  REDIRECT_MS: 2200
+  DB_URL      : "https://jmtcsr1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  DEFAULT_ROOM: "1",
+  MAX_LEN     : 300,
+  BOARD_URL   : "board.html",
+  REDIRECT_MS : 2200
 };
 
 const q = new URLSearchParams(location.search);
-if (q.get("room")) CONFIG.ROOM = q.get("room");
+const rawRoom = (q.get("room") || "").replace(/[^0-9]/g, "");
+const ROOM = rawRoom !== "" ? String(parseInt(rawRoom, 10)) : CONFIG.DEFAULT_ROOM;
+const MSGS = `${CONFIG.DB_URL}/rooms/${ROOM}/msgs.json`;
 
-const BASE = `${CONFIG.DB_URL}/rooms/${CONFIG.ROOM}/msgs.json`;
 const el = id => document.getElementById(id);
+el("roomNo").textContent = ROOM;
+el("count").textContent = `0 / ${CONFIG.MAX_LEN}`;
 
-/* 전광판 주소 — room / goal 파라미터를 그대로 넘깁니다 */
 function boardUrl(){
   const p = new URLSearchParams();
-  if (q.get("room")) p.set("room", q.get("room"));
+  p.set("room", ROOM);
   if (q.get("goal")) p.set("goal", q.get("goal"));
-  const s = p.toString();
-  return CONFIG.BOARD_URL + (s ? "?" + s : "");
+  return CONFIG.BOARD_URL + "?" + p.toString();
 }
 
-/* 별가루 */
 (function(){
   const d = el("dust");
   for (let i = 0; i < 26; i++){
@@ -231,10 +183,10 @@ function boardUrl(){
   }
 })();
 
-/* 현재까지 모인 응원 수 */
+/* 지금까지 모인 응원 수 */
 (async function(){
   try{
-    const res = await fetch(`${BASE}?shallow=true`, {cache:"no-store"});
+    const res = await fetch(`${MSGS}?shallow=true`, {cache:"no-store"});
     if (!res.ok) return;
     const data = await res.json();
     el("cnt").textContent = (data ? Object.keys(data).length : 0).toLocaleString("ko-KR");
@@ -268,13 +220,12 @@ async function send(){
   note("보내는 중이에요");
 
   try{
-    const res = await fetch(BASE, {
+    const res = await fetch(MSGS, {
       method : "POST",
       headers: {"Content-Type":"application/json"},
       body   : JSON.stringify({ text, name, ts:{".sv":"timestamp"} })
     });
     if (!res.ok) throw new Error(res.status);
-
     el("done").classList.add("show");
     setTimeout(() => { location.href = boardUrl(); }, CONFIG.REDIRECT_MS);
   }catch(err){
