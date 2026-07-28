@@ -331,7 +331,7 @@ const MOODS = [
 ];
 let mood = -1;
 function setMood(pct){
-  const next = pct <= 20 ? 0 : (pct <= 80 ? 1 : 2);
+  const next = pct <= 20 ? 0 : (pct <= 40 ? 1 : 2);
   if (next === mood) return;
   mood = next;
   MOODS.forEach((m, i) => el(m.id).classList.toggle("on", i === next));
